@@ -1,0 +1,10 @@
+corp-travel-status-v2
+node_modules
+coverage
+.env
+.vscode
+.swc
+package-lock.json
+yarn.lock
+YTLOGS
+/YTLOGS

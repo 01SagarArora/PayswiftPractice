@@ -1,0 +1,1 @@
+export { headerFooterApi } from 'api/headerFooterApi/headerFooterApi';
