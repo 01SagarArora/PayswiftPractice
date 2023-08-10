@@ -1,13 +1,13 @@
 replicaCount: 1
-name: corp-travel-status-v2
+name: travel-status-v2
 image:
-  repository: "qaregistry.yatra.com/corp-travel-status-v2"
+  repository: "qaregistry.yatra.com/travel-status-v2"
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion .
   tag: "061c682"
 args: PROD
 env:
-  Product: corp-travel-status-v2  
+  Product: travel-status-v2
 service:
   type: ClusterIP
   port: 80

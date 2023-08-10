@@ -64,11 +64,11 @@ Other:
 
 4. Open your browser with the next address:
 
-   `https://dev.yatra.com/trip-new-ui/tripListingPage?viewMode=TLR`
+   `https://dev.yatra.com/travel-status-v2/healthcheck`
 
 ### Build and run a server (SSR)
 
-1. Build the project (production bundle will be in the `"corp-travel-status-v2"` folder):
+1. Build the project (production bundle will be in the `"travel-status-v2"` folder):
 
     `npm run build`
 

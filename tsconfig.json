@@ -24,7 +24,7 @@
     "baseUrl": ".",
     "removeComments": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./corp-travel-status-v2",
+    "outDir": "./travel-status-v2",
     "paths": {
       "*": [
         "./src/*",

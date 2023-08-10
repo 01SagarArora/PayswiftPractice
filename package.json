@@ -1,5 +1,5 @@
 {
-  "name": "corp-travel-status-v2",
+  "name": "travel-status-v2",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -9,13 +9,13 @@
     "*.scss"
   ],
   "scripts": {
-    "clean": "rm -rf corp-travel-status-v2",
+    "clean": "rm -rf travel-status-v2",
     "start:webpack": "cross-env NODE_ENV=development webpack --mode=development",
-    "start:server": "wait-on corp-travel-status-v2/server.js && node corp-travel-status-v2/server.js",
+    "start:server": "wait-on travel-status-v2/server.js && node travel-status-v2/server.js",
     "dev": "npm run clean && npm-run-all --print-label --parallel start:webpack start:server",
     "start": "npm run dev",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --mode production",
-    "start:prod": "node --max_old_space_size=400 corp-travel-status-v2/server.js",
+    "start:prod": "node --max_old_space_size=400 travel-status-v2/server.js",
     "start:static": "npm run clean  && cross-env NODE_ENV=development NO_SSR=true webpack serve --mode development --open",
     "build:static": "npm run clean  && cross-env NODE_ENV=production NO_SSR=true webpack --mode production"
   },

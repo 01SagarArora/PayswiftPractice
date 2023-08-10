@@ -77,6 +77,6 @@
     }
   ],
   "ignoreFiles": [
-    "corp-travel-status-v2/*.css"
+    "travel-status-v2/*.css"
   ]
 }

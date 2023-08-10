@@ -1,5 +1,5 @@
 export const ROUTE_CONSTANTS = {
-  BASE_PATH: '/corp-travel-status-v2',
+  BASE_PATH: '/travel-status-v2',
   FETCH: '/fetch',
   HOME: '/',
   NOT_FOUND: '/405',

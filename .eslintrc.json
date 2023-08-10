@@ -22,7 +22,7 @@
         "react",
         "@typescript-eslint"
     ],
-    "ignorePatterns": ["corp-travel-status-v2", "node_modules"],
+    "ignorePatterns": ["travel-status-v2", "node_modules"],
     "rules": {
         "indent": [
             "error",

@@ -7,7 +7,7 @@ const DEV_SERVER_PORT: number = 8040;
 const DEV_SERVER_HTTPS_PORT: number = 8050;
 
 const SRC_DIR: string = path.join(__dirname, '../src');
-const DIST_DIR: string = path.join(__dirname, '../corp-travel-status-v2');
+const DIST_DIR: string = path.join(__dirname, '../travel-status-v2');
 const SERVER_SRC_DIR: string = path.join(__dirname, '../src/server');
 
 const SERVER_BUNDLE_NAME: string = 'server';
