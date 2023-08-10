@@ -11,10 +11,10 @@ const DIST_DIR: string = path.join(__dirname, '../travel-status-v2');
 const SERVER_SRC_DIR: string = path.join(__dirname, '../src/server');
 
 const SERVER_BUNDLE_NAME: string = 'server';
-const STATIC_CONTENT_PATH = 'corp-build/'
-const BASE_PATH = '/corp-build';
-const HEALTH_CHECK = '/corp-build/healthCheck';
-const APP_MEMORY_STATUS = '/corp-build/status';
+const STATIC_CONTENT_PATH = 'travel-status-v2/'
+const BASE_PATH = '/travel-status-v2';
+const HEALTH_CHECK = '/travel-status-v2/healthCheck';
+const APP_MEMORY_STATUS = '/travel-status-v2/status';
 
 
 const ALIAS: Record<string, string> = {
