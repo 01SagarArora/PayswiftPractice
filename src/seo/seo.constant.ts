@@ -7,5 +7,9 @@ export const PAGE = {
         title : 'Error Page',
         description : 'Error Page Starter Kit'
     },
+    travelStatus : {
+        title : 'Travel Status',
+        description : 'Travel Status'
+    },
 
 }

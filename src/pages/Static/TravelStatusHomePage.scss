@@ -1,0 +1,46 @@
+.filterBox {
+    background: var(--color-white);
+    border: var(--border);
+    box-shadow: var(--shadow-primary);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.tabLink {
+    background: #f7f7f7;
+    font-size: 16px;
+    font-weight: 500;
+    color: #f34f4f;
+    font-family: Rubik;
+}
+
+button.resetButton {
+    border-radius: 4px;
+    border: solid 1px #f34f4f !important;
+    color: #f34f4f;
+}
+
+button.filterApplyButton {
+    border-radius: 4px;
+    background-color: #f34f4f !important;
+    color: #fff;
+}
+
+.tripHeader{
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    white-space:nowrap;
+}
+
+.tripBody{
+  font-family: Rubik;
+  font-size: 13px;
+  color: #333;
+}
+
+.tripBody:nth-child(5){
+    white-space:nowrap;
+}
+

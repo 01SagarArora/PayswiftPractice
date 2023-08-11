@@ -23,7 +23,7 @@ button.MuiButtonBase-root:disabled {
 }
 
 button.MuiButton-contained:hover:not(:disabled) {
-    background-color: var(--color-button-primary);
+    // background-color: var(--color-button-primary);
     font-weight: bold;
 }
 button.MuiPaginationItem-outlined.Mui-selected {
