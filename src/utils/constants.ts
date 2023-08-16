@@ -5,5 +5,5 @@ export const BASE_URL = process.env.NODE_ENV==='development' ? DEV_BASE_URL: RFS
 
 export const HEADER_URL = `http://fresco.ui.service/fresco/corporate/en/flights/service?name=B2B_HEADER&firstPageLoad=true&ssoToken={0}&userType={1}`
 export const FOOTER_URL = `http://fresco.ui.service/fresco/corporate/en/flights/dom/service?name=FOOTER&dataType=hook&ssoToken={0}&userType={1}`
-export const PRRODUCT_NAME = {
-}
+export const TRAVEL_STATUS_TRIP_API = '/finch/listPendingUpdates'
+
