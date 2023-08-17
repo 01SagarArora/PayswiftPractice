@@ -116,6 +116,8 @@ const TravelStatusHomePage = () => {
     updatePagination(totalPages, startIndex, endIndex, mainBookingData.length);
   }, [page, isDataLoaded])
 
+  console.log("bookingsData",bookingsData)
+
   return (
     <Container>
       <SEO title={PAGE.travelStatus.title} description={PAGE.travelStatus.description} />
@@ -169,11 +171,11 @@ const TravelStatusHomePage = () => {
                           </div>
                         </Box>
                       </TableCell>
-                      <TableCell className="tripBody">{item.BookingId}</TableCell>
-                      <TableCell className="tripBody">{item.hotelName}</TableCell>
-                      <TableCell className="tripBody">{item.hotelAddress}</TableCell>
-                      <TableCell className="tripBody">{item.PaxName}</TableCell>
-                      <TableCell className="tripBody">{item.startDate}</TableCell>
+                      <TableCell className="tripBody">{item.BookingId === "-" || item.BookingId === ""? "NA" : item.BookingId}</TableCell>
+                      <TableCell className="tripBody">{item.hotelName === "-" || item.hotelName === ""? "NA" : item.hotelName}</TableCell>
+                      <TableCell className="tripBody">{item.hotelAddress === "-" || item.hotelAddress === ""? "NA" : item.hotelAddress}</TableCell>
+                      <TableCell className="tripBody">{item.PaxName === "-" || item.PaxName === ""? "NA" : item.PaxName}</TableCell>
+                      <TableCell className="tripBody">{item.startDate === "-" || item.startDate === ""? "NA" : item.startDate}</TableCell>
                       <TableCell className="tripBody">
                         <Stack
                           direction="row"
