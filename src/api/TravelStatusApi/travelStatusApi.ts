@@ -1,6 +1,6 @@
 import { buildCreateApi, coreModule, reactHooksModule, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { isServer } from 'utils';
-import { BASE_URL,TRAVEL_STATUS_TRIP_API}  from "../../utils/constants";
+import { BASE_URL, TRAVEL_STATUS_CONFIG_API, TRAVEL_STATUS_REASONS_API, TRAVEL_STATUS_TRIP_API } from "../../utils/constants";
 
 
 let createApiFunction = createApi;
@@ -19,24 +19,52 @@ if (isServer) {
 
 
 export const travelStatusTripApi = createApiFunction({
-    reducerPath: 'travelStatusTripApi',
-    baseQuery: fetchBaseQuery({ 
-      baseUrl: BASE_URL,
+  reducerPath: 'travelStatusTripApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: BASE_URL,
   }
-    ),
-    endpoints: builder => ({
-      getTripData: builder.query({
-        query: () => {
-            let url = TRAVEL_STATUS_TRIP_API;
-            return {            
-                url: url,
-                method:"GET",
-                headers: {
-                    'content-type': 'application/json;charset=UTF-8',
-                  },
-                  responseHandler: (response: { text: () => any }) => response.text()
-                };
-        },
-      }),
-    })
-  });
+  ),
+  endpoints: builder => ({
+    getTripData: builder.query({
+      query: () => {
+        let url = TRAVEL_STATUS_TRIP_API;
+        return {
+          url: url,
+          method: "GET",
+          headers: {
+            'content-type': 'application/json;charset=UTF-8',
+          },
+          responseHandler: (response: { text: () => any }) => response.text()
+        };
+      },
+    }),
+
+    getConfigData: builder.query({
+      query: (arg) => {
+        let url = TRAVEL_STATUS_CONFIG_API;
+        return {
+          url: url,
+          method: "POST",
+          body: arg,
+          headers: {
+            'content-type': 'application/json;charset=UTF-8',
+          },
+        };
+      },
+    }),
+
+    getReasons: builder.query({
+      query: (arg) => {
+        let url = TRAVEL_STATUS_REASONS_API;
+        return {
+          url: url,
+          method: "POST",
+          body: arg,
+          headers: {
+            'content-type': 'application/json;charset=UTF-8',
+          },
+        };
+      },
+    }),
+  })
+});

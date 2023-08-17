@@ -9,7 +9,6 @@ const initStore = (preloadedState?: Partial<RootState>) => configureStore({
     getDefaultMiddleware().concat([
       headerFooterApi.middleware,
       travelStatusTripApi.middleware,
-
       ]),
   preloadedState,
   devTools: String(process.env.NODE_ENV).trim() !== 'production',

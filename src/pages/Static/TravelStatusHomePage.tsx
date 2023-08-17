@@ -1,29 +1,20 @@
-import Container from '@mui/material/Container';
-import Box from "@mui/material/Box";
 import SEO from '../../seo/Seo';
 import { PAGE } from '../../seo/seo.constant';
 import "../Static/TravelStatusHomePage.scss";
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Stack from "@mui/material/Stack";
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-// import { tripData } from "../../mockData";
-import { Button, Typography, Table, TableBody } from '@mui/material';
+import { Container, Box, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Tab, Stack } from '@mui/material';
 import PaginationButton, { PaginationData } from 'components/Pagination/PaginationButton';
 import { useState } from 'react';
 import { travelStatusTripApi } from "api";
 import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'store/store';
-// import { PaginationModel } from './PaginationModel';
-// import checkMark from "../../assets/images/icons/checkMark.svg";
-
+import { Icon } from 'pages/Static/Icon';
+import { PaginationModel } from './PaginationModel';
 import { styled } from '@mui/system';
 import TravelStatusIconSvg from './TravelStatusIconSvg';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
+// Mui div Component mainly for box shadow 
 const ShadowBox = styled('div')({
   borderRadius: '0px 6px 6px 6px',
   boxShadow: '0 0 4px 0 rgba(0, 0, 0, 0.3)',
@@ -31,6 +22,7 @@ const ShadowBox = styled('div')({
   overflow: 'hidden'
 });
 
+// Mui info Box, div component 
 const InfoBox = styled('div')({
   fontFamily: 'Rubik',
   fontSize: '13px',
@@ -38,24 +30,29 @@ const InfoBox = styled('div')({
   color: '#333',
   borderRadius: '8px',
   backgroundColor: '#fffcc7',
-  padding: '16px'
+  padding: '16px',
+  display: 'flex'
 });
 
+export type BookingType = "HOTEL" | "VISA" | "FLIGHTS";
+const itemsPerPage = 3;
 
 const TravelStatusHomePage = () => {
   const [bookingsData, setBookingsData] = useState<string[]>([]);
+  const [mainBookingData, setMainBookingData] = useState<string[]>([]);
   const [page, setPage] = useState<number>(1);
-  const [paginationData] = useState<PaginationData>(
+  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
+  const [paginationData, setPaginationData] = useState<PaginationData>(
     {} as PaginationData
   );
   const travelStatusTripDispatch = useDispatch<AppDispatch>();
+  const tripDataArray: string[] = [];
 
+  // For Travel List
   const getTravelStatusList = () => {
     travelStatusTripDispatch(
       travelStatusTripApi.endpoints.getTripData.initiate({})
     ).then((response: any) => {
-      const tripDataArray: string[] = [];
-      console.log("response", response)
       const tripData = JSON.parse(response.data)
       tripData?.data?.forEach((tripDataItem: any) => {
         tripDataItem.bookings?.forEach((bookingsItem: any) => {
@@ -63,33 +60,61 @@ const TravelStatusHomePage = () => {
         })
       })
       setBookingsData(tripDataArray);
-
-
+      setMainBookingData(tripDataArray)
+      setIsDataLoaded(true)
     });
   }
 
-  // const updatePagination = () => {
-  //   const paginationData = PaginationModel.getPaginationData({
-  //     startIndex: 1,
-  //     endIndex: 10,
-  //     nextPageLink: "nextPage",
-  //     pageNumber: page,
-  //     previousPageLink: "previousPage",
-  //     recordInPages: 3,
-  //     totalPages: 20,
-  //     totalRecords: bookingsData.length,
-  //     responseStatus: bookingsData.status,
-  //     listingData: bookingsData
-  //   });
-  //   setPaginationData({ ...paginationData });
+  // For Reasons API Data
+  // const configPayload = {
+  //   configs : [{
+  //     'name': 'travelStatusConfig',
+  //     'whereConditions': [{
+  //       'name': 'channel',
+  //       'value': 'web'
+  //     }]
+  //   }]
   // }
 
+  // const getConfigApiData = () => {
+  //   travelStatusTripDispatch(
+  //     travelStatusTripApi.endpoints.getConfigData.initiate(configPayload, {})
+  //   ).then((response: any) => {
+  //     console.log("configData", JSON.parse(response.data))
+  //   });
+  // }
+
+  // For update the Pagination
+  const updatePagination = (totalPages: number, startIndex: number, endIndex: number, totalRecords: number) => {
+    const paginationData = PaginationModel.getPaginationData({
+      startIndex: startIndex,
+      endIndex: endIndex,
+      nextPageLink: "nextPage",
+      pageNumber: page,
+      previousPageLink: "previousPage",
+      recordInPages: itemsPerPage,
+      totalPages: totalPages,
+      totalRecords: totalRecords,
+      responseStatus: 200,
+      listingData: bookingsData
+    });
+    setPaginationData({ ...paginationData });
+  }
+
   useEffect(() => {
-
-    // updatePagination();
+    // getConfigApiData();
     getTravelStatusList();
-  }, [page])
+  }, [])
 
+  // For Pagination 
+  useEffect(() => {
+    const totalPages = Math.ceil(mainBookingData.length / itemsPerPage);
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = page * itemsPerPage;
+    const arr = [...mainBookingData];
+    setBookingsData(arr.slice(startIndex, endIndex));
+    updatePagination(totalPages, startIndex, endIndex, mainBookingData.length);
+  }, [page, isDataLoaded])
 
   return (
     <Container>
@@ -99,12 +124,13 @@ const TravelStatusHomePage = () => {
           variant="scrollable"
           scrollButtons="auto"
           className="mainTabs"
-          sx={{ minWidth: 172 }}
+          value={0}
+          sx={{ minWidth: 172 ,'& .MuiTabs-indicator': { display: 'none' }}}
         >
           <Tab className="tabLink"
             label={
-              <Box sx={{display:"flex"}}>
-                <TravelStatusIconSvg/>
+              <Box sx={{ display: "flex" }}>
+                <div className="checkMarkIcon"><TravelStatusIconSvg /></div>
                 <span className="tabContent">Travel Status</span>
               </Box>
             } />
@@ -130,8 +156,17 @@ const TravelStatusHomePage = () => {
                       <TableCell className="tripBody">
 
                         <Box sx={{ display: 'flex', alignItems: "center" }}>
-                          <span className="imageContainer"></span>
-                          <span>{item.TripId}</span>
+                          <div className="">
+                            <span className="gray-dark productNameHolder ">
+                              <Stack direction={"row"} alignItems={"center"}>
+                                <div className='icon-container'>
+                                  <Icon name={item.bookingType as BookingType} color={'red'} size={'medium'} />
+                                </div>
+                                &nbsp;&nbsp;
+                                <span>{item.TripId}</span>
+                              </Stack>
+                            </span>
+                          </div>
                         </Box>
                       </TableCell>
                       <TableCell className="tripBody">{item.BookingId}</TableCell>
@@ -163,11 +198,12 @@ const TravelStatusHomePage = () => {
                 }
               </TableBody>
             </Table>
-
           </TableContainer>
           <Box sx={{ padding: "16px" }}>
             <InfoBox>
-              <Typography variant="body2">
+              <InfoOutlinedIcon style={{ color: '#333333' }} />
+
+              <Typography variant="body2" className='px-2'>
                 Your Travel policy mandates you to update if you have availed your booked flights or hotels. If you do not update this info your expense claims can be rejected & future booking may be denied.
               </Typography>
             </InfoBox>

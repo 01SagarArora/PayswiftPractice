@@ -1,88 +1,75 @@
 
-.tableContainer{
-    box-shadow: var(--shadow-primary) !important;
-}
-.mainTabs{
+.mainTabs {
     background: #eeeeee;
-    // box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
-
+    box-shadow: -4px 4px 3px -4px rgba(0, 0, 0, 0.3);
 }
+
 .tabLink {
     background: #ffffff;
     font-size: 16px;
     font-weight: 500;
-    color: #f34f4f;
-    font-family: Rubik;
-    border-top: 3px solid #f34f4f;
-    border-radius:4px 4px 0px 0px;
+    color: var(--color-theme);
+    font-family: var(--font-family-primary);
+    border-top: 3px solid var(--color-theme);
+    border-radius: 4px 4px 0px 0px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
 }
 
 button.resetButton {
     border-radius: 4px;
-    border: solid 1px #f34f4f !important;
-    color: #f34f4f;
-    text-transform: capitalize; 
+    border: solid 1px var(--color-theme) !important;
+    color: var(--color-theme);
+    text-transform: capitalize;
     box-shadow: none;
 }
 
 button.filterApplyButton {
     border-radius: 4px;
-    background-color: #f34f4f !important;
+    background-color: var(--color-theme) !important;
     color: #fff;
-    text-transform: capitalize; 
+    text-transform: capitalize;
     box-shadow: none;
 
 }
 
-.tripHeader{
-    font-family: Rubik;
+.tripHeader {
+    font-family: var(--font-family-primary);
     font-size: 16px;
     font-weight: 500;
     color: #333;
-    white-space:nowrap;
+    white-space: nowrap;
 }
 
-// .tripHeader:not(:nth-child(1)){
-//     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
-// }
-
-.tripBody{
-  font-family: Rubik;
-  font-size: 13px;
-  color: #333;
-}
-
-.tripBody:nth-child(5){
-    white-space:nowrap;
-}
-
-.travelStatusNotes{
-  border-radius: 8px;
-  background-color: #fffcc7;
-}
-
-.notesContent{
-    font-family: Rubik;
+.tripBody {
+    font-family: var(--font-family-primary);
     font-size: 13px;
-    line-height: 1.23;
     color: #333;
 }
 
-.tabContent{
-  font-family: Rubik;
-  font-size: 16px;
-  font-weight: 500;
-  color: #f34f4f;
-  text-transform: capitalize !important;
+.tripBody:nth-child(5) {
+    white-space: nowrap;
 }
 
-.imageContainer{
-    width: 32px;
-  height: 32px;
-  margin: 0 10px 0 0;
-  padding: 9.7px 6px 9.7px 7px;
-  border: solid 1px #e2e2e2;
-  border-radius: 100%;
+.tabContent {
+    font-family: var(--font-family-primary);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-theme);
+    text-transform: capitalize !important;
 }
 
+.checkMarkIcon {
+    width: 22px;
+    height: 22px;
+    margin: 0 6px 0 0;
+}
+
+.info-deta {
+    // display: none;
+    background-image: url(/src/assets/images/icons/trip-info-ico.png);
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 2.3rem;
+    background-position: 0 0;
+  }
