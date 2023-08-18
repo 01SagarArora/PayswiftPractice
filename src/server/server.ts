@@ -50,7 +50,7 @@ const chunkExtractor = new ChunkExtractor({ statsFile });
       serverUpTime: new Date(),
       ipAddress: req.socket.remoteAddress
     });
-    logger.info(`Health check of application working fine!!`);
+    // logger.info(`Health check of application working fine!!`);
   })
 
   

@@ -13,6 +13,7 @@ import { ROUTE_CONSTANTS } from 'constants/routeConstants';
 import {headerRequest, footerRequest} from 'server/middlewares';
 import { getHtmlTemplate } from 'server/template';
 import { IS_RENDER_TO_STREAM } from 'server/constants';
+import { mainDataRequest } from './mainDataRequests';
 
 
 const serverRenderer = (chunkExtractor: ChunkExtractor):
@@ -31,6 +32,7 @@ RequestHandler => async (req: any, res: Response) => {
   var frescoData : any = {
     header:'',
     footer:'',
+    mainData:''
   }
 
   function setHeaderFooterValue(key:string,data:any){
@@ -50,9 +52,10 @@ RequestHandler => async (req: any, res: Response) => {
   Note: Why not just get data during SSR?
   Because rendering will be done before resolving the request Promise.
   */
-  
   await headerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
   await footerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
+  await mainDataRequest(store,req?.headers?.cookie);
+
   preloadedState = { ...store.getState() };
   
   const helmetContext = {};

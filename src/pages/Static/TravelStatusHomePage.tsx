@@ -6,13 +6,14 @@ import PaginationButton, { PaginationData } from 'components/Pagination/Paginati
 import { useState } from 'react';
 import { travelStatusTripApi } from "api";
 import { useEffect } from "react";
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from 'store/store';
 import { Icon } from 'pages/Static/Icon';
 import { PaginationModel } from './PaginationModel';
 import { styled } from '@mui/system';
 import TravelStatusIconSvg from './TravelStatusIconSvg';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import {tripMockData} from '../../mockData';
 
 // Mui div Component mainly for box shadow 
 const ShadowBox = styled('div')({
@@ -47,13 +48,19 @@ const TravelStatusHomePage = () => {
   );
   const travelStatusTripDispatch = useDispatch<AppDispatch>();
   const tripDataArray: string[] = [];
+  const mainBookingsData = useSelector((state: RootState) => state.mainData);
+
+  console.log("mainBookingsData",mainBookingsData.mainData.data);
 
   // For Travel List
   const getTravelStatusList = () => {
     travelStatusTripDispatch(
       travelStatusTripApi.endpoints.getTripData.initiate({})
     ).then((response: any) => {
-      const tripData = JSON.parse(response.data)
+      // const tripData = JSON.parse(response.data)
+      // const travelStatusS2SData = mainBookingsData.mainData.data;
+      console.log(response,mainBookingsData.mainData.data)
+      const tripData = tripMockData;
       tripData?.data?.forEach((tripDataItem: any) => {
         tripDataItem.bookings?.forEach((bookingsItem: any) => {
           tripDataArray?.push(bookingsItem);
@@ -116,8 +123,7 @@ const TravelStatusHomePage = () => {
     updatePagination(totalPages, startIndex, endIndex, mainBookingData.length);
   }, [page, isDataLoaded])
 
-  console.log("bookingsData",bookingsData)
-
+  console.log("isDataLoaded",isDataLoaded)
   return (
     <Container>
       <SEO title={PAGE.travelStatus.title} description={PAGE.travelStatus.description} />
@@ -204,7 +210,6 @@ const TravelStatusHomePage = () => {
           <Box sx={{ padding: "16px" }}>
             <InfoBox>
               <InfoOutlinedIcon style={{ color: '#333333' }} />
-
               <Typography variant="body2" className='px-2'>
                 Your Travel policy mandates you to update if you have availed your booked flights or hotels. If you do not update this info your expense claims can be rejected & future booking may be denied.
               </Typography>

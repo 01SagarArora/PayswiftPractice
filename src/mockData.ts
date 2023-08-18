@@ -1,4 +1,4 @@
-export const tripData = {
+export const tripMockData = {
     "status": "success",
     "httpCode": 200,
     "message": null,

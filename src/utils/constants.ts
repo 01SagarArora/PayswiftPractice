@@ -8,6 +8,9 @@ export const FOOTER_URL = `http://fresco.ui.service/fresco/corporate/en/flights/
 export const TRAVEL_STATUS_TRIP_API = '/finch/listPendingUpdates';
 export const TRAVEL_STATUS_CONFIG_API = '/falcon/configuration/api';
 export const TRAVEL_STATUS_REASONS_API = '/reasons';
+export const TRAVEL_STATUS_S2S_LIST_API = 'http://finch.default.svc.yatra/finch/listPendingUpdates'
+
+
 
 
 

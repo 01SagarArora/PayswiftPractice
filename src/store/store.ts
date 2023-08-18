@@ -1,7 +1,7 @@
 import { configureStore, StateFromReducersMapObject } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { rootReducer } from './rootReducer';
-import { headerFooterApi, travelStatusTripApi } from 'api';
+import { commonS2SApi, headerFooterApi, travelStatusTripApi } from 'api';
 
 const initStore = (preloadedState?: Partial<RootState>) => configureStore({
   reducer: rootReducer,
@@ -9,6 +9,7 @@ const initStore = (preloadedState?: Partial<RootState>) => configureStore({
     getDefaultMiddleware().concat([
       headerFooterApi.middleware,
       travelStatusTripApi.middleware,
+      commonS2SApi.middleware,
       ]),
   preloadedState,
   devTools: String(process.env.NODE_ENV).trim() !== 'production',
