@@ -12,25 +12,81 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { tripData } from "../../mockData";
 import { Button } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from 'store/store';
+import { Booking } from 'models/PendingUpdate';
+import { commonApi } from 'api/commonApi/apis';
+import { UPDATE_TRAVEL_STATUS } from 'utils/constants';
+import { setPendingList } from 'store/PostSlice/PostSlice';
+import TSDialog from 'pages/TSDialog/TSDialog';
+import { useState } from 'react';
 
 
 const TravelStatusHomePage = () => {
+  const tripDataArray = useSelector((state:RootState)=> state.pendingList?.data);
+  const reasonData = useSelector((state: RootState)=> state.reasonData?.data);
+  const isReasonLoaded = useSelector((state:RootState)=> state.reasonData.isReasonLoaded);
+  const flightReasons = reasonData?.configurations?.travelStatusConfig.domFlight;
+  const hotelReasons = reasonData?.configurations?.travelStatusConfig.domHotel;
+  const [dialogProps,setDialogProps] = useState({show:false});
+  const dispatch = useAppDispatch();
+  //console.log(domReasons,hotelReasons);
 
-  let tripDataArray: string[] = [];
-  tripData?.data?.map((item) => {
-    item.bookings?.map((data: any) => {
-      tripDataArray?.push(data);
-    })
-  })
+  const updateTripList = (id:string)=>{
+    let newArr = tripDataArray.filter((trip)=>trip.id!==id);
+    setPendingList(newArr);
+  }
+
+  const onClickTravelled = (trip:any,isYes:boolean)=>{
+    let tripObj = {
+      updateList:[] as any[],
+      type: trip.bookingType,
+      //trip : {...trip},
+    };
+    tripObj.updateList.push({id: trip.id, status: isYes? 'Availed': 'U'});
+
+    console.log(tripObj)
+
+    
+    if(isYes){
+      //Todo: Set Loader
+      delete tripObj.type;
+      //As per production call update travel status api
+      console.log(tripObj)
+      return;
+      dispatch(commonApi.endpoints.postApi.initiate({url: UPDATE_TRAVEL_STATUS, data: tripObj}))
+      .then((res:any) =>{
+        console.log(res);
+        const resp = res.data;
+        if(resp.data && resp.data.success == 'success'){
+          updateTripList(trip.id);
+        }else if(resp.data.httpCode == 401){
+          //todo lgoin 
+        }else if(resp.data.httpCode == 500){
+          //todo error handling
+        }
+      })
+    }else{
+      // model show
+      let props = {
+        show:true,
+        type: trip.bookingType as string,
+        tripData: {...tripObj},
+        reason : trip.bookingType =='AIR'? flightReasons : hotelReasons
+      }
+      setDialogProps(props);
+    }
+
+  }
   return (
+    <>
     <Container>
       <SEO title={PAGE.travelStatus.title} description={PAGE.travelStatus.description} />
       <section className="padding-b">
         <Stack>
-          <Tabs aria-label="basic tabs example">
-          <i className="trip-icon-checkMark"></i>
+          <Tabs aria-label="basic tabs example" >
+            <i className="trip-icon-checkMark"></i>
             <Tab className="tabLink" label="Travel Status" />
           </Tabs>
           <Box className="filterBox padding">
@@ -49,9 +105,9 @@ const TravelStatusHomePage = () => {
                 </TableHead>
                 <TableBody>
                   {
-                    tripDataArray?.map((item: any) =>
-                      <>
-                        <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                    tripDataArray.length &&  tripDataArray?.map((item: Booking) =>
+                      
+                        <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                           <TableCell className="tripBody">{item.TripId}</TableCell>
                           <TableCell className="tripBody">{item.BookingId}</TableCell>
                           <TableCell className="tripBody">{item.hotelName}</TableCell>
@@ -67,19 +123,21 @@ const TravelStatusHomePage = () => {
                               className="mr-1"
                             >
                               <span>
-                                <Button variant="contained" className="filterApplyButton ">
+                                <Button variant="contained" className="filterApplyButton"
+                                onClick={()=>{onClickTravelled(item,true)}}>
                                   Yes
                                 </Button>
                               </span>
                               <span>
-                                <Button variant="outlined" className="resetButton">
+                                <Button variant="outlined" className="resetButton" disabled={!isReasonLoaded}
+                                 onClick={()=>{onClickTravelled(item,false)}}>
                                   No
                                 </Button>
                               </span>
                             </Stack>
                           </TableCell>
                         </TableRow>
-                      </>
+                    
                     )
                   }
                 </TableBody>
@@ -89,6 +147,9 @@ const TravelStatusHomePage = () => {
         </Stack>
       </section>
     </Container>
+    <TSDialog {...dialogProps} />
+    </>
+    
   )
 }
 

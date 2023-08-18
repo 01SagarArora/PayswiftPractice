@@ -2,12 +2,14 @@ import { configureStore, StateFromReducersMapObject } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { rootReducer } from './rootReducer';
 import { headerFooterApi } from 'api';
+import { commonApi } from 'api/commonApi/apis';
 
 const initStore = (preloadedState?: Partial<RootState>) => configureStore({
   reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat([
       headerFooterApi.middleware,
+      commonApi.middleware
       ]),
   preloadedState,
   devTools: String(process.env.NODE_ENV).trim() !== 'production',
