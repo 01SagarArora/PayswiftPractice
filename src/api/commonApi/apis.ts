@@ -1,6 +1,6 @@
 import { buildCreateApi, coreModule, reactHooksModule, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { isServer } from 'utils';
-import {  BASE_URL}  from "../../utils/constants";
+import { BASE_URL, GET_POSTS}  from "../../utils/constants";
 
 let createApiFunction = createApi;
 
@@ -80,4 +80,22 @@ export const commonApi = createApiFunction({
       },
     })
   })
+})
+
+
+export const pendingTravelUpdates = createApiFunction({
+  reducerPath: 'travelUpdates',
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: BASE_URL,
+    prepareHeaders: (headers) => {
+        headers.set("Content-Type", "application/json")
+        return headers
+    }
+  }),
+  endpoints: builder =>({
+    getUpdates: builder.query<any,any>({
+      query : ()=> GET_POSTS
+    })
+  })
+
 })
