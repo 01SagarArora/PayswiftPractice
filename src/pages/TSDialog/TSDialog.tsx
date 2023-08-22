@@ -1,17 +1,24 @@
 import { Dialog, DialogTitle, IconButton, DialogContent, Stack, DialogActions, Button, MenuItem, Select, SelectChangeEvent, TextField, Divider } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from "react";
+import {  useEffect, useState } from "react";
 import { YT_TRAVEL_DATA } from "utils/helpers";
 
 interface TSDialogProps{
     show:boolean,
     tripData?:any,
     type?:string,
-    reason?:any
+    reason?:any,
 }
 const TSDialog = (props:TSDialogProps) => {
+    console.log({props})
     const [selStatus, setSelStatus]= useState("");
+    const [showDialogBox,setShowDialogBox] = useState(props.show);
+
     
+    useEffect(()=>{
+        setShowDialogBox(props.show)
+    },[props])
+
     const modelData = {
         title: 'Reason for not travelling',
         reasonList:[
@@ -24,7 +31,6 @@ const TSDialog = (props:TSDialogProps) => {
     }
     let selectedReason = modelData.isShowReasonDropdown ? YT_TRAVEL_DATA.defaultSelectedReason: '';
     const tripObj = props.tripData;
-    console.log(selStatus)
     const onClickSubmit =()=>{
         if(selStatus == ''){
             return;
@@ -38,14 +44,22 @@ const TSDialog = (props:TSDialogProps) => {
         if(action =='OK'){
             onClickSubmit();
         }
+        else if(action == 'CLOSE'){
+            setShowDialogBox(false);           
+        }
     }
     
     const handleChange = (event: SelectChangeEvent) => {
         setSelStatus(event.target.value as string);
     };
 
+    // useEffect(() =>{
+    //     console.log({showDialogBox})
+    //     setShowDialogBox(props.show);
+    // },[showDialogBox])
+    // console.log("showDialogBox",showDialogBox)
   return (
-    <Dialog open={props.show} fullWidth={true} maxWidth={'sm'}>
+    <Dialog open={showDialogBox} fullWidth={true} maxWidth={'sm'}>
                 <DialogTitle>{modelData.title}
                     <IconButton onClick={()=>triggerAction('CLOSE')}
                         sx={{
@@ -53,7 +67,7 @@ const TSDialog = (props:TSDialogProps) => {
                             right: 8,
                             top: 8,
                         }}>
-                        <CloseIcon />
+                        <CloseIcon/>
                     </IconButton>
                 </DialogTitle>
                 <Divider/>

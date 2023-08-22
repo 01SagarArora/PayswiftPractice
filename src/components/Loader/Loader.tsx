@@ -26,7 +26,7 @@ export default function Loader(props: { oMessage: String }) {
           <ThemeProvider theme={theme}>  
             <CircularProgress color='primary' size={30}/>
           </ThemeProvider>  
-        <h3 className="fs-md normal show" id="loadMessageBefore">{props.oMessage || ''}</h3>
+        <p className="fs-md normal show" id="loadMessageBefore">{props.oMessage || ''}</p>
       </div>
     </div>
   )

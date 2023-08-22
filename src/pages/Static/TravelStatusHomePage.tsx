@@ -5,8 +5,8 @@ import { Container, Box, Button, Typography, Table, TableBody, TableCell, TableC
 import PaginationButton, { PaginationData } from 'components/Pagination/PaginationButton';
 import { useState, useEffect } from 'react';
 // import { travelStatusTripApi } from "api";
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from 'store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState, useAppDispatch } from 'store/store';
 import { Icon } from 'pages/Static/Icon';
 import { PaginationModel } from './PaginationModel';
 import { styled } from '@mui/system';
@@ -19,6 +19,8 @@ import { UPDATE_TRAVEL_STATUS } from 'utils/constants';
 import { commonApi } from 'api/commonApi/apis';
 import { setPendingList } from 'store/PostSlice/PostSlice';
 import { setMainData } from 'store/MainData/mainDataSlice';
+import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
+import { LOADER_MSG } from 'components/Loader/loader.contant';
 // import { setMainData } from 'store/MainData/mainDataSlice';
 
 // Mui div Component mainly for box shadow 
@@ -37,11 +39,12 @@ const InfoBox = styled('div')({
   color: '#333',
   borderRadius: '8px',
   backgroundColor: '#fffcc7',
-  padding: '16px',
-  display: 'flex'
+  padding: '12px',
+  display: 'flex',
+  margin: '25px 20px 20px 20px'
 });
 
-export type BookingType = "HOTEL" | "VISA" | "FLIGHTS";
+export type BookingType = "HOTEL" | "VISA" | "FLIGHTS" | "TRAIN" | "CAR" | "BUS";
 const itemsPerPage = 3;
 
 const TravelStatusHomePage = () => {
@@ -60,8 +63,8 @@ const TravelStatusHomePage = () => {
   const hotelReasons = reasonData?.configurations?.travelStatusConfig.domHotel;
   const [dialogProps, setDialogProps] = useState({ show: false });
   const dispatch = useAppDispatch();
+  const loaderDispatch = useDispatch<AppDispatch>();
 
-  console.log("tripDataArray", tripDataArray);
 
   // For Travel List
   const getTravelStatusList = () => {
@@ -101,7 +104,7 @@ const TravelStatusHomePage = () => {
       totalPages: totalPages,
       totalRecords: totalRecords,
       responseStatus: 200,
-      listingData: tripDataArray
+      listingData: bookingsData.mainData
     });
     setPaginationData({ ...paginationData });
   }
@@ -113,23 +116,32 @@ const TravelStatusHomePage = () => {
 
   // For Pagination 
   useEffect(() => {
+
     const totalPages = Math.ceil(mainBookingData.length / itemsPerPage);
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = page * itemsPerPage;
     const arr = [...mainBookingData];
-    setTravelList(arr.slice(startIndex, endIndex));
-
-    setMainData(arr.slice(startIndex, endIndex));
-
+    loaderDispatch(startLoading(LOADER_MSG.tripDetails.default));
+    setTimeout(() => {
+      setTravelList(arr.slice(startIndex, endIndex));
+      setMainData(arr.slice(startIndex, endIndex));
+      loaderDispatch(stopLoading());
+    }, 1000)
     updatePagination(totalPages, startIndex, endIndex, mainBookingData.length);
   }, [page, isDataLoaded])
+
+  const handlePageChange = (clickedOnPageNumber: number) => {
+    setPage(clickedOnPageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   const updateTripList = (id: string) => {
     let newArr = tripDataArray.filter((trip) => trip.id !== id);
     setPendingList(newArr);
   }
 
-  const onClickTravelled = (trip: any, isYes: boolean) => {
+  const onClickTravelled = (trip: any, isYes: boolean, index:number) => {
+    console.log("trip", trip)
     let tripObj = {
       updateList: [] as any[],
       type: trip.bookingType,
@@ -137,7 +149,8 @@ const TravelStatusHomePage = () => {
     };
     tripObj.updateList.push({ id: trip.id, status: isYes ? 'Availed' : 'U' });
 
-    console.log(tripObj)
+    console.log({tripObj})
+
 
 
     if (isYes) {
@@ -164,12 +177,18 @@ const TravelStatusHomePage = () => {
         show: true,
         type: trip.bookingType as string,
         tripData: { ...tripObj },
-        reason: trip.bookingType == 'AIR' ? flightReasons : hotelReasons
+        reason: trip.bookingType == 'AIR' ? flightReasons : hotelReasons,
       }
       setDialogProps(props);
-    }
 
+      const array = [...travelList];
+      console.log("array",array[index])
+      array[index].isCloseClicked = true;
+      setTravelList(array);
+    }
   }
+
+
   return (
     <>
       <Container>
@@ -206,7 +225,7 @@ const TravelStatusHomePage = () => {
                 </TableHead>
                 <TableBody>
                   {
-                    travelList && travelList?.map((item: any) =>
+                    travelList && travelList?.map((item: any, index:number) =>
                       <TableRow key={item.id}>
                         <TableCell className="tripBody">
 
@@ -238,14 +257,14 @@ const TravelStatusHomePage = () => {
                             className="mr-1"
                           >
                             <span>
-                              <Button variant="contained" className="filterApplyButton"
-                                onClick={() => { onClickTravelled(item, true) }}>
+                              <Button variant={item?.isCloseClicked ? "outlined" : "contained"} className={item?.isCloseClicked ? "resetButton" : "filterApplyButton"}
+                                onClick={() => { onClickTravelled(item, true, index) }}>
                                 Yes
                               </Button>
                             </span>
                             <span>
-                              <Button variant="outlined" className="resetButton" disabled={!isReasonLoaded}
-                                onClick={() => { onClickTravelled(item, false) }}>
+                              <Button variant={item?.isCloseClicked ? "contained" : "outlined"} className={item?.isCloseClicked ? "filterApplyButton" : "resetButton"} disabled={!isReasonLoaded}
+                                onClick={() => { onClickTravelled(item, false, index) }}>
                                 No
                               </Button>
                             </span>
@@ -256,7 +275,7 @@ const TravelStatusHomePage = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-            <Box sx={{ padding: "16px" }}>
+            <Box className="infoContainer">
               <InfoBox>
                 <InfoOutlinedIcon style={{ color: '#333333' }} />
                 <Typography variant="body2" className='px-2'>
@@ -275,8 +294,7 @@ const TravelStatusHomePage = () => {
           <span className="mr-1">Showing results</span>
           <PaginationButton
             data={paginationData}
-            handlePageChange={(clickedOnPageNumber: number) =>
-              setPage(clickedOnPageNumber)
+            handlePageChange={handlePageChange
             }
           ></PaginationButton>
         </Stack>

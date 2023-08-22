@@ -1,10 +1,10 @@
 import { FC, ReactElement, useEffect } from 'react';
 import { ErrorBoundary } from 'components';
 import Router from 'router/Router';
-import {  RootState, useAppDispatch } from 'store/store';
+import {  AppDispatch, RootState, useAppDispatch } from 'store/store';
 import AlertDialog from 'components/common/AlertDialog';
 import './App.scss'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader from "./components/Loader/Loader";
 import { commonApi } from 'api/commonApi/apis';
 import { setPendingList } from 'store/PostSlice/PostSlice';
@@ -13,17 +13,22 @@ import { REASON_REQUEST } from './models/ReasonData';
 import { setReasonData, setReasonLoaded } from 'store/ReasonSlice/ReasonSlics';
 import { Booking, PendingUpdate } from 'models/PendingUpdate';
 import { tripMockData } from './mockData';
+import { LOADER_MSG } from 'components/Loader/loader.contant';
+import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 //import TSDialog from 'pages/TSDialog/TSDialog';
 
 const App: FC = (): ReactElement => {
   const loader = useSelector((state: RootState) => state.loader);
   const alert = useSelector((state: RootState) => state.alert);
   const dispatch = useAppDispatch();
+  const loaderDispatch = useDispatch<AppDispatch>();
   
   useEffect(() => { 
     function getPendingActions(){
+      loaderDispatch(startLoading(LOADER_MSG.tripDetails.default));
         dispatch(commonApi.endpoints.getApi.initiate({url: GET_POSTS}))
           .then((res)=>{
+            loaderDispatch(stopLoading());
             let tripDataArray: Booking[] = [];
             let resp = res.data.data.length ? res.data : tripMockData;
             resp.data?.map((item:PendingUpdate) => {
