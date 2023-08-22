@@ -1,35 +1,31 @@
-
 .mainTabs {
     background: #eeeeee;
     box-shadow: -4px 4px 3px -4px rgba(0, 0, 0, 0.3);
-}
 
-.tabLink {
-    background: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--color-theme);
-    font-family: var(--font-family-primary);
-    border-top: 3px solid var(--color-theme);
-    border-radius: 4px 4px 0px 0px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
-}
+    .tabLink {
+        background: #ffffff;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--color-theme);
+        font-family: var(--font-family-primary);
+        border-top: 3px solid var(--color-theme);
+        border-radius: 4px 4px 0px 0px;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
 
-button.resetButton {
-    border-radius: 4px;
-    border: solid 1px var(--color-theme) !important;
-    color: var(--color-theme);
-    text-transform: capitalize;
-    box-shadow: none;
-}
+        .tabContent {
+            font-family: var(--font-family-primary);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-theme);
+            text-transform: capitalize !important;
+        }
 
-button.filterApplyButton {
-    border-radius: 4px;
-    background-color: var(--color-theme) !important;
-    color: #fff;
-    text-transform: capitalize;
-    box-shadow: none;
-
+        .checkMarkIcon {
+            width: 22px;
+            height: 22px;
+            margin: 0 6px 0 0;
+        }
+    }
 }
 
 .tripHeader {
@@ -44,36 +40,25 @@ button.filterApplyButton {
     font-family: var(--font-family-primary);
     font-size: 13px;
     color: #333;
+
+    &:nth-child(5) {
+        white-space: nowrap;
+    }
+
 }
 
-.tripBody:nth-child(5) {
-    white-space: nowrap;
-}
-
-.tabContent {
-    font-family: var(--font-family-primary);
-    font-size: 16px;
-    font-weight: 500;
+button.containedButton {
+    border-radius: 4px;
+    border: solid 1px var(--color-theme) !important;
     color: var(--color-theme);
-    text-transform: capitalize !important;
+    text-transform: capitalize;
+    box-shadow: none;
 }
 
-.checkMarkIcon {
-    width: 22px;
-    height: 22px;
-    margin: 0 6px 0 0;
+button.outlinedButton {
+    border-radius: 4px;
+    background-color: var(--color-theme) !important;
+    color: #fff;
+    text-transform: capitalize;
+    box-shadow: none;
 }
-
-.info-deta {
-    // display: none;
-    background-image: url(/src/assets/images/icons/trip-info-ico.png);
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    top: 2.3rem;
-    background-position: 0 0;
-  }
-
-  .infoContainer{
-    
-  }

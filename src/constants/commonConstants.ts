@@ -27,3 +27,9 @@ export const enum THEME_NAMES {
 }
 
 export const THEME_SWITCHER_DESCRIPTION = 'Theme switcher';
+
+export const TRAVEL_STATUS_PAGE = {
+  TRAVEL_STATUS:"Travel Status",
+  INFO_CONTENT: "Your Travel policy mandates you to update if you have availed your booked flights or hotels. If you do not update this info your expense claims can be rejected & future booking may be denied.",
+  SHOW_RESULTS: "Showing results"
+}

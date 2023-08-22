@@ -1,6 +1,6 @@
 import { commonS2SApi } from 'api';
 import { setError } from 'store/Error/ErrorSlice';
-import { setMainData, setToken } from 'store/MainData/mainDataSlice';
+import { setMainData, setToken } from 'store/MainData/MainDataSlice';
 import { TRAVEL_STATUS_S2S_LIST_API } from 'utils/constants';
 import { getKeyFromCookie } from 'utils/helpers';
 // import { tripMockData } from '../../mockData';

@@ -12,16 +12,14 @@ import { PaginationModel } from './PaginationModel';
 import { styled } from '@mui/system';
 import TravelStatusIconSvg from './TravelStatusIconSvg';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-// import {tripMockData} from '../../mockData';
-// import { Booking } from 'models/PendingUpdate';
 import TSDialog from 'pages/TSDialog/TSDialog';
 import { UPDATE_TRAVEL_STATUS } from 'utils/constants';
 import { commonApi } from 'api/commonApi/apis';
 import { setPendingList } from 'store/PostSlice/PostSlice';
-import { setMainData } from 'store/MainData/mainDataSlice';
+import { setMainData } from 'store/MainData/MainDataSlice';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
-// import { setMainData } from 'store/MainData/mainDataSlice';
+import { TRAVEL_STATUS_PAGE } from 'constants/commonConstants';
 
 // Mui div Component mainly for box shadow 
 const ShadowBox = styled('div')({
@@ -113,6 +111,19 @@ const TravelStatusHomePage = () => {
     getTravelStatusList();
   }, [])
 
+  // For swapping the classNames of action buttons thrrough the dialog box
+  useEffect(() => {
+    if (!dialogProps.show) {
+      const array = [...travelList];
+      array.forEach((data) => {
+        if (data.isCloseClicked) {
+          data.isCloseClicked = false;
+        }
+      })
+      setTravelList(array);
+    }
+  }, [dialogProps.show])
+
   // For Pagination 
   useEffect(() => {
 
@@ -167,17 +178,22 @@ const TravelStatusHomePage = () => {
         })
     } else {
       // model show
+
+
+      const array = [...travelList];
+      array[index].isCloseClicked = true;
+      const closeOnClick = array[index].isCloseClicked
+      setTravelList(array);
+
       let props = {
         show: true,
         type: trip.bookingType as string,
         tripData: { ...tripObj },
         reason: trip.bookingType == 'AIR' ? flightReasons : hotelReasons,
+        closeOnClick: closeOnClick
       }
       setDialogProps(props);
 
-      const array = [...travelList];
-      array[index].isCloseClicked = true;
-      setTravelList(array);
     }
   }
 
@@ -197,7 +213,7 @@ const TravelStatusHomePage = () => {
               label={
                 <Box sx={{ display: "flex" }}>
                   <div className="checkMarkIcon"><TravelStatusIconSvg /></div>
-                  <span className="tabContent">Travel Status</span>
+                  <span className="tabContent">{TRAVEL_STATUS_PAGE.TRAVEL_STATUS}</span>
                 </Box>
               } />
           </Tabs>
@@ -249,13 +265,13 @@ const TravelStatusHomePage = () => {
                             className="mr-1"
                           >
                             <span>
-                              <Button variant={item?.isCloseClicked ? "outlined" : "contained"} className={item?.isCloseClicked ? "resetButton" : "filterApplyButton"}
+                              <Button variant={item?.isCloseClicked ? "outlined" : "contained"} className={item?.isCloseClicked ? "containedButton" : "outlinedButton"}
                                 onClick={() => { onClickTravelled(item, true, index) }}>
                                 Yes
                               </Button>
                             </span>
                             <span>
-                              <Button variant={item?.isCloseClicked ? "contained" : "outlined"} className={item?.isCloseClicked ? "filterApplyButton" : "resetButton"} disabled={!isReasonLoaded}
+                              <Button variant={item?.isCloseClicked ? "contained" : "outlined"} className={item?.isCloseClicked ? "outlinedButton" : "containedButton"} disabled={!isReasonLoaded}
                                 onClick={() => { onClickTravelled(item, false, index) }}>
                                 No
                               </Button>
@@ -272,7 +288,7 @@ const TravelStatusHomePage = () => {
               <InfoBox>
                 <InfoOutlinedIcon style={{ color: '#333333' }} />
                 <Typography variant="body2" className='px-2'>
-                  Your Travel policy mandates you to update if you have availed your booked flights or hotels. If you do not update this info your expense claims can be rejected & future booking may be denied.
+                  {TRAVEL_STATUS_PAGE.INFO_CONTENT}
                 </Typography>
               </InfoBox>
             </Box>
@@ -284,7 +300,7 @@ const TravelStatusHomePage = () => {
           direction={"row"}
           className="py-4"
         >
-          <span className="mr-1">Showing results</span>
+          <span className="mr-1">{TRAVEL_STATUS_PAGE.SHOW_RESULTS}</span>
           <PaginationButton
             data={paginationData}
             handlePageChange={handlePageChange
@@ -292,7 +308,7 @@ const TravelStatusHomePage = () => {
           ></PaginationButton>
         </Stack>
       </Container>
-      <TSDialog {...dialogProps} />
+      <TSDialog {...dialogProps} setDialogProps={setDialogProps} />
     </>
 
   )

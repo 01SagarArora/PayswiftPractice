@@ -3,7 +3,7 @@ import { MainData } from "models/PendingUpdate";
 
 
 const mainDataSlice = createSlice({
-    name: 'queryProp',
+    name: 'mainData',
     initialState: {
         mainData: [] as MainData[] ,
         csrfToken:""

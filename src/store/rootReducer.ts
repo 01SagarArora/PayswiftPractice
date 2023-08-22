@@ -3,7 +3,7 @@ import { alertReducer } from './Alert/alertSlice';
 import { loaderReducer } from './Loader/LoaderSlice';
 import { commonS2SApi, headerFooterApi, travelStatusTripApi
 } from 'api';
-import { mainDataReducer } from './MainData/mainDataSlice';
+import { mainDataReducer } from './MainData/MainDataSlice';
 import { errorReducer } from './Error/ErrorSlice';
 import { commonApi } from 'api/commonApi/apis';
 import { pendingListReducer } from './PostSlice/PostSlice';
