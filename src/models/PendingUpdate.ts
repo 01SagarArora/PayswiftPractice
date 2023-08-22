@@ -1,3 +1,10 @@
+export interface MainData{
+    status: string,
+    httpCode: number,
+    message: null,
+    data: PendingUpdate[]
+}
+
 export interface PendingUpdate{
     superPnr:string
     bookings: Booking[];

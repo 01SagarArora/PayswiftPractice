@@ -91,7 +91,6 @@ const TravelStatusHomePage = () => {
   //   });
   // }
 
-  console.log("travelList", travelList)
   // For update the Pagination
   const updatePagination = (totalPages: number, startIndex: number, endIndex: number, totalRecords: number) => {
     const paginationData = PaginationModel.getPaginationData({
@@ -140,19 +139,14 @@ const TravelStatusHomePage = () => {
     setPendingList(newArr);
   }
 
-  const onClickTravelled = (trip: any, isYes: boolean, index:number) => {
-    console.log("trip", trip)
+  const onClickTravelled = (trip: any, isYes: boolean, index: number) => {
     let tripObj = {
       updateList: [] as any[],
       type: trip.bookingType,
       //trip : {...trip},
     };
     tripObj.updateList.push({ id: trip.id, status: isYes ? 'Availed' : 'U' });
-
-    console.log({tripObj})
-
-
-
+    console.log({ tripObj })
     if (isYes) {
       //Todo: Set Loader
       delete tripObj.type;
@@ -182,12 +176,10 @@ const TravelStatusHomePage = () => {
       setDialogProps(props);
 
       const array = [...travelList];
-      console.log("array",array[index])
       array[index].isCloseClicked = true;
       setTravelList(array);
     }
   }
-
 
   return (
     <>
@@ -225,12 +217,12 @@ const TravelStatusHomePage = () => {
                 </TableHead>
                 <TableBody>
                   {
-                    travelList && travelList?.map((item: any, index:number) =>
-                      <TableRow key={item.id}>
+                    travelList && travelList?.map((item: any, index: number) =>
+                      <TableRow key={item.startDate}>
                         <TableCell className="tripBody">
 
                           <Box sx={{ display: 'flex', alignItems: "center" }}>
-                            <div className="">
+                            <span className="">
                               <span className="gray-dark productNameHolder ">
                                 <Stack direction={"row"} alignItems={"center"}>
                                   <div className='icon-container'>
@@ -240,7 +232,7 @@ const TravelStatusHomePage = () => {
                                   <span>{item.TripId}</span>
                                 </Stack>
                               </span>
-                            </div>
+                            </span>
                           </Box>
                         </TableCell>
                         <TableCell className="tripBody">{item.BookingId === "-" || item.BookingId === "" ? "NA" : item.BookingId}</TableCell>
@@ -272,6 +264,7 @@ const TravelStatusHomePage = () => {
                         </TableCell>
                       </TableRow>)
                   }
+
                 </TableBody>
               </Table>
             </TableContainer>

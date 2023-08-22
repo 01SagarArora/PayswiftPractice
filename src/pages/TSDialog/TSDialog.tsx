@@ -10,7 +10,6 @@ interface TSDialogProps{
     reason?:any,
 }
 const TSDialog = (props:TSDialogProps) => {
-    console.log({props})
     const [selStatus, setSelStatus]= useState("");
     const [showDialogBox,setShowDialogBox] = useState(props.show);
 

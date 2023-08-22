@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import {MAIN_DATA} from 'server/middlewares/mainDataRequests';
+import { MainData } from "models/PendingUpdate";
 
 
 const mainDataSlice = createSlice({
     name: 'queryProp',
     initialState: {
-        mainData: [{}],
+        mainData: [] as MainData[] ,
         csrfToken:""
     },
     reducers: {

@@ -15,11 +15,14 @@ import { Booking, PendingUpdate } from 'models/PendingUpdate';
 import { tripMockData } from './mockData';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
+import NotFound from 'components/NotFound/NotFound';
+// import { PageNotFound } from 'pages';
 //import TSDialog from 'pages/TSDialog/TSDialog';
 
 const App: FC = (): ReactElement => {
   const loader = useSelector((state: RootState) => state.loader);
   const alert = useSelector((state: RootState) => state.alert);
+  const error = useSelector((state: RootState) => state.error);
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
   
@@ -30,8 +33,8 @@ const App: FC = (): ReactElement => {
           .then((res)=>{
             loaderDispatch(stopLoading());
             let tripDataArray: Booking[] = [];
-            let resp = res.data.data.length ? res.data : tripMockData;
-            resp.data?.map((item:PendingUpdate) => {
+            let resp = res?.data?.length ? res?.data : tripMockData;
+            resp?.data?.map((item:PendingUpdate) => {
               item.bookings?.map((booking: Booking) => {
                 tripDataArray?.push(booking);
               })
@@ -61,10 +64,21 @@ const App: FC = (): ReactElement => {
   }, []);
 
   return (
+    // <ErrorBoundary>
+    //   jhh
+    //   {error.isPageNotFound && <NotFound />}
+    //    {loader.isLoading &&  <Loader oMessage={loader.oMessage} />}
+    //    <AlertDialog {...alert}></AlertDialog>
+    //     <Router />
+    // </ErrorBoundary>
+
     <ErrorBoundary>
-       {loader.isLoading && <Loader oMessage={loader.oMessage} />}
-       <AlertDialog {...alert}></AlertDialog>
+      {error.isPageNotFound && <NotFound />}
+      {(loader.isLoading) &&(!error.isPageNotFound) && <Loader  oMessage={loader.oMessage} />}
+      <AlertDialog {...alert}></AlertDialog>
+      <main>
         <Router />
+      </main>
     </ErrorBoundary>
   );
 };
