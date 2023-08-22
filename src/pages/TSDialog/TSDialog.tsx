@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle, IconButton, DialogContent, Stack, DialogActions, Button, MenuItem, Select, SelectChangeEvent, TextField, Divider } from "@mui/material"
+import { Dialog, DialogTitle, IconButton, DialogContent, DialogActions, Button, MenuItem, Select, SelectChangeEvent, TextField, Divider } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import {  useEffect, useState } from "react";
 import { YT_TRAVEL_DATA } from "utils/helpers";
@@ -72,9 +72,9 @@ const TSDialog = (props:TSDialogProps) => {
                 </DialogTitle>
                 <Divider/>
                 <DialogContent >
-                    <Stack direction="column">
+                    {/* <Stack direction="column"> */}
                         {modelData.isShowReasonDropdown ?<Select
-                            sx={{ width: 300, mt: 2 }}
+                            sx={{ width: 300}}
                             id="nt-reason"
                             value={selStatus}
                             displayEmpty
@@ -92,7 +92,7 @@ const TSDialog = (props:TSDialogProps) => {
                             rows={3}
                             defaultValue=""
                         />
-                    </Stack>
+                    {/* </Stack> */}
                 </DialogContent>
                 <DialogActions className="m-2">
                     <Button variant="contained" color="error" size="large"
