@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     show: false,
     title: '',
     messages: [''],
-    actions: [AlertActions.OK]
+    actions: [AlertActions.OK],
 };
 const alertSlice = createSlice({
     name: 'alert',
