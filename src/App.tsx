@@ -17,9 +17,6 @@ import { LOADER_MSG } from 'components/Loader/loader.contant';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import NotFound from 'components/NotFound/NotFound';
 import { showAlert } from 'store/Alert/alertSlice';
-// import { setError } from 'store/Error/ErrorSlice';
-// import { PageNotFound } from 'pages';
-//import TSDialog from 'pages/TSDialog/TSDialog';
 
 const App: FC = (): ReactElement => {
   const loader = useSelector((state: RootState) => state.loader);
