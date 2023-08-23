@@ -16,6 +16,8 @@ import { tripMockData } from './mockData';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import NotFound from 'components/NotFound/NotFound';
+import { showAlert } from 'store/Alert/alertSlice';
+// import { setError } from 'store/Error/ErrorSlice';
 // import { PageNotFound } from 'pages';
 //import TSDialog from 'pages/TSDialog/TSDialog';
 
@@ -47,12 +49,21 @@ const App: FC = (): ReactElement => {
       let req = {...REASON_REQUEST};
         dispatch(commonApi.endpoints.postApi.initiate({url: GET_REASONS, data: req}))
             .then((res)=>{
+              try{
               if(res.data.success){
                 //TODO : MANIPULATE DATA
                 dispatch(setReasonData(res.data));
                 dispatch(setReasonLoaded());
               }
-              
+            }catch(e){
+              console.log(e)
+              let alertData = {
+                title: "Error",
+                messages: ["Please Try After Sometime"],
+                actions: ['OK'],
+              };
+              dispatch(showAlert(alertData));
+            }             
         })
     }
 
@@ -64,13 +75,6 @@ const App: FC = (): ReactElement => {
   }, []);
 
   return (
-    // <ErrorBoundary>
-    //   jhh
-    //   {error.isPageNotFound && <NotFound />}
-    //    {loader.isLoading &&  <Loader oMessage={loader.oMessage} />}
-    //    <AlertDialog {...alert}></AlertDialog>
-    //     <Router />
-    // </ErrorBoundary>
 
     <ErrorBoundary>
       {error.isPageNotFound && <NotFound />}
