@@ -19,6 +19,7 @@ import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
 import { TRAVEL_STATUS_PAGE } from 'constants/commonConstants';
 import { setTSDailogData, showTSDialog } from 'store/TSDialogSlice/TSDialogSlice';
+import { NotFoundPage } from 'components/ResultNotFound/NoResultFound';
 
 // Mui div Component mainly for box shadow 
 const ShadowBox = styled('div')({
@@ -58,9 +59,9 @@ const TravelStatusHomePage = () => {
   const hotelReasons = reasonData?.configurations?.travelStatusConfig.domHotel;
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
-  console.log('booking data',bookingsData)
+  console.log('booking data', bookingsData)
 
-  
+
   // For update the Pagination
   const updatePagination = (totalPages: number, startIndex: number, endIndex: number, totalRecords: number) => {
     const paginationData = PaginationModel.getPaginationData({
@@ -83,20 +84,19 @@ const TravelStatusHomePage = () => {
   }, [])
 
   // For swapping the classNames of action buttons through the dialog box
-  const onDialogClose = ()=>{
+  const onDialogClose = () => {
     console.log(travelList);
     const array = [...travelList];
-      array.forEach((data) => {
-        if (data.isCloseClicked) {
-          data.isCloseClicked = false;
-        }
-      })
-      setTravelList(array);
+    array.forEach((data) => {
+      if (data.isCloseClicked) {
+        data.isCloseClicked = false;
+      }
+    })
+    setTravelList(array);
   }
 
   // For Pagination 
   useEffect(() => {
-
     const totalPages = Math.ceil(bookingsData.length / itemsPerPage);
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = page * itemsPerPage;
@@ -107,7 +107,7 @@ const TravelStatusHomePage = () => {
       loaderDispatch(stopLoading());
     }, 1000)
     updatePagination(totalPages, startIndex, endIndex, bookingsData.length);
-  }, [page, isDataLoaded,bookingsData])
+  }, [page, isDataLoaded, bookingsData])
 
   const handlePageChange = (clickedOnPageNumber: number) => {
     setPage(clickedOnPageNumber);
@@ -131,7 +131,7 @@ const TravelStatusHomePage = () => {
         .then((res: any) => {
           console.log(res);
           const resp = res.data;
-          if (resp.data && resp.data.status == 'success') {
+          if (resp.data && resp.status == 'success') {
             //updateTripList(trip.id);
             dispatch(updateMainListData(trip.id))
           } else if (resp.data.httpCode == 401) {
@@ -154,6 +154,8 @@ const TravelStatusHomePage = () => {
       dispatch(showTSDialog());
     }
   }
+
+  console.log("travelList", travelList);
 
   return (
     <>
@@ -189,22 +191,22 @@ const TravelStatusHomePage = () => {
                     <TableCell className="tripHeader">Travelled</TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
+                {travelList.length ? <TableBody>
                   {
                     travelList && travelList?.map((item: any, index: number) =>
                       <TableRow key={item.startDate}>
                         <TableCell className="tripBody">
 
                           <Box sx={{ display: 'flex', alignItems: "center" }}>
-                              <span className="gray-dark productNameHolder ">
-                                <Stack direction={"row"} alignItems={"center"}>
-                                  <div className='icon-container'>
-                                    <Icon name={item.bookingType as BookingType} color={'red'} size={'medium'} />
-                                  </div>
-                                  &nbsp;&nbsp;
-                                  <span>{item.TripId}</span>
-                                </Stack>
-                              </span>
+                            <span className="gray-dark productNameHolder ">
+                              <Stack direction={"row"} alignItems={"center"}>
+                                <div className='icon-container'>
+                                  <Icon name={item.bookingType as BookingType} color={'red'} size={'medium'} />
+                                </div>
+                                &nbsp;&nbsp;
+                                <span>{item.TripId}</span>
+                              </Stack>
+                            </span>
                           </Box>
                         </TableCell>
                         <TableCell className="tripBody">{item.BookingId === "-" || item.BookingId === "" ? "NA" : item.BookingId}</TableCell>
@@ -234,12 +236,13 @@ const TravelStatusHomePage = () => {
                             </span>
                           </Stack>
                         </TableCell>
-                      </TableRow>)
+                      </TableRow>
+                    )
                   }
-
-                </TableBody>
+                </TableBody>:""}
               </Table>
             </TableContainer>
+            {travelList.length == 0 && <NotFoundPage />}
             <Box className="infoContainer">
               <InfoBox>
                 <InfoOutlinedIcon style={{ color: '#333333' }} />
@@ -264,7 +267,7 @@ const TravelStatusHomePage = () => {
           ></PaginationButton>
         </Stack>
       </Container>
-      <TSDialog onClose={()=>{onDialogClose()}}/>
+      <TSDialog onClose={() => { onDialogClose() }} />
     </>
 
   )
