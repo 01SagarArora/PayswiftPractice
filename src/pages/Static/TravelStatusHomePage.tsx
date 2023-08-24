@@ -44,7 +44,6 @@ export type BookingType = "HOTEL" | "VISA" | "FLIGHTS" | "TRAIN" | "CAR" | "BUS"
 const itemsPerPage = 3;
 
 const TravelStatusHomePage = () => {
-  const [mainBookingData, setMainBookingData] = useState<any>([]);
   const [page, setPage] = useState<number>(1);
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
   const [paginationData, setPaginationData] = useState<PaginationData>(
@@ -63,7 +62,6 @@ const TravelStatusHomePage = () => {
 
   // For Travel List
   const getTravelStatusList = () => {
-    setMainBookingData(bookingsData)
     setIsDataLoaded(true)
   }
 
@@ -105,17 +103,17 @@ const TravelStatusHomePage = () => {
   // For Pagination 
   useEffect(() => {
 
-    const totalPages = Math.ceil(mainBookingData.length / itemsPerPage);
+    const totalPages = Math.ceil(bookingsData.length / itemsPerPage);
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = page * itemsPerPage;
-    const arr = [...mainBookingData];
+    const arr = [...bookingsData];
     loaderDispatch(startLoading(LOADER_MSG.tripDetails.default));
     setTimeout(() => {
       setTravelList(arr.slice(startIndex, endIndex));
       setMainData(arr.slice(startIndex, endIndex));
       loaderDispatch(stopLoading());
     }, 1000)
-    updatePagination(totalPages, startIndex, endIndex, mainBookingData.length);
+    updatePagination(totalPages, startIndex, endIndex, bookingsData.length);
   }, [page, isDataLoaded])
 
   const handlePageChange = (clickedOnPageNumber: number) => {
@@ -169,6 +167,8 @@ const TravelStatusHomePage = () => {
 
     }
   }
+
+  console.log("travelList",travelList)
 
   return (
     <>

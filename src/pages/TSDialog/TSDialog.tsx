@@ -3,28 +3,22 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useState } from "react";
 import { SubmitErrorHandler, SubmitHandler, useForm} from "react-hook-form";
 import { YT_TRAVEL_DATA } from "utils/helpers";
-import { UPDATE_TRAVEL_STATUS } from "utils/constants";
-import { commonApi } from "api/commonApi/apis";
-import { useAppDispatch } from "store/store";
-import { updateMainListData } from "store/MainData/MainDataSlice";
+// import { UPDATE_TRAVEL_STATUS } from "utils/constants";
+// import { commonApi } from "api/commonApi/apis";
+// import { useAppDispatch } from "store/store";
 
 interface TSDialogProps {
     show: boolean,
     tripData?: any,
     type?: string,
     reasonData?: any,
-    setDialogProps: (value: {
-        show: boolean,
-        tripData?: any,
-        type?: string,
-        reason?: any,
-    }) => void
+    setDialogProps: any;
 }
 const TSDialog = (props: TSDialogProps) => {
     const {register, formState:{errors},handleSubmit} = useForm();
     const [selectedReason, setSelectedReason] = useState("");
     const [showTextField, setShowTextField] = useState(false);
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
 
     let modelData = {
         title: 'Reason for not travelling',
@@ -48,7 +42,8 @@ const TSDialog = (props: TSDialogProps) => {
     },[props]);
 
     const onClose = () => {
-            props.setDialogProps({ ...props, show: false })
+        console.log("close")
+            props?.setDialogProps({ ...props, show: false })
     }
     const onSubmit:SubmitHandler<any> = (data, e) => {
         console.log(data, e)
@@ -60,19 +55,24 @@ const TSDialog = (props: TSDialogProps) => {
         delete obj.type;
 
         console.log("final obj",obj);
-        dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: obj }))
-        .then((res: any) => {
-          console.log(res);
-          const resp = res.data;
-          if (resp.data && resp.data.success == 'success') {
-            //updating main data
-            dispatch(updateMainListData(obj.updateList[0].id));
-          } else if (resp.data.httpCode == 401) {
-            //todo lgoin 
-          } else if (resp.data.httpCode == 500) {
-            //todo error handling
-          }
-        })
+
+        // dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: obj }))
+        // .then((res: any) => {
+        //   console.log("response",res);
+        //   try{
+        //   const resp = res.data;
+        //   if (resp.data && resp.data.success == 'success') {
+        //     //updateTripList(trip.id);
+        //   } else if (resp.data.httpCode == 401) {
+        //     //todo lgoin 
+        //   } else if (resp.data.httpCode == 500) {
+        //     //todo error handling
+        //   }
+        // } catch(e){
+        //     console.log(e)
+        // }}
+        // )
+   
 
     };
     const onError:SubmitErrorHandler<any> = (errors, e) => console.log('ereroe',errors, e);
