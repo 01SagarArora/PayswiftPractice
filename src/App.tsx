@@ -7,12 +7,9 @@ import './App.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from "./components/Loader/Loader";
 import { commonApi } from 'api/commonApi/apis';
-import { setPendingList } from 'store/PostSlice/PostSlice';
-import { GET_POSTS, GET_REASONS } from 'utils/constants';
+import { GET_REASONS } from 'utils/constants';
 import { REASON_REQUEST } from './models/ReasonData';
 import { setReasonData, setReasonLoaded } from 'store/ReasonSlice/ReasonSlics';
-import { Booking, PendingUpdate } from 'models/PendingUpdate';
-import { tripMockData } from './mockData';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import NotFound from 'components/NotFound/NotFound';
@@ -27,26 +24,13 @@ const App: FC = (): ReactElement => {
   const loaderDispatch = useDispatch<AppDispatch>();
   
   useEffect(() => { 
-    function getPendingActions(){
-      loaderDispatch(startLoading(LOADER_MSG.tripDetails.default));
-        dispatch(commonApi.endpoints.getApi.initiate({url: GET_POSTS}))
-          .then((res)=>{
-            loaderDispatch(stopLoading());
-            let tripDataArray: Booking[] = [];
-            let resp = res?.data?.length ? res?.data : tripMockData;
-            resp?.data?.map((item:PendingUpdate) => {
-              item.bookings?.map((booking: Booking) => {
-                tripDataArray?.push(booking);
-              })
-            });
-            dispatch(setPendingList(tripDataArray))
-        })
-    }
-
+    
     function getReasonsList(){
       let req = {...REASON_REQUEST};
+        loaderDispatch(startLoading(LOADER_MSG.tripDetails.default));
         dispatch(commonApi.endpoints.postApi.initiate({url: GET_REASONS, data: req}))
             .then((res)=>{
+            loaderDispatch(stopLoading());
               try{
               if(res.data.success){
                 //TODO : MANIPULATE DATA
@@ -68,10 +52,6 @@ const App: FC = (): ReactElement => {
             }             
         })
     }
-
-
-
-    getPendingActions();
     getReasonsList();
    
   }, []);

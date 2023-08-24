@@ -1,59 +1,45 @@
 import { Dialog, DialogTitle, IconButton, DialogContent, Button, MenuItem, TextField, Divider, Stack, FormControl, FormHelperText } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SubmitErrorHandler, SubmitHandler, useForm} from "react-hook-form";
 import { YT_TRAVEL_DATA } from "utils/helpers";
 import { UPDATE_TRAVEL_STATUS } from "utils/constants";
 import { commonApi } from "api/commonApi/apis";
-import { useAppDispatch } from "store/store";
+import { RootState, useAppDispatch } from "store/store";
 import { updateMainListData } from "store/MainData/MainDataSlice";
+import { useSelector } from "react-redux";
+import { hideTSDialog } from "store/TSDialogSlice/TSDialogSlice";
 
 interface TSDialogProps {
-    show: boolean,
-    tripData?: any,
-    type?: string,
-    reasonData?: any,
-    setDialogProps: (value: {
-        show: boolean,
-        tripData?: any,
-        type?: string,
-        reason?: any,
-    }) => void
+    onClose:()=>void
 }
-const TSDialog = (props: TSDialogProps) => {
+const TSDialog = (props:TSDialogProps) => {
     const {register, formState:{errors},handleSubmit} = useForm();
     const [selectedReason, setSelectedReason] = useState("");
     const [showTextField, setShowTextField] = useState(false);
+    const show = useSelector((state:RootState)=> state.tsDialog.show);
+    const data = useSelector((state:RootState)=> state.tsDialog.data);
     const dispatch = useAppDispatch();
-
     let modelData = {
         title: 'Reason for not travelling',
         statusList: [
             "Cancelled at Yatra",
-            props.type === 'AIR' ? "Cancelled at Airline" : "Cancelled at Hotel",
+             data.type === 'AIR' ? "Cancelled at Airline" : "Cancelled at Hotel",
             "No Show",
             "Dispute"
         ],
-        reasonList: props?.reasonData?.reasonInputMaster,
-        isShowReasonDropdown: props?.reasonData?.reasonInputType == 'both' || props?.reasonData?.reasonInputType == 'master' || props?.reasonData?.reasonInputType == 'dropdown'
+        reasonList: data?.reasonData?.reasonInputMaster,
+        isShowReasonDropdown: data?.reasonData?.reasonInputType == 'both' || data?.reasonData?.reasonInputType == 'master' || data?.reasonData?.reasonInputType == 'dropdown'
     }
-    useEffect(()=>{
-        modelData = {
-            ...modelData,
-            reasonList: props?.reasonData?.reasonInputMaster,
-            isShowReasonDropdown: props?.reasonData?.reasonInputType == 'both' || props?.reasonData?.reasonInputType == 'master' || props?.reasonData?.reasonInputType == 'dropdown'
-        }
-        console.log('change',modelData);
-        setSelectedReason(modelData.isShowReasonDropdown ? YT_TRAVEL_DATA.defaultSelectedReason : '')
-    },[props]);
 
     const onClose = () => {
-            props.setDialogProps({ ...props, show: false })
+            console.log('agehge',props);
+            //props.setDialogProps({ ...props, show: false })
+            props.onClose();
+            dispatch(hideTSDialog());
     }
-    const onSubmit:SubmitHandler<any> = (data, e) => {
-        console.log(data, e)
-
-        const obj = props.tripData;
+    const onSubmit:SubmitHandler<any> = (data) => {
+        const obj = data.tripData;
 
         obj.updateList[0].status = data.status;
         obj.updateList[0].comment = showTextField ? data.reasonText : data.reason;
@@ -64,9 +50,10 @@ const TSDialog = (props: TSDialogProps) => {
         .then((res: any) => {
           console.log(res);
           const resp = res.data;
-          if (resp.data && resp.data.success == 'success') {
+          if (resp.data && resp.data.status == 'success') {
             //updating main data
             dispatch(updateMainListData(obj.updateList[0].id));
+            dispatch(hideTSDialog());
           } else if (resp.data.httpCode == 401) {
             //todo lgoin 
           } else if (resp.data.httpCode == 500) {
@@ -79,7 +66,7 @@ const TSDialog = (props: TSDialogProps) => {
 
 
     const handleChangeReason = (event: any) => {
-        if(props.reasonData && props.reasonData.reasonInputType === YT_TRAVEL_DATA.noReasonBothType){
+        if(data?.reasonData && data?.reasonData.reasonInputType === YT_TRAVEL_DATA.noReasonBothType){
             setShowTextField(event.target.value === YT_TRAVEL_DATA.noReasonText)
         }
         setSelectedReason(event.target.value as string);
@@ -88,7 +75,7 @@ const TSDialog = (props: TSDialogProps) => {
     console.log("abcccc")
 
     return (
-        <Dialog open={props.show} fullWidth={true} maxWidth={'sm'}>
+        <Dialog open={show} fullWidth={true} maxWidth={'sm'}>
             <DialogTitle>{modelData.title}
                 <IconButton onClick={() => onClose()}
                     sx={{

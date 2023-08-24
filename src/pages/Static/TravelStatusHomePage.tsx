@@ -14,10 +14,11 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import TSDialog from 'pages/TSDialog/TSDialog';
 import { UPDATE_TRAVEL_STATUS } from 'utils/constants';
 import { commonApi } from 'api/commonApi/apis';
-import { setMainData, updateMainListData } from 'store/MainData/MainDataSlice';
+import { updateMainListData } from 'store/MainData/MainDataSlice';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
 import { TRAVEL_STATUS_PAGE } from 'constants/commonConstants';
+import { setTSDailogData, showTSDialog } from 'store/TSDialogSlice/TSDialogSlice';
 
 // Mui div Component mainly for box shadow 
 const ShadowBox = styled('div')({
@@ -44,7 +45,6 @@ export type BookingType = "HOTEL" | "VISA" | "FLIGHTS" | "TRAIN" | "CAR" | "BUS"
 const itemsPerPage = 3;
 
 const TravelStatusHomePage = () => {
-  const [mainBookingData, setMainBookingData] = useState<any>([]);
   const [page, setPage] = useState<number>(1);
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
   const [paginationData, setPaginationData] = useState<PaginationData>(
@@ -56,17 +56,11 @@ const TravelStatusHomePage = () => {
   const isReasonLoaded = useSelector((state: RootState) => state.reasonData.isReasonLoaded);
   const flightReasons = reasonData?.configurations?.travelStatusConfig.domFlight;
   const hotelReasons = reasonData?.configurations?.travelStatusConfig.domHotel;
-  const [dialogProps, setDialogProps] = useState({ show: false });
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
   console.log('booking data',bookingsData)
 
-  // For Travel List
-  const getTravelStatusList = () => {
-    setMainBookingData(bookingsData)
-    setIsDataLoaded(true)
-  }
-
+  
   // For update the Pagination
   const updatePagination = (totalPages: number, startIndex: number, endIndex: number, totalRecords: number) => {
     const paginationData = PaginationModel.getPaginationData({
@@ -79,59 +73,56 @@ const TravelStatusHomePage = () => {
       totalPages: totalPages,
       totalRecords: totalRecords,
       responseStatus: 200,
-      listingData: bookingsData
+      listingData: []
     });
     setPaginationData({ ...paginationData });
   }
 
   useEffect(() => {
-    // getConfigApiData();
-    getTravelStatusList();
+    setIsDataLoaded(true);
   }, [])
 
   // For swapping the classNames of action buttons through the dialog box
-  useEffect(() => {
-    if (!dialogProps.show) {
-      const array = [...travelList];
+  const onDialogClose = ()=>{
+    console.log(travelList);
+    const array = [...travelList];
       array.forEach((data) => {
         if (data.isCloseClicked) {
           data.isCloseClicked = false;
         }
       })
       setTravelList(array);
-    }
-  }, [dialogProps.show])
+  }
 
   // For Pagination 
   useEffect(() => {
 
-    const totalPages = Math.ceil(mainBookingData.length / itemsPerPage);
+    const totalPages = Math.ceil(bookingsData.length / itemsPerPage);
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = page * itemsPerPage;
-    const arr = [...mainBookingData];
+    const arr = [...bookingsData];
     loaderDispatch(startLoading(LOADER_MSG.tripDetails.default));
     setTimeout(() => {
       setTravelList(arr.slice(startIndex, endIndex));
-      setMainData(arr.slice(startIndex, endIndex));
       loaderDispatch(stopLoading());
     }, 1000)
-    updatePagination(totalPages, startIndex, endIndex, mainBookingData.length);
-  }, [page, isDataLoaded])
+    updatePagination(totalPages, startIndex, endIndex, bookingsData.length);
+  }, [page, isDataLoaded,bookingsData])
 
   const handlePageChange = (clickedOnPageNumber: number) => {
     setPage(clickedOnPageNumber);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  const onClickTravelled = (trip: any, isYes: boolean, index: number) => {
+  const onClickTravelled = (trip: any, isYesClicked: boolean, index: number) => {
     let tripObj = {
       updateList: [] as any[],
       type: trip.bookingType,
       //trip : {...trip},
     };
-    tripObj.updateList.push({ id: trip.id, status: isYes ? 'Availed' : 'U' });
+    tripObj.updateList.push({ id: trip.id, status: isYesClicked ? 'Availed' : 'U' });
     console.log({ tripObj })
-    if (isYes) {
+    if (isYesClicked) {
       //Todo: Set Loader
       delete tripObj.type;
       //As per production call update travel status api
@@ -140,7 +131,7 @@ const TravelStatusHomePage = () => {
         .then((res: any) => {
           console.log(res);
           const resp = res.data;
-          if (resp.data && resp.data.success == 'success') {
+          if (resp.data && resp.data.status == 'success') {
             //updateTripList(trip.id);
             dispatch(updateMainListData(trip.id))
           } else if (resp.data.httpCode == 401) {
@@ -150,23 +141,17 @@ const TravelStatusHomePage = () => {
           }
         })
     } else {
-      // model show
-
-
-      const array = [...travelList];
+      // TSDialog is shown
+      const array = JSON.parse(JSON.stringify(travelList));
       array[index].isCloseClicked = true;
-      const closeOnClick = array[index].isCloseClicked
       setTravelList(array);
-
-      let props = {
-        show: true,
+      let obj = {
         type: trip.bookingType as string,
         tripData: { ...tripObj },
         reasonData: trip.bookingType == 'AIR' ? flightReasons : hotelReasons,
-        closeOnClick: closeOnClick
       }
-      setDialogProps(props);
-
+      dispatch(setTSDailogData(obj));
+      dispatch(showTSDialog());
     }
   }
 
@@ -279,7 +264,7 @@ const TravelStatusHomePage = () => {
           ></PaginationButton>
         </Stack>
       </Container>
-      <TSDialog {...dialogProps} setDialogProps={setDialogProps} />
+      <TSDialog onClose={()=>{onDialogClose()}}/>
     </>
 
   )
