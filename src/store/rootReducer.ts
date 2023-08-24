@@ -6,7 +6,6 @@ import { commonS2SApi, headerFooterApi, travelStatusTripApi
 import { mainDataReducer } from './MainData/MainDataSlice';
 import { errorReducer } from './Error/ErrorSlice';
 import { commonApi } from 'api/commonApi/apis';
-import { pendingListReducer } from './PostSlice/PostSlice';
 import { reasonsReducer } from './ReasonSlice/ReasonSlics';
 
 export const rootReducer = {
@@ -14,7 +13,6 @@ export const rootReducer = {
   loader:loaderReducer,
   mainData : mainDataReducer,
   error: errorReducer,
-  pendingList: pendingListReducer,
   reasonData: reasonsReducer,
   [headerFooterApi.reducerPath]: headerFooterApi.reducer,
   [travelStatusTripApi.reducerPath]: travelStatusTripApi.reducer,

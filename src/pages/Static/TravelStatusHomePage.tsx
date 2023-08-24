@@ -14,7 +14,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import TSDialog from 'pages/TSDialog/TSDialog';
 import { UPDATE_TRAVEL_STATUS } from 'utils/constants';
 import { commonApi } from 'api/commonApi/apis';
-import { setMainData } from 'store/MainData/MainDataSlice';
+import { setMainData, updateMainListData } from 'store/MainData/MainDataSlice';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
 import { TRAVEL_STATUS_PAGE } from 'constants/commonConstants';
@@ -123,12 +123,6 @@ const TravelStatusHomePage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  const updateTripList = (id: string) => {
-    let newArr = bookingsData.filter((booking) => booking.id !== id);
-    setMainData(newArr);
-  }
-
-
   const onClickTravelled = (trip: any, isYes: boolean, index: number) => {
     let tripObj = {
       updateList: [] as any[],
@@ -142,13 +136,13 @@ const TravelStatusHomePage = () => {
       delete tripObj.type;
       //As per production call update travel status api
       console.log(tripObj)
-      return;
       dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: tripObj }))
         .then((res: any) => {
           console.log(res);
           const resp = res.data;
           if (resp.data && resp.data.success == 'success') {
-            updateTripList(trip.id);
+            //updateTripList(trip.id);
+            dispatch(updateMainListData(trip.id))
           } else if (resp.data.httpCode == 401) {
             //todo lgoin 
           } else if (resp.data.httpCode == 500) {

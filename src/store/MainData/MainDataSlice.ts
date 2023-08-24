@@ -14,9 +14,12 @@ const mainDataSlice = createSlice({
         },
         setToken(state, action) {
             state.csrfToken = action.payload;
+        },
+        updateMainListData(state,action){
+            state.mainData = state.mainData.filter(booking=> action.payload!== booking.id)
         }
     }
 })
 
-export const { setMainData, setToken } = mainDataSlice.actions;
+export const { setMainData, setToken,updateMainListData } = mainDataSlice.actions;
 export const mainDataReducer = mainDataSlice.reducer;

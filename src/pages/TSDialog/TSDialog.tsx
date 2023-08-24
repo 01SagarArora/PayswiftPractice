@@ -6,6 +6,7 @@ import { YT_TRAVEL_DATA } from "utils/helpers";
 import { UPDATE_TRAVEL_STATUS } from "utils/constants";
 import { commonApi } from "api/commonApi/apis";
 import { useAppDispatch } from "store/store";
+import { updateMainListData } from "store/MainData/MainDataSlice";
 
 interface TSDialogProps {
     show: boolean,
@@ -59,13 +60,13 @@ const TSDialog = (props: TSDialogProps) => {
         delete obj.type;
 
         console.log("final obj",obj);
-
         dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: obj }))
         .then((res: any) => {
           console.log(res);
           const resp = res.data;
           if (resp.data && resp.data.success == 'success') {
-            //updateTripList(trip.id);
+            //updating main data
+            dispatch(updateMainListData(obj.updateList[0].id));
           } else if (resp.data.httpCode == 401) {
             //todo lgoin 
           } else if (resp.data.httpCode == 500) {
