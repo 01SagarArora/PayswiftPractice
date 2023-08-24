@@ -5,8 +5,7 @@ import { setMainData, setToken } from 'store/MainData/MainDataSlice';
 import { TRAVEL_STATUS_S2S_LIST_API } from 'utils/constants';
 import { getKeyFromCookie } from 'utils/helpers';
 
-const mainDataRequest = async (store: any, cookie: any) => {
-    
+const mainDataRequest = async (store: any, cookie: any) => { 
     store.dispatch(commonS2SApi.endpoints.getApi.initiate({ cookie, url: TRAVEL_STATUS_S2S_LIST_API })).then((res: any) => {
         try{
             const response = JSON.parse(res.data);
