@@ -89,7 +89,7 @@ const TravelStatusHomePage = () => {
     getTravelStatusList();
   }, [])
 
-  // For swapping the classNames of action buttons thrrough the dialog box
+  // For swapping the classNames of action buttons through the dialog box
   useEffect(() => {
     if (!dialogProps.show) {
       const array = [...travelList];
@@ -217,7 +217,6 @@ const TravelStatusHomePage = () => {
                         <TableCell className="tripBody">
 
                           <Box sx={{ display: 'flex', alignItems: "center" }}>
-                            <span className="">
                               <span className="gray-dark productNameHolder ">
                                 <Stack direction={"row"} alignItems={"center"}>
                                   <div className='icon-container'>
@@ -227,7 +226,6 @@ const TravelStatusHomePage = () => {
                                   <span>{item.TripId}</span>
                                 </Stack>
                               </span>
-                            </span>
                           </Box>
                         </TableCell>
                         <TableCell className="tripBody">{item.BookingId === "-" || item.BookingId === "" ? "NA" : item.BookingId}</TableCell>

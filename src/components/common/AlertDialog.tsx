@@ -11,6 +11,7 @@ import { AppDispatch } from "../../store/store";
 import { hideAlert } from "../../store/Alert/alertSlice";
 import { useDispatch } from "react-redux";
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from "react";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 
 export default function AlertDialog(props: AlertDialogData) {
@@ -28,6 +29,7 @@ export default function AlertDialog(props: AlertDialogData) {
                             right: 8,
                             top: 8,
                         }}>
+                        <InfoOutlinedIcon/>
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
