@@ -4,7 +4,6 @@ import "../Static/TravelStatusHomePage.scss";
 import { Container, Box, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Tab, Stack } from '@mui/material';
 import PaginationButton, { PaginationData } from 'components/Pagination/PaginationButton';
 import { useState, useEffect } from 'react';
-// import { travelStatusTripApi } from "api";
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState, useAppDispatch } from 'store/store';
 import { Icon } from 'pages/Static/Icon';

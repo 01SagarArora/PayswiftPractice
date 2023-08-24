@@ -11,25 +11,32 @@ import { AppDispatch } from "../../store/store";
 import { hideAlert } from "../../store/Alert/alertSlice";
 import { useDispatch } from "react-redux";
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from "react";
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-
+// import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import Icon from '@mui/material/Icon';
 
 export default function AlertDialog(props: AlertDialogData) {
+    console.log({props})
     const alertDisapatch = useDispatch<AppDispatch>();
-    function triggerAction(_action:string){
+    function triggerAction(_action: string) {
         alertDisapatch(hideAlert());
     }
     return (
         <div>
             <Dialog open={props.show}>
-                <DialogTitle>{props.title}
-                    <IconButton onClick={()=>triggerAction('OK')}
+                <DialogTitle>
+                    <IconButton sx={{
+                        padding: '0px',
+                        marginRight: '6px',
+                    }}> 
+                    <Icon style={{color: props?.icon?.color}}>{props?.icon?.name}</Icon>
+                    </IconButton>
+                    {props.title}
+                    <IconButton onClick={() => triggerAction('OK')}
                         sx={{
                             position: 'absolute',
                             right: 8,
                             top: 8,
                         }}>
-                        <InfoOutlinedIcon/>
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
@@ -43,7 +50,7 @@ export default function AlertDialog(props: AlertDialogData) {
                 <DialogActions>
                     {
                         props?.actions.map((action: string) => (
-                            <Button key={action} variant="contained" onClick={()=>triggerAction(action)}>{action}</Button>
+                            <Button key={action} variant="contained" onClick={() => triggerAction(action)}>{action}</Button>
                         ))
                     }
                 </DialogActions>

@@ -2,6 +2,7 @@ import { Dialog, DialogTitle, IconButton, DialogContent, DialogActions, Button, 
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
 import { YT_TRAVEL_DATA } from "utils/helpers";
+// import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 interface TSDialogProps {
     show: boolean,
@@ -52,6 +53,8 @@ const TSDialog = (props: TSDialogProps) => {
     const handleChange = (event: SelectChangeEvent) => {
         setSelStatus(event.target.value as string);
     };
+
+    console.log("abcccc")
 
     return (
         <Dialog open={props.show} fullWidth={true} maxWidth={'sm'}>

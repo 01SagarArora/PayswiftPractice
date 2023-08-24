@@ -7,7 +7,9 @@ import { commonApi } from 'api/commonApi/apis';
 const initStore = (preloadedState?: Partial<RootState>) => configureStore({
   reducer: rootReducer,
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat([
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat([
       headerFooterApi.middleware,
       travelStatusTripApi.middleware,
       commonS2SApi.middleware,
