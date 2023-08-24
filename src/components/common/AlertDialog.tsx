@@ -11,11 +11,12 @@ import { AppDispatch } from "../../store/store";
 import { hideAlert } from "../../store/Alert/alertSlice";
 import { useDispatch } from "react-redux";
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from "react";
-// import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import Icon from '@mui/material/Icon';
+import { Icon } from 'pages/Static/Icon';
+
+export type TripIcon = "Error";
 
 export default function AlertDialog(props: AlertDialogData) {
-    console.log({props})
+    console.log({ props })
     const alertDisapatch = useDispatch<AppDispatch>();
     function triggerAction(_action: string) {
         alertDisapatch(hideAlert());
@@ -27,8 +28,8 @@ export default function AlertDialog(props: AlertDialogData) {
                     <IconButton sx={{
                         padding: '0px',
                         marginRight: '6px',
-                    }}> 
-                    <Icon style={{color: props?.icon?.color}}>{props?.icon?.name}</Icon>
+                    }}>
+                        <Icon name={props.title as TripIcon} color={"red"} size={"small"}/>
                     </IconButton>
                     {props.title}
                     <IconButton onClick={() => triggerAction('OK')}
