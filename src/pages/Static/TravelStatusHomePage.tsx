@@ -14,7 +14,6 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import TSDialog from 'pages/TSDialog/TSDialog';
 import { UPDATE_TRAVEL_STATUS } from 'utils/constants';
 import { commonApi } from 'api/commonApi/apis';
-import { setPendingList } from 'store/PostSlice/PostSlice';
 import { setMainData } from 'store/MainData/MainDataSlice';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
@@ -52,8 +51,7 @@ const TravelStatusHomePage = () => {
     {} as PaginationData
   );
   const [travelList, setTravelList] = useState<any>([]);
-  const bookingsData = useSelector((state: RootState) => state.mainData);
-  const tripDataArray = useSelector((state: RootState) => state.pendingList?.data);
+  const bookingsData = useSelector((state: RootState) => state.mainData?.mainData);
   const reasonData = useSelector((state: RootState) => state.reasonData?.data);
   const isReasonLoaded = useSelector((state: RootState) => state.reasonData.isReasonLoaded);
   const flightReasons = reasonData?.configurations?.travelStatusConfig.domFlight;
@@ -61,11 +59,11 @@ const TravelStatusHomePage = () => {
   const [dialogProps, setDialogProps] = useState({ show: false });
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
-
+  console.log('booking data',bookingsData)
 
   // For Travel List
   const getTravelStatusList = () => {
-    setMainBookingData(bookingsData.mainData)
+    setMainBookingData(bookingsData)
     setIsDataLoaded(true)
   }
 
@@ -81,7 +79,7 @@ const TravelStatusHomePage = () => {
       totalPages: totalPages,
       totalRecords: totalRecords,
       responseStatus: 200,
-      listingData: bookingsData.mainData
+      listingData: bookingsData
     });
     setPaginationData({ ...paginationData });
   }
@@ -126,9 +124,10 @@ const TravelStatusHomePage = () => {
   }
 
   const updateTripList = (id: string) => {
-    let newArr = tripDataArray.filter((trip) => trip.id !== id);
-    setPendingList(newArr);
+    let newArr = bookingsData.filter((booking) => booking.id !== id);
+    setMainData(newArr);
   }
+
 
   const onClickTravelled = (trip: any, isYes: boolean, index: number) => {
     let tripObj = {
@@ -169,7 +168,7 @@ const TravelStatusHomePage = () => {
         show: true,
         type: trip.bookingType as string,
         tripData: { ...tripObj },
-        reason: trip.bookingType == 'AIR' ? flightReasons : hotelReasons,
+        reasonData: trip.bookingType == 'AIR' ? flightReasons : hotelReasons,
         closeOnClick: closeOnClick
       }
       setDialogProps(props);
