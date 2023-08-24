@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { MainData } from "models/PendingUpdate";
+import { Booking } from "models/PendingUpdate";
 
 
 const mainDataSlice = createSlice({
     name: 'mainData',
     initialState: {
-        mainData: [] as MainData[] ,
+        mainData: [] as Booking[] ,
         csrfToken:""
     },
     reducers: {
