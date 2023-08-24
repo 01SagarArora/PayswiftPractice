@@ -52,6 +52,7 @@ const TSDialog = (props:TSDialogProps) => {
           const resp = res.data;
           if (resp.data && resp.data.status == 'success') {
             //updating main data
+            props.onClose();
             dispatch(updateMainListData(obj.updateList[0].id));
             dispatch(hideTSDialog());
           } else if (resp.data.httpCode == 401) {
