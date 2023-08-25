@@ -14,7 +14,7 @@ import { LOADER_MSG } from 'components/Loader/loader.contant';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import NotFound from 'components/NotFound/NotFound';
 import { showAlert } from 'store/Alert/alertSlice';
-// import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { ALERT_DIALOG } from 'constants/commonConstants';
 
 const App: FC = (): ReactElement => {
   const loader = useSelector((state: RootState) => state.loader);
@@ -40,8 +40,8 @@ const App: FC = (): ReactElement => {
             }catch(e){
               console.log(e)
               let alertData = {
-                title: "Error",
-                messages: ["Please Try After Sometime"],
+                title: ALERT_DIALOG.DIALOG_TITLE,
+                messages: [ALERT_DIALOG.TRY_AGAIN_MESSAGE],
                 actions: ['OK'],
               };
               dispatch(showAlert(alertData));

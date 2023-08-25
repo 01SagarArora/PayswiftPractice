@@ -7,6 +7,8 @@ import TrainIcon from '@mui/icons-material/Train';
 import CarIcon from '@mui/icons-material/DirectionsCar';
 import BusIcon from '@mui/icons-material/DirectionsBus';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+
 
 export type TripIcon = "callender" | 'completed' | 'approved' | 'submitted' | 'rejected' | 'pending' | 'Error';
 export type IconSize = 'medium' | 'small' | 'large'
@@ -34,7 +36,7 @@ export function Icon(props: { name: TimeLineIcons, color: string, size: IconSize
                 return <ErrorOutlineIcon  style={{ color: props.color }} fontSize={props?.size || 'medium'} />
 
             default:
-                return <></>
+                return <InfoOutlinedIcon  style={{ color: props.color || 'black' }} fontSize={props?.size || 'medium'} />
         }
     }
 

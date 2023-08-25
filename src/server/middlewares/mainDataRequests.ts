@@ -15,7 +15,6 @@ const mainDataRequest = async (store: any, cookie: any) => {
                     tempTripData?.push(bookingsItem);
                 })
             })
-            
             store.dispatch(setMainData(tempTripData))
             let csrfToken = getKeyFromCookie('XSRF-TOKEN', cookie);
             store.dispatch(setToken(csrfToken))

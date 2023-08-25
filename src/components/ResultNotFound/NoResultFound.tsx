@@ -1,6 +1,7 @@
 import {  Stack } from "@mui/material";
 import "./NoResultFound.scss";
 import NoResultFoundSvg from "./NoResultFoundSvg";
+import { NO_DATA_FOUND_PAGE } from "constants/commonConstants";
 
 const NotFoundPage = () => {
     return (
@@ -10,8 +11,8 @@ const NotFoundPage = () => {
                 >
                     <NoResultFoundSvg />
                     <Stack className = "noDataFoundContent">
-                        <div className='sorry-text'>Sorry, No Data Found</div>
-                        <div className='sub-text-404'>There were no Travel Status found for this scenario.</div>
+                        <div className='sorry-text'>{NO_DATA_FOUND_PAGE.NOT_FOUND}</div>
+                        <div className='sub-text-404'>{NO_DATA_FOUND_PAGE.NOT_FOUND_TITLE}</div>
                     </Stack>
             </Stack>
         </div>

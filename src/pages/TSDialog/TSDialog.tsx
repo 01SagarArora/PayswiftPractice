@@ -33,7 +33,6 @@ const TSDialog = (props:TSDialogProps) => {
     }
 
     const onClose = () => {
-            console.log('agehge',props);
             //props.setDialogProps({ ...props, show: false })
             props.onClose();
             dispatch(hideTSDialog());
@@ -44,11 +43,8 @@ const TSDialog = (props:TSDialogProps) => {
         obj.updateList[0].status = data.status;
         obj.updateList[0].comment = showTextField ? data.reasonText : data.reason;
         delete obj.type;
-
-        console.log("final obj",obj);
         dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: obj }))
         .then((res: any) => {
-          console.log(res);
           const resp = res.data;
           if (resp.data && resp.data.status == 'success') {
             //updating main data
@@ -72,8 +68,6 @@ const TSDialog = (props:TSDialogProps) => {
         }
         setSelectedReason(event.target.value as string);
     };
-
-    console.log("abcccc")
 
     return (
         <Dialog open={show} fullWidth={true} maxWidth={'sm'}>

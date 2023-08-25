@@ -59,8 +59,6 @@ const TravelStatusHomePage = () => {
   const hotelReasons = reasonData?.configurations?.travelStatusConfig.domHotel;
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
-  console.log('booking data', bookingsData)
-
 
   // For update the Pagination
   const updatePagination = (totalPages: number, startIndex: number, endIndex: number, totalRecords: number) => {
@@ -79,13 +77,8 @@ const TravelStatusHomePage = () => {
     setPaginationData({ ...paginationData });
   }
 
-  useEffect(() => {
-    setIsDataLoaded(true);
-  }, [])
-
   // For swapping the classNames of action buttons through the dialog box
   const onDialogClose = () => {
-    console.log(travelList);
     const array = [...travelList];
     array.forEach((data) => {
       if (data.isCloseClicked) {
@@ -103,11 +96,14 @@ const TravelStatusHomePage = () => {
     const arr = [...bookingsData];
     loaderDispatch(startLoading(LOADER_MSG.tripDetails.default));
     setTimeout(() => {
-      setTravelList(arr.slice(startIndex, endIndex));
       loaderDispatch(stopLoading());
     }, 1000)
+    setTimeout(() => {
+      setIsDataLoaded(true);
+      setTravelList(arr.slice(startIndex, endIndex));
+    }, 0)
     updatePagination(totalPages, startIndex, endIndex, bookingsData.length);
-  }, [page, isDataLoaded, bookingsData])
+  }, [page, bookingsData])
 
   const handlePageChange = (clickedOnPageNumber: number) => {
     setPage(clickedOnPageNumber);
@@ -121,15 +117,12 @@ const TravelStatusHomePage = () => {
       //trip : {...trip},
     };
     tripObj.updateList.push({ id: trip.id, status: isYesClicked ? 'Availed' : 'U' });
-    console.log({ tripObj })
     if (isYesClicked) {
       //Todo: Set Loader
       delete tripObj.type;
       //As per production call update travel status api
-      console.log(tripObj)
       dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: tripObj }))
         .then((res: any) => {
-          console.log(res);
           const resp = res.data;
           if (resp.data && resp.status == 'success') {
             //updateTripList(trip.id);
@@ -154,9 +147,6 @@ const TravelStatusHomePage = () => {
       dispatch(showTSDialog());
     }
   }
-
-  console.log("travelList", travelList);
-
   return (
     <>
       <Container>
@@ -191,7 +181,7 @@ const TravelStatusHomePage = () => {
                     <TableCell className="tripHeader">Travelled</TableCell>
                   </TableRow>
                 </TableHead>
-                {travelList.length ? <TableBody>
+                {isDataLoaded && travelList.length ? <TableBody>
                   {
                     travelList && travelList?.map((item: any, index: number) =>
                       <TableRow key={item.startDate}>
@@ -239,10 +229,10 @@ const TravelStatusHomePage = () => {
                       </TableRow>
                     )
                   }
-                </TableBody>:""}
+                </TableBody> : ""}
               </Table>
             </TableContainer>
-            {travelList.length == 0 && <NotFoundPage />}
+            {travelList.length === 0 && isDataLoaded === true && <NotFoundPage />}
             <Box className="infoContainer">
               <InfoBox>
                 <InfoOutlinedIcon style={{ color: '#333333' }} />
@@ -253,19 +243,21 @@ const TravelStatusHomePage = () => {
             </Box>
           </ShadowBox>
         </Stack>
-        <Stack
-          alignItems="center"
-          justifyContent="end"
-          direction={"row"}
-          className="py-4"
-        >
-          <span className="mr-1">{TRAVEL_STATUS_PAGE.SHOW_RESULTS}</span>
-          <PaginationButton
-            data={paginationData}
-            handlePageChange={handlePageChange
-            }
-          ></PaginationButton>
-        </Stack>
+        {travelList.length ?
+          <Stack
+            alignItems="center"
+            justifyContent="end"
+            direction={"row"}
+            className="py-4"
+          >
+            <span className="mr-1">{TRAVEL_STATUS_PAGE.SHOW_RESULTS}</span>
+            <PaginationButton
+              data={paginationData}
+              handlePageChange={handlePageChange
+              }
+            ></PaginationButton>
+          </Stack>
+        : ""}
       </Container>
       <TSDialog onClose={() => { onDialogClose() }} />
     </>

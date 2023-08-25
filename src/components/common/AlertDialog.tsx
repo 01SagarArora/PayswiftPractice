@@ -11,12 +11,9 @@ import { AppDispatch } from "../../store/store";
 import { hideAlert } from "../../store/Alert/alertSlice";
 import { useDispatch } from "react-redux";
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from "react";
-import { Icon } from 'pages/Static/Icon';
-
-export type TripIcon = "Error";
+import { Icon, TripIcon} from 'pages/Static/Icon';
 
 export default function AlertDialog(props: AlertDialogData) {
-    console.log({ props })
     const alertDisapatch = useDispatch<AppDispatch>();
     function triggerAction(_action: string) {
         alertDisapatch(hideAlert());

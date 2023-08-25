@@ -33,3 +33,16 @@ export const TRAVEL_STATUS_PAGE = {
   INFO_CONTENT: "Your Travel policy mandates you to update if you have availed your booked flights or hotels. If you do not update this info your expense claims can be rejected & future booking may be denied.",
   SHOW_RESULTS: "Showing results"
 }
+
+export const ALERT_DIALOG = {
+  TRY_AGAIN_MESSAGE: "Please Try After Sometime",
+  DIALOG_TITLE: "Error"
+}
+
+export const NO_DATA_FOUND_PAGE = {
+  NOT_FOUND: "Sorry, No Data Found",
+  NOT_FOUND_TITLE: "There were no Travel Status found for this scenario."
+}
+
+
+
