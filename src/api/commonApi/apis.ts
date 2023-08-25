@@ -1,6 +1,6 @@
 import { buildCreateApi, coreModule, reactHooksModule, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { isServer } from 'utils';
-import {  PROD_BASE_URL ,BASE_URL}  from "../../utils/constants";
+import { BASE_URL, GET_POSTS}  from "../../utils/constants";
 
 let createApiFunction = createApi;
 
@@ -21,14 +21,15 @@ if (isServer) {
 export const commonS2SApi = createApiFunction({
   reducerPath: 'commonS2SApi',
     baseQuery : fetchBaseQuery({
-    baseUrl: PROD_BASE_URL,
+    baseUrl: BASE_URL,
   }),
   endpoints: builder => ({
     getApi: builder.query<any, any>({
-      query:({url})=> ( {
+      query:({cookie,url})=> ( {
        url,
        headers: {
-        'content-type': 'text/plain',
+        'content-type': 'application/json;charset=UTF-8',
+        'cookie': cookie,
        },
        responseHandler: (response: { text: () => any }) => response.text()
       }),
@@ -79,4 +80,22 @@ export const commonApi = createApiFunction({
       },
     })
   })
+})
+
+
+export const pendingTravelUpdates = createApiFunction({
+  reducerPath: 'travelUpdates',
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: BASE_URL,
+    prepareHeaders: (headers) => {
+        headers.set("Content-Type", "application/json")
+        return headers
+    }
+  }),
+  endpoints: builder =>({
+    getUpdates: builder.query<any,any>({
+      query : ()=> GET_POSTS
+    })
+  })
+
 })

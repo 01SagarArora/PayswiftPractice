@@ -4,5 +4,6 @@ export const ROUTE_CONSTANTS = {
   HOME: '/',
   NOT_FOUND: '/405',
   DEFAULT_PAGE : '/DefaultPage',
-  FAV_ICON:"/favicon.ico"
+  FAV_ICON:"/favicon.ico",
+  TRAVEL_STATUS_HOME_PAGE:"/home"
 };

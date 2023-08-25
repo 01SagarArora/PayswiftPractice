@@ -14,7 +14,6 @@ const SERVER_BUNDLE_NAME: string = 'server';
 const STATIC_CONTENT_PATH = 'travel-status-v2/'
 const BASE_PATH = '/travel-status-v2';
 const HEALTH_CHECK = '/travel-status-v2/healthCheck';
-const APP_MEMORY_STATUS = '/travel-status-v2/status';
 
 
 const ALIAS: Record<string, string> = {
@@ -49,6 +48,5 @@ export {
   SRC_DIR,
   BASE_PATH,
   HEALTH_CHECK,
-  STATIC_CONTENT_PATH,
-  APP_MEMORY_STATUS
+  STATIC_CONTENT_PATH
 };

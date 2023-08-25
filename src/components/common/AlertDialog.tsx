@@ -11,18 +11,25 @@ import { AppDispatch } from "../../store/store";
 import { hideAlert } from "../../store/Alert/alertSlice";
 import { useDispatch } from "react-redux";
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from "react";
-
+import { Icon, TripIcon} from 'pages/Static/Icon';
 
 export default function AlertDialog(props: AlertDialogData) {
     const alertDisapatch = useDispatch<AppDispatch>();
-    function triggerAction(_action:string){
+    function triggerAction(_action: string) {
         alertDisapatch(hideAlert());
     }
     return (
         <div>
             <Dialog open={props.show}>
-                <DialogTitle>{props.title}
-                    <IconButton onClick={()=>triggerAction('OK')}
+                <DialogTitle>
+                    <IconButton sx={{
+                        padding: '0px',
+                        marginRight: '6px',
+                    }}>
+                        <Icon name={props.title as TripIcon} color={"red"} size={"small"}/>
+                    </IconButton>
+                    {props.title}
+                    <IconButton onClick={() => triggerAction('OK')}
                         sx={{
                             position: 'absolute',
                             right: 8,
@@ -41,7 +48,7 @@ export default function AlertDialog(props: AlertDialogData) {
                 <DialogActions>
                     {
                         props?.actions.map((action: string) => (
-                            <Button key={action} variant="contained" onClick={()=>triggerAction(action)}>{action}</Button>
+                            <Button key={action} variant="contained" onClick={() => triggerAction(action)}>{action}</Button>
                         ))
                     }
                 </DialogActions>
