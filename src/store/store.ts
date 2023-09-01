@@ -1,7 +1,7 @@
 import { configureStore, StateFromReducersMapObject } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { rootReducer } from './rootReducer';
-import { commonS2SApi, headerFooterApi, travelStatusTripApi } from 'api';
+import { commonS2SApi, headerFooterApi } from 'api';
 import { commonApi } from 'api/commonApi/apis';
 
 const initStore = (preloadedState?: Partial<RootState>) => configureStore({
@@ -11,7 +11,6 @@ const initStore = (preloadedState?: Partial<RootState>) => configureStore({
       serializableCheck: false,
     }).concat([
       headerFooterApi.middleware,
-      travelStatusTripApi.middleware,
       commonS2SApi.middleware,
       commonApi.middleware
       ]),

@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { alertReducer } from './Alert/alertSlice';
 import { loaderReducer } from './Loader/LoaderSlice';
-import { commonS2SApi, headerFooterApi, travelStatusTripApi
+import { commonS2SApi, headerFooterApi
 } from 'api';
 import { mainDataReducer } from './MainData/MainDataSlice';
 import { errorReducer } from './Error/ErrorSlice';
@@ -17,7 +17,6 @@ export const rootReducer = {
   error: errorReducer,
   reasonData: reasonsReducer,
   [headerFooterApi.reducerPath]: headerFooterApi.reducer,
-  [travelStatusTripApi.reducerPath]: travelStatusTripApi.reducer,
   [commonS2SApi.reducerPath]: commonS2SApi.reducer,
   [commonApi.reducerPath]: commonApi.reducer,
 };
