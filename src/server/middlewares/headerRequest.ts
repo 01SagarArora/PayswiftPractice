@@ -9,7 +9,7 @@ const headerRequest = async (store: any,cookie:any,setHeaderValue:any) => {
   let ssoToken = getKeyFromCookie('ssoToken',cookie);
   let userType = getKeyFromCookie('userType',cookie);
   const headerUrlWithSsoToken = urlFormatter(frescoHeaderUrl,[ssoToken,userType]);
-  store.dispatch(commonS2SApi.endpoints.getFooterHeader.initiate({url:headerUrlWithSsoToken})).then((res:any)=>{    
+  store.dispatch(commonS2SApi.endpoints.getApi.initiate({url:headerUrlWithSsoToken})).then((res:any)=>{    
   logger.info(`cookie ----------->>> ${cookie}`);
     setHeaderValue('header',res.data);
   });
