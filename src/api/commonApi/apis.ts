@@ -45,7 +45,14 @@ export const commonS2SApi = createApiFunction({
        'body':data,
        responseHandler: (response: { text: () => any }) => response.text()
       }),
-  })
+    }),
+    getFooterHeader: builder.query<any, any>({
+      query:({url})=>  {
+      return {url,
+       method: "GET",
+       responseHandler: (response) => response.text()       
+      }},
+    })
 })
 })
 
