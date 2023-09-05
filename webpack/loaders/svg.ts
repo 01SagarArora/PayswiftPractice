@@ -1,6 +1,6 @@
 import { RuleSetRule } from 'webpack';
 
-import { IS_DEV } from '../constants';
+import { IS_DEV,IMAGES_STATIC_CONTENT_PATH } from '../constants';
 import { TLoader } from '../types';
 
 const svgRegex: RegExp = /\.svg$/;
@@ -22,7 +22,7 @@ const universalLoader: RuleSetRule = {
     },
   ],
   generator: {
-    filename: `images/${IS_DEV ? '[name][ext]' : '[name]-[hash][ext]'}`,
+    filename: `${IMAGES_STATIC_CONTENT_PATH}/${IS_DEV ? '[name][ext]' : '[name]-[hash][ext]'}`,
   },
 };
 
