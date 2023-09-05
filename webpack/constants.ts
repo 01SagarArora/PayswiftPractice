@@ -14,7 +14,7 @@ const SERVER_BUNDLE_NAME: string = 'server';
 const STATIC_CONTENT_PATH = 'travel-status-v2/'
 const BASE_PATH = '/travel-status-v2';
 const HEALTH_CHECK = '/travel-status-v2/healthCheck';
-const IMAGES_STATIC_CONTENT_PATH = 'corp-build/images';
+const IMAGES_STATIC_CONTENT_PATH = 'travel-status-v2/images';
 
 
 const ALIAS: Record<string, string> = {
