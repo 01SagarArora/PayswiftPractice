@@ -31,6 +31,8 @@ const App: FC = (): ReactElement => {
         dispatch(commonApi.endpoints.postApi.initiate({url: GET_REASONS, data: req}))
             .then((res)=>{
             loaderDispatch(stopLoading());
+            console.log(res)
+
               try{
               if(res.data.success){
                 //TODO : MANIPULATE DATA

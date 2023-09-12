@@ -12,14 +12,15 @@ import { styled } from '@mui/system';
 import TravelStatusIconSvg from './TravelStatusIconSvg';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import TSDialog from 'pages/TSDialog/TSDialog';
-import { UPDATE_TRAVEL_STATUS } from 'utils/constants';
+import { LOGIN_URL, PROD_BASE_URL, UPDATE_TRAVEL_STATUS } from 'utils/constants';
 import { commonApi } from 'api/commonApi/apis';
-import { updateMainListData } from 'store/MainData/MainDataSlice';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
-import { TRAVEL_STATUS_PAGE } from 'constants/commonConstants';
+import { ALERT_DIALOG, TRAVEL_STATUS_PAGE } from 'constants/commonConstants';
 import { setTSDailogData, showTSDialog } from 'store/TSDialogSlice/TSDialogSlice';
 import { NotFoundPage } from 'components/ResultNotFound/NoResultFound';
+import { showAlert } from 'store/Alert/alertSlice';
+import { updateMainListData } from 'store/MainData/MainDataSlice';
 
 // Mui div Component mainly for box shadow 
 const ShadowBox = styled('div')({
@@ -123,15 +124,33 @@ const TravelStatusHomePage = () => {
       //As per production call update travel status api
       dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: tripObj }))
         .then((res: any) => {
-          const resp = res.data;
-          if (resp.data && resp.status == 'success') {
-            //updateTripList(trip.id);
-            dispatch(updateMainListData(trip.id))
-          } else if (resp.data.httpCode == 401) {
-            //todo lgoin 
-          } else if (resp.data.httpCode == 500) {
-            //todo error handling
-          }
+          try{
+            const resp = res.data;
+            if (resp.data && resp.status == 'success') {
+              dispatch(updateMainListData(trip.id))
+            } else if (resp.data.httpCode == 401) {
+              const redirectUrl = window.location.href;
+              const loginRequiredUrl = PROD_BASE_URL + LOGIN_URL + `channel=crp&returnUrl=` + redirectUrl;
+              window.location.href = loginRequiredUrl;
+            } else if (resp.data.httpCode == 500) {
+              //todo error handling
+              let alertData = {
+                title: ALERT_DIALOG.DIALOG_TITLE,
+                messages: [ALERT_DIALOG.TRY_AGAIN_MESSAGE],
+                actions: ['OK'],
+              };
+              dispatch(showAlert(alertData));            
+            }
+          }catch(e){
+            console.log(e)
+            let alertData = {
+              title: ALERT_DIALOG.DIALOG_TITLE,
+              messages: [ALERT_DIALOG.TRY_AGAIN_MESSAGE],
+              actions: ['OK'],
+            };
+            dispatch(showAlert(alertData));
+          }  
+          
         })
     } else {
       // TSDialog is shown
@@ -229,10 +248,10 @@ const TravelStatusHomePage = () => {
                       </TableRow>
                     )
                   }
-                </TableBody> : ""}
+                </TableBody> : null}
               </Table>
+              {travelList.length === 0 && isDataLoaded === true && <NotFoundPage />}
             </TableContainer>
-            {travelList.length === 0 && isDataLoaded === true && <NotFoundPage />}
             <Box className="infoContainer">
               <InfoBox>
                 <InfoOutlinedIcon style={{ color: '#333333' }} />
@@ -257,7 +276,7 @@ const TravelStatusHomePage = () => {
               }
             ></PaginationButton>
           </Stack>
-        : ""}
+          : ""}
       </Container>
       <TSDialog onClose={() => { onDialogClose() }} />
     </>
