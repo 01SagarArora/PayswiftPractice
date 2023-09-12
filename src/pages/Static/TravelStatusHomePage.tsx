@@ -12,7 +12,7 @@ import { styled } from '@mui/system';
 import TravelStatusIconSvg from './TravelStatusIconSvg';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import TSDialog from 'pages/TSDialog/TSDialog';
-import { LOGIN_URL, PROD_BASE_URL, UPDATE_TRAVEL_STATUS } from 'utils/constants';
+import { UPDATE_TRAVEL_STATUS } from 'utils/constants';
 import { commonApi } from 'api/commonApi/apis';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
@@ -21,6 +21,8 @@ import { setTSDailogData, showTSDialog } from 'store/TSDialogSlice/TSDialogSlice
 import { NotFoundPage } from 'components/ResultNotFound/NoResultFound';
 import { showAlert } from 'store/Alert/alertSlice';
 import { updateMainListData } from 'store/MainData/MainDataSlice';
+import { setNotFound } from 'store/NotFound/NotFoundSlice';
+import { ROUTE_CONSTANTS } from 'constants/routeConstants';
 
 // Mui div Component mainly for box shadow 
 const ShadowBox = styled('div')({
@@ -60,6 +62,8 @@ const TravelStatusHomePage = () => {
   const hotelReasons = reasonData?.configurations?.travelStatusConfig.domHotel;
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
+  const apiDispatch = useDispatch();
+
 
   // For update the Pagination
   const updatePagination = (totalPages: number, startIndex: number, endIndex: number, totalRecords: number) => {
@@ -129,9 +133,14 @@ const TravelStatusHomePage = () => {
             if (resp.data && resp.status == 'success') {
               dispatch(updateMainListData(trip.id))
             } else if (resp.data.httpCode == 401) {
-              const redirectUrl = window.location.href;
-              const loginRequiredUrl = PROD_BASE_URL + LOGIN_URL + `channel=crp&returnUrl=` + redirectUrl;
-              window.location.href = loginRequiredUrl;
+              apiDispatch(
+                setNotFound({
+                  show: true,
+                  noDataStatus: false,
+                  errorMsg: "Error, Please Login",
+                  backdropUrl: `${ROUTE_CONSTANTS.TRAVEL_STATUS_HOME_PAGE}`,
+                })
+              );
             } else if (resp.data.httpCode == 500) {
               //todo error handling
               let alertData = {
@@ -143,12 +152,13 @@ const TravelStatusHomePage = () => {
             }
           }catch(e){
             console.log(e)
-            let alertData = {
-              title: ALERT_DIALOG.DIALOG_TITLE,
-              messages: [ALERT_DIALOG.TRY_AGAIN_MESSAGE],
-              actions: ['OK'],
-            };
-            dispatch(showAlert(alertData));
+            apiDispatch(
+              setNotFound({
+                show: false,
+                noDataStatus: true,
+                backdropUrl: `${ROUTE_CONSTANTS.TRAVEL_STATUS_HOME_PAGE}`,
+              })
+            );
           }  
           
         })
