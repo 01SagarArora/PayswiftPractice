@@ -10,8 +10,6 @@ const NotFound = (props: {
   notFound?: {
     show?: boolean;
     noDataStatus?: boolean;
-    viewMode?: string;
-    tripId?: string;
     backdropUrl?: string;
     errorMsg?: string;
   };

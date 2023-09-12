@@ -19,9 +19,12 @@ import { ALERT_DIALOG } from 'constants/commonConstants';
 const App: FC = (): ReactElement => {
   const loader = useSelector((state: RootState) => state.loader);
   const alert = useSelector((state: RootState) => state.alert);
-  const error = useSelector((state: RootState) => state.error);
+  // const error = useSelector((state: RootState) => state.error);
+  const notFound = useSelector((state: RootState) => state.notFound)
+
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
+
   
   useEffect(() => { 
     
@@ -57,12 +60,15 @@ const App: FC = (): ReactElement => {
   return (
 
     <ErrorBoundary>
-      {error.isPageNotFound && <NotFound />}
-      {(loader.isLoading) &&(!error.isPageNotFound) && <Loader  oMessage={loader.oMessage} />}
+      {notFound.show || notFound.noDataStatus ? <NotFound notFound={notFound}/>:
+      <>
+      {loader.isLoading && <Loader oMessage={loader.oMessage} />}
       <AlertDialog {...alert}></AlertDialog>
-      {!error.isPageNotFound && <main>
+      <main>
         <Router />
-      </main>}
+      </main>
+      </>
+      }
     </ErrorBoundary>
   );
 };

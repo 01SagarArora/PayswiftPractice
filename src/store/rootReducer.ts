@@ -8,6 +8,7 @@ import { errorReducer } from './Error/ErrorSlice';
 import { commonApi } from 'api/commonApi/apis';
 import { reasonsReducer } from './ReasonSlice/ReasonSlics';
 import { tsDailogReducer } from './TSDialogSlice/TSDialogSlice';
+import { notFoundReducer } from './NotFound/NotFoundSlice';
 
 export const rootReducer = {
   alert:alertReducer,
@@ -16,6 +17,7 @@ export const rootReducer = {
   tsDialog: tsDailogReducer,
   error: errorReducer,
   reasonData: reasonsReducer,
+  notFound : notFoundReducer,
   [commonS2SApi.reducerPath]: commonS2SApi.reducer,
   [commonApi.reducerPath]: commonApi.reducer,
 };
