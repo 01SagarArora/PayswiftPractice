@@ -21,8 +21,7 @@ import { setTSDailogData, showTSDialog } from 'store/TSDialogSlice/TSDialogSlice
 import { NotFoundPage } from 'components/ResultNotFound/NoResultFound';
 import { showAlert } from 'store/Alert/alertSlice';
 import { updateMainListData } from 'store/MainData/MainDataSlice';
-import { setNotFound } from 'store/NotFound/NotFoundSlice';
-import { ROUTE_CONSTANTS } from 'constants/routeConstants';
+import { setError } from 'store/Error/ErrorSlice';
 
 // Mui div Component mainly for box shadow 
 const ShadowBox = styled('div')({
@@ -62,8 +61,6 @@ const TravelStatusHomePage = () => {
   const hotelReasons = reasonData?.configurations?.travelStatusConfig.domHotel;
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
-  const apiDispatch = useDispatch();
-
 
   // For update the Pagination
   const updatePagination = (totalPages: number, startIndex: number, endIndex: number, totalRecords: number) => {
@@ -128,19 +125,13 @@ const TravelStatusHomePage = () => {
       //As per production call update travel status api
       dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: tripObj }))
         .then((res: any) => {
-          try{
+          try {
             const resp = res.data;
             if (resp.data && resp.status == 'success') {
               dispatch(updateMainListData(trip.id))
             } else if (resp.data.httpCode == 401) {
-              apiDispatch(
-                setNotFound({
-                  show: true,
-                  noDataStatus: false,
-                  errorMsg: "Error, Please Login",
-                  backdropUrl: `${ROUTE_CONSTANTS.TRAVEL_STATUS_HOME_PAGE}`,
-                })
-              );
+              dispatch(setError())
+              return false
             } else if (resp.data.httpCode == 500) {
               //todo error handling
               let alertData = {
@@ -148,19 +139,17 @@ const TravelStatusHomePage = () => {
                 messages: [ALERT_DIALOG.TRY_AGAIN_MESSAGE],
                 actions: ['OK'],
               };
-              dispatch(showAlert(alertData));            
+              dispatch(showAlert(alertData));
             }
-          }catch(e){
+          } catch (e) {
             console.log(e)
-            apiDispatch(
-              setNotFound({
-                show: false,
-                noDataStatus: true,
-                backdropUrl: `${ROUTE_CONSTANTS.TRAVEL_STATUS_HOME_PAGE}`,
-              })
-            );
-          }  
-          
+            let alertData = {
+              title: ALERT_DIALOG.DIALOG_TITLE,
+              messages: [ALERT_DIALOG.TRY_AGAIN_MESSAGE],
+              actions: ['OK'],
+            };
+            dispatch(showAlert(alertData));
+          }
         })
     } else {
       // TSDialog is shown

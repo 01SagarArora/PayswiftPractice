@@ -19,6 +19,7 @@ const mainDataRequest = async (store: any, cookie: any) => {
             let csrfToken = getKeyFromCookie('XSRF-TOKEN', cookie);
             store.dispatch(setToken(csrfToken))
         }catch(e){
+            console.log(e)
             store.dispatch(setError())
             return false
         }       
