@@ -45,7 +45,7 @@ export const commonS2SApi = createApiFunction({
        'body':data,
        responseHandler: (response: { text: () => any }) => response.text()
       }),
-  })
+    }),
 })
 })
 

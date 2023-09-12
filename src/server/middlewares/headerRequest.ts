@@ -1,4 +1,4 @@
-import { headerFooterApi } from 'api';
+import { commonS2SApi } from 'api';
 import { HEADER_URL } from 'utils/constants';
 import { getKeyFromCookie, urlFormatter } from 'utils/helpers';
 
@@ -9,10 +9,10 @@ const headerRequest = async (store: any,cookie:any,setHeaderValue:any) => {
   let ssoToken = getKeyFromCookie('ssoToken',cookie);
   let userType = getKeyFromCookie('userType',cookie);
   const headerUrlWithSsoToken = urlFormatter(frescoHeaderUrl,[ssoToken,userType]);
-  store.dispatch(headerFooterApi.endpoints.getFooterHeader.initiate({url:headerUrlWithSsoToken})).then((res:any)=>{    
+  store.dispatch(commonS2SApi.endpoints.getApi.initiate({url:headerUrlWithSsoToken})).then((res:any)=>{    
   logger.info(`cookie ----------->>> ${cookie}`);
     setHeaderValue('header',res.data);
   });
- return Promise.all(store.dispatch(headerFooterApi.util.getRunningQueriesThunk()));
+ return Promise.all(store.dispatch(commonS2SApi.util.getRunningQueriesThunk()));
 };
 export { headerRequest };
