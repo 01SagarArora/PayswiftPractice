@@ -22,6 +22,9 @@ import { NotFoundPage } from 'components/ResultNotFound/NoResultFound';
 import { showAlert } from 'store/Alert/alertSlice';
 import { updateMainListData } from 'store/MainData/MainDataSlice';
 import { setError } from 'store/Error/ErrorSlice';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+
 
 // Mui div Component mainly for box shadow 
 const ShadowBox = styled('div')({
@@ -42,6 +45,15 @@ const InfoBox = styled('div')({
   padding: '12px',
   display: 'flex',
   margin: '25px 20px 20px 20px'
+});
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Rubik',
+      'sans-serif'
+    ].join(','),
+  }
 });
 
 export type BookingType = "HOTEL" | "VISA" | "FLIGHTS" | "TRAIN" | "CAR" | "BUS";
@@ -186,6 +198,7 @@ const TravelStatusHomePage = () => {
               } />
           </Tabs>
           <ShadowBox>
+            <ThemeProvider theme={theme}>
             <TableContainer>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
@@ -251,6 +264,7 @@ const TravelStatusHomePage = () => {
               </Table>
               {travelList.length === 0 && isDataLoaded === true && <NotFoundPage />}
             </TableContainer>
+            </ThemeProvider>
             <Box className="infoContainer">
               <InfoBox>
                 <InfoOutlinedIcon style={{ color: '#333333' }} />
