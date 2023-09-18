@@ -52,7 +52,7 @@ export const commonS2SApi = createApiFunction({
 export const commonApi = createApiFunction({
   reducerPath: 'commonApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL,
+    baseUrl: '',
   }),
   endpoints: builder => ({
     getApi: builder.query<any, any>({
