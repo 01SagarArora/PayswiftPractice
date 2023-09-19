@@ -36,7 +36,7 @@ const plugins: WebpackPluginInstance[] = [
   ] : []),
   new ForkTsCheckerWebpackPlugin(),
   new MiniCssExtractPlugin({
-    filename: IS_DEV ? `${STATIC_CONTENT_PATH}[name].css` : `${STATIC_CONTENT_PATH}[name].[contenthash].css`,
+    filename: IS_DEV ? `${STATIC_CONTENT_PATH}css/[name].css` : `${STATIC_CONTENT_PATH}css/[name].[contenthash].css`,
   }),
   new LoadablePlugin(
     {
@@ -58,7 +58,7 @@ const clientConfig: Configuration = {
   plugins,
   output: {
     path: DIST_DIR,
-    filename: `${STATIC_CONTENT_PATH}${filename('js')}`,
+    filename: `${STATIC_CONTENT_PATH}js/${filename('js')}`,
     publicPath: '/',
   },
   devtool: IS_DEV ? 'source-map' : false,

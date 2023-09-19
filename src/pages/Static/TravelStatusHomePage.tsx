@@ -14,12 +14,17 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import TSDialog from 'pages/TSDialog/TSDialog';
 import { UPDATE_TRAVEL_STATUS } from 'utils/constants';
 import { commonApi } from 'api/commonApi/apis';
-import { updateMainListData } from 'store/MainData/MainDataSlice';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
-import { TRAVEL_STATUS_PAGE } from 'constants/commonConstants';
+import { ALERT_DIALOG, TRAVEL_STATUS_PAGE } from 'constants/commonConstants';
 import { setTSDailogData, showTSDialog } from 'store/TSDialogSlice/TSDialogSlice';
 import { NotFoundPage } from 'components/ResultNotFound/NoResultFound';
+import { showAlert } from 'store/Alert/alertSlice';
+import { updateMainListData } from 'store/MainData/MainDataSlice';
+import { setError } from 'store/Error/ErrorSlice';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+
 
 // Mui div Component mainly for box shadow 
 const ShadowBox = styled('div')({
@@ -40,6 +45,15 @@ const InfoBox = styled('div')({
   padding: '12px',
   display: 'flex',
   margin: '25px 20px 20px 20px'
+});
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Rubik',
+      'sans-serif'
+    ].join(','),
+  }
 });
 
 export type BookingType = "HOTEL" | "VISA" | "FLIGHTS" | "TRAIN" | "CAR" | "BUS";
@@ -123,14 +137,30 @@ const TravelStatusHomePage = () => {
       //As per production call update travel status api
       dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: tripObj }))
         .then((res: any) => {
-          const resp = res.data;
-          if (resp.data && resp.status == 'success') {
-            //updateTripList(trip.id);
-            dispatch(updateMainListData(trip.id))
-          } else if (resp.data.httpCode == 401) {
-            //todo lgoin 
-          } else if (resp.data.httpCode == 500) {
-            //todo error handling
+          try {
+            const resp = res.data;
+            if (resp.data && resp.status == 'success') {
+              dispatch(updateMainListData(trip.id))
+            } else if (resp.data.httpCode == 401) {
+              dispatch(setError())
+              return false
+            } else if (resp.data.httpCode == 500) {
+              //todo error handling
+              let alertData = {
+                title: ALERT_DIALOG.DIALOG_TITLE,
+                messages: [ALERT_DIALOG.TRY_AGAIN_MESSAGE],
+                actions: ['OK'],
+              };
+              dispatch(showAlert(alertData));
+            }
+          } catch (e) {
+            console.log(e)
+            let alertData = {
+              title: ALERT_DIALOG.DIALOG_TITLE,
+              messages: [ALERT_DIALOG.TRY_AGAIN_MESSAGE],
+              actions: ['OK'],
+            };
+            dispatch(showAlert(alertData));
           }
         })
     } else {
@@ -168,9 +198,10 @@ const TravelStatusHomePage = () => {
               } />
           </Tabs>
           <ShadowBox>
+            <ThemeProvider theme={theme}>
             <TableContainer>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
+              <Table sx={{ minWidth: 650 }} aria-label="table content">
+                <TableHead className="tableHead">
                   <TableRow>
                     <TableCell className="tripHeader">Trip ID</TableCell>
                     <TableCell className="tripHeader">CT Number</TableCell>
@@ -188,15 +219,15 @@ const TravelStatusHomePage = () => {
                         <TableCell className="tripBody">
 
                           <Box sx={{ display: 'flex', alignItems: "center" }}>
-                            <span className="gray-dark productNameHolder ">
+                            <div className="gray-dark productNameHolder ">
                               <Stack direction={"row"} alignItems={"center"}>
-                                <div className='icon-container'>
+                                <span className='icon-container'>
                                   <Icon name={item.bookingType as BookingType} color={'red'} size={'medium'} />
-                                </div>
+                                </span>
                                 &nbsp;&nbsp;
                                 <span>{item.TripId}</span>
                               </Stack>
-                            </span>
+                            </div>
                           </Box>
                         </TableCell>
                         <TableCell className="tripBody">{item.BookingId === "-" || item.BookingId === "" ? "NA" : item.BookingId}</TableCell>
@@ -210,7 +241,7 @@ const TravelStatusHomePage = () => {
                             alignItems={"center"}
                             justifyContent="space-between"
                             spacing={2}
-                            className="mr-1"
+                            className="mr-1 travelActions"
                           >
                             <span>
                               <Button variant={item?.isCloseClicked ? "outlined" : "contained"} className={item?.isCloseClicked ? "containedButton" : "outlinedButton"}
@@ -218,7 +249,7 @@ const TravelStatusHomePage = () => {
                                 Yes
                               </Button>
                             </span>
-                            <span>
+                            <span className="actionButtons">
                               <Button variant={item?.isCloseClicked ? "contained" : "outlined"} className={item?.isCloseClicked ? "outlinedButton" : "containedButton"} disabled={!isReasonLoaded}
                                 onClick={() => { onClickTravelled(item, false, index) }}>
                                 No
@@ -229,10 +260,11 @@ const TravelStatusHomePage = () => {
                       </TableRow>
                     )
                   }
-                </TableBody> : ""}
+                </TableBody> : null}
               </Table>
+              {travelList.length === 0 && isDataLoaded === true && <NotFoundPage />}
             </TableContainer>
-            {travelList.length === 0 && isDataLoaded === true && <NotFoundPage />}
+            </ThemeProvider>
             <Box className="infoContainer">
               <InfoBox>
                 <InfoOutlinedIcon style={{ color: '#333333' }} />
@@ -257,7 +289,7 @@ const TravelStatusHomePage = () => {
               }
             ></PaginationButton>
           </Stack>
-        : ""}
+          : ""}
       </Container>
       <TSDialog onClose={() => { onDialogClose() }} />
     </>

@@ -13,7 +13,6 @@
         box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
 
         .tabContent {
-            font-family: var(--font-family-primary);
             font-size: 16px;
             font-weight: 500;
             color: var(--color-theme);
@@ -28,21 +27,36 @@
     }
 }
 
+.tableHead{
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+
 .tripHeader {
-    font-family: var(--font-family-primary);
     font-size: 16px;
     font-weight: 500;
     color: #333;
     white-space: nowrap;
+
+    &:nth-child(7) {
+        text-align: center;
+    }
+
+}
 }
 
 .tripBody {
-    font-family: var(--font-family-primary);
     font-size: 13px;
     color: #333;
 
     &:nth-child(5) {
         white-space: nowrap;
+    }
+
+    .travelActions{
+        width: 90%;
+    }
+
+    .actionButtons{
+        margin-left: 0px !important;
     }
 
 }

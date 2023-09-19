@@ -1,6 +1,6 @@
 import { RuleSetRule } from 'webpack';
 
-import { IS_DEV } from '../constants';
+import { STATIC_CONTENT_PATH } from '../constants';
 import { TLoader } from '../types';
 
 const imageRegex: RegExp = /\.(png|jpg|jpeg|gif)$/;
@@ -9,7 +9,7 @@ const universalLoader: RuleSetRule = {
   test: imageRegex,
   type: 'asset/resource',
   generator: {
-    filename: `images/${IS_DEV ? '[name][ext]' : '[name]-[hash][ext]'}`,
+    filename: `${STATIC_CONTENT_PATH}images/[name]-[hash][ext]}`,
   },
 };
 

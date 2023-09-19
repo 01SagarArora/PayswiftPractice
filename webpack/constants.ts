@@ -6,15 +6,15 @@ const IS_SWC: boolean = true;
 const DEV_SERVER_PORT: number = 8040;
 const DEV_SERVER_HTTPS_PORT: number = 8050;
 
+const APP_NAME ='travel-status-v2';
 const SRC_DIR: string = path.join(__dirname, '../src');
-const DIST_DIR: string = path.join(__dirname, '../travel-status-v2');
+const DIST_DIR: string = path.join(__dirname, `../${APP_NAME}`);
 const SERVER_SRC_DIR: string = path.join(__dirname, '../src/server');
 
 const SERVER_BUNDLE_NAME: string = 'server';
-const STATIC_CONTENT_PATH = 'travel-status-v2/'
-const BASE_PATH = '/travel-status-v2';
-const HEALTH_CHECK = '/travel-status-v2/healthCheck';
-
+const STATIC_CONTENT_PATH = `${APP_NAME}/`
+const BASE_PATH = `/${APP_NAME}`;
+const HEALTH_CHECK = `/${APP_NAME}/healthCheck`;
 
 const ALIAS: Record<string, string> = {
   api: `${SRC_DIR}/api`,
@@ -48,5 +48,6 @@ export {
   SRC_DIR,
   BASE_PATH,
   HEALTH_CHECK,
-  STATIC_CONTENT_PATH
+  STATIC_CONTENT_PATH,
+  APP_NAME
 };

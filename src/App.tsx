@@ -58,9 +58,9 @@ const App: FC = (): ReactElement => {
       {error.isPageNotFound && <NotFound />}
       {(loader.isLoading) &&(!error.isPageNotFound) && <Loader  oMessage={loader.oMessage} />}
       <AlertDialog {...alert}></AlertDialog>
-      <main>
+      {!error.isPageNotFound && <main>
         <Router />
-      </main>
+      </main>}
     </ErrorBoundary>
   );
 };

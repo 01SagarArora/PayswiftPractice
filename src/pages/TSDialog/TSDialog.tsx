@@ -3,12 +3,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
 import { SubmitErrorHandler, SubmitHandler, useForm} from "react-hook-form";
 import { YT_TRAVEL_DATA } from "utils/helpers";
-import { UPDATE_TRAVEL_STATUS } from "utils/constants";
+import { LOGIN_URL, PROD_BASE_URL, UPDATE_TRAVEL_STATUS } from "utils/constants";
 import { commonApi } from "api/commonApi/apis";
 import { RootState, useAppDispatch } from "store/store";
 import { updateMainListData } from "store/MainData/MainDataSlice";
 import { useSelector } from "react-redux";
 import { hideTSDialog } from "store/TSDialogSlice/TSDialogSlice";
+import { ALERT_DIALOG } from "constants/commonConstants";
+import { showAlert } from "store/Alert/alertSlice";
 
 interface TSDialogProps {
     onClose:()=>void
@@ -45,6 +47,9 @@ const TSDialog = (props:TSDialogProps) => {
         delete obj.type;
         dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: obj }))
         .then((res: any) => {
+            try{
+
+            
           const resp = res.data;
           if (resp.data && resp.data.status == 'success') {
             //updating main data
@@ -53,9 +58,27 @@ const TSDialog = (props:TSDialogProps) => {
             dispatch(hideTSDialog());
           } else if (resp.data.httpCode == 401) {
             //todo lgoin 
+            const redirectUrl = window.location.href;
+            const loginRequiredUrl = PROD_BASE_URL + LOGIN_URL + `channel=crp&returnUrl=` + redirectUrl;
+            window.location.href = loginRequiredUrl;
           } else if (resp.data.httpCode == 500) {
             //todo error handling
+            let alertData = {
+                title: ALERT_DIALOG.DIALOG_TITLE,
+                messages: [ALERT_DIALOG.TRY_AGAIN_MESSAGE],
+                actions: ['OK'],
+              };
+              dispatch(showAlert(alertData)); 
           }
+        }catch(e){
+            console.log(e)
+            let alertData = {
+              title: ALERT_DIALOG.DIALOG_TITLE,
+              messages: [ALERT_DIALOG.TRY_AGAIN_MESSAGE],
+              actions: ['OK'],
+            };
+            dispatch(showAlert(alertData));
+          }  
         })
 
     };

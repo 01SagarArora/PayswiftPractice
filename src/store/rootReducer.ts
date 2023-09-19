@@ -1,13 +1,14 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { alertReducer } from './Alert/alertSlice';
 import { loaderReducer } from './Loader/LoaderSlice';
-import { commonS2SApi, headerFooterApi, travelStatusTripApi
+import { commonS2SApi
 } from 'api';
 import { mainDataReducer } from './MainData/MainDataSlice';
 import { errorReducer } from './Error/ErrorSlice';
 import { commonApi } from 'api/commonApi/apis';
 import { reasonsReducer } from './ReasonSlice/ReasonSlics';
 import { tsDailogReducer } from './TSDialogSlice/TSDialogSlice';
+import { notFoundReducer } from './NotFound/NotFoundSlice';
 
 export const rootReducer = {
   alert:alertReducer,
@@ -16,8 +17,7 @@ export const rootReducer = {
   tsDialog: tsDailogReducer,
   error: errorReducer,
   reasonData: reasonsReducer,
-  [headerFooterApi.reducerPath]: headerFooterApi.reducer,
-  [travelStatusTripApi.reducerPath]: travelStatusTripApi.reducer,
+  notFound : notFoundReducer,
   [commonS2SApi.reducerPath]: commonS2SApi.reducer,
   [commonApi.reducerPath]: commonApi.reducer,
 };
