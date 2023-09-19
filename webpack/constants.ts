@@ -14,7 +14,7 @@ const SERVER_SRC_DIR: string = path.join(__dirname, '../src/server');
 const SERVER_BUNDLE_NAME: string = 'server';
 const STATIC_CONTENT_PATH = `${APP_NAME}/`
 const BASE_PATH = `/${APP_NAME}`;
-const HEALTH_CHECK = `${APP_NAME}/healthCheck`;
+const HEALTH_CHECK = `/${APP_NAME}/healthCheck`;
 
 const ALIAS: Record<string, string> = {
   api: `${SRC_DIR}/api`,

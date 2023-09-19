@@ -14,6 +14,7 @@ import {headerRequest, footerRequest} from 'server/middlewares';
 import { getHtmlTemplate } from 'server/template';
 import { IS_RENDER_TO_STREAM } from 'server/constants';
 import { mainDataRequest } from './mainDataRequests';
+import { getKeyFromCookie } from 'utils/helpers';
 
 
 const serverRenderer = (chunkExtractor: ChunkExtractor):
@@ -52,10 +53,14 @@ RequestHandler => async (req: any, res: Response) => {
   Note: Why not just get data during SSR?
   Because rendering will be done before resolving the request Promise.
   */
-  await headerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
-  await footerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
-  await mainDataRequest(store,req?.headers?.cookie);
 
+  console.log("REQUEST HEADER COOKIE",req?.headers?.cookie)
+  let ssoToken = getKeyFromCookie("ssoToken",req?.headers?.cookie )
+  if(req?.headers?.cookie && ssoToken){
+    await headerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
+    await footerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
+    await mainDataRequest(store,req?.headers?.cookie);
+  }
   preloadedState = { ...store.getState() };
   
   const helmetContext = {};
