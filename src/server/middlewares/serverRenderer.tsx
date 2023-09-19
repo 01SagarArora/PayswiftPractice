@@ -54,7 +54,6 @@ RequestHandler => async (req: any, res: Response) => {
   Because rendering will be done before resolving the request Promise.
   */
 
-  console.log("REQUEST HEADER COOKIE",req?.headers?.cookie)
   let ssoToken = getKeyFromCookie("ssoToken",req?.headers?.cookie )
   if(req?.headers?.cookie && ssoToken){
     await headerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
