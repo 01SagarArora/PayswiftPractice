@@ -200,8 +200,8 @@ const TravelStatusHomePage = () => {
           <ShadowBox>
             <ThemeProvider theme={theme}>
             <TableContainer>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
+              <Table sx={{ minWidth: 650 }} aria-label="table content">
+                <TableHead className="tableHead">
                   <TableRow>
                     <TableCell className="tripHeader">Trip ID</TableCell>
                     <TableCell className="tripHeader">CT Number</TableCell>
@@ -219,15 +219,15 @@ const TravelStatusHomePage = () => {
                         <TableCell className="tripBody">
 
                           <Box sx={{ display: 'flex', alignItems: "center" }}>
-                            <span className="gray-dark productNameHolder ">
+                            <div className="gray-dark productNameHolder ">
                               <Stack direction={"row"} alignItems={"center"}>
-                                <div className='icon-container'>
+                                <span className='icon-container'>
                                   <Icon name={item.bookingType as BookingType} color={'red'} size={'medium'} />
-                                </div>
+                                </span>
                                 &nbsp;&nbsp;
                                 <span>{item.TripId}</span>
                               </Stack>
-                            </span>
+                            </div>
                           </Box>
                         </TableCell>
                         <TableCell className="tripBody">{item.BookingId === "-" || item.BookingId === "" ? "NA" : item.BookingId}</TableCell>
@@ -241,7 +241,7 @@ const TravelStatusHomePage = () => {
                             alignItems={"center"}
                             justifyContent="space-between"
                             spacing={2}
-                            className="mr-1"
+                            className="mr-1 travelActions"
                           >
                             <span>
                               <Button variant={item?.isCloseClicked ? "outlined" : "contained"} className={item?.isCloseClicked ? "containedButton" : "outlinedButton"}
@@ -249,7 +249,7 @@ const TravelStatusHomePage = () => {
                                 Yes
                               </Button>
                             </span>
-                            <span>
+                            <span className="actionButtons">
                               <Button variant={item?.isCloseClicked ? "contained" : "outlined"} className={item?.isCloseClicked ? "outlinedButton" : "containedButton"} disabled={!isReasonLoaded}
                                 onClick={() => { onClickTravelled(item, false, index) }}>
                                 No
