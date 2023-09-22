@@ -24,5 +24,16 @@ export interface Booking{
     itineraryType:string;
     paxId:string;
     startDate:string;
-    updateStatus:any
+    updateStatus:any;
+    description:string;
+    FlightArrival:string;
+    Origin:string;
+    Destination:string;
+}
+
+export enum BookingTypes{   
+    AIR = 'AIR',
+    HOTEL = 'HOTEL',
+    TRAIN = 'TRAIN',
+    VISA = 'VISA',
 }

@@ -11,6 +11,7 @@ declare module '*.svg?url';
 declare module '*.svg?base64';
 interface Window {
   __PRELOADED_STATE__: any;
+  isEmulate:any;
 }
 
 declare const NO_SSR: boolean;

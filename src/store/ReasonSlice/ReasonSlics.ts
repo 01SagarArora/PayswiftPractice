@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ReasonData } from "models/ReasonData";
 
+
 const reasonsSlice = createSlice({
     name:'reasons',
     initialState:{

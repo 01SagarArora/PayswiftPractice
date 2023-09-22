@@ -25,6 +25,7 @@ export function Icon(props: { name: TimeLineIcons, color: string, size: IconSize
             case 'VISA':
                 return <VisaIcon style={{ color: props.color }} fontSize={props?.size || 'medium'} />
             case 'FLIGHTS':
+            case 'AIR':
                 return <>&nbsp;<FlightIcon className="rotate-45" style={{ color: props.color }} fontSize={props?.size || 'medium'} /></>
             case 'TRAIN':
                 return <TrainIcon style={{ color: props.color }} fontSize={props?.size || 'medium'} />

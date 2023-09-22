@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Booking } from "models/PendingUpdate";
+import { Booking} from './../../models/PendingUpdate';
 
 
 const mainDataSlice = createSlice({

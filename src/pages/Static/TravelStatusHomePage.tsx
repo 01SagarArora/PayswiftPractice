@@ -23,6 +23,7 @@ import { showAlert } from 'store/Alert/alertSlice';
 import { updateMainListData } from 'store/MainData/MainDataSlice';
 import { setError } from 'store/Error/ErrorSlice';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Booking, BookingTypes} from './../../models/PendingUpdate';
 
 
 
@@ -56,8 +57,8 @@ const theme = createTheme({
   }
 });
 
-export type BookingType = "HOTEL" | "VISA" | "FLIGHTS" | "TRAIN" | "CAR" | "BUS";
-const itemsPerPage = 3;
+export type BookingType = "HOTEL" | "VISA" | "FLIGHTS" | "TRAIN" | "CAR" | "BUS" | "AIR";
+const itemsPerPage = 10;
 
 const TravelStatusHomePage = () => {
   const [page, setPage] = useState<number>(1);
@@ -66,14 +67,14 @@ const TravelStatusHomePage = () => {
     {} as PaginationData
   );
   const [travelList, setTravelList] = useState<any>([]);
-  const bookingsData = useSelector((state: RootState) => state.mainData?.mainData);
+  const bookingsData = useSelector((state: RootState) => state.mainData?.mainData) as Booking[];
   const reasonData = useSelector((state: RootState) => state.reasonData?.data);
   const isReasonLoaded = useSelector((state: RootState) => state.reasonData.isReasonLoaded);
   const flightReasons = reasonData?.configurations?.travelStatusConfig.domFlight;
   const hotelReasons = reasonData?.configurations?.travelStatusConfig.domHotel;
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
-
+  const isEmulation = window.isEmulate ? true:false;
   // For update the Pagination
   const updatePagination = (totalPages: number, startIndex: number, endIndex: number, totalRecords: number) => {
     const paginationData = PaginationModel.getPaginationData({
@@ -177,9 +178,64 @@ const TravelStatusHomePage = () => {
       dispatch(showTSDialog());
     }
   }
+
+  const getArrivalDateTime =(trip:Booking)=>{
+    let text="";
+    switch(trip.bookingType){
+      case BookingTypes.AIR:
+        text = trip.FlightArrival ==='' || trip.FlightArrival == '-' ? "NA": trip.FlightArrival;
+        break;
+      case BookingTypes.HOTEL:
+      case BookingTypes.TRAIN:
+      case BookingTypes.VISA:
+        text = trip.startDate ==='' || trip.startDate == '-' ? "NA": trip.startDate;
+        break;
+      default:
+        text ="";
+        break;
+    }
+    return text;
+  }
+
+  const getDescription =(trip:Booking)=>{
+    let text="";
+    switch(trip.bookingType){
+      case BookingTypes.AIR:
+        text = trip.description ==='' || trip.description == '-' ? "NA": trip.description;
+        break;
+      case BookingTypes.HOTEL:
+      case BookingTypes.TRAIN:
+      case BookingTypes.VISA:
+        text = trip.hotelName ==='' || trip.hotelName == '-' ? "NA": trip.hotelName;
+        break;
+      default:
+        text ="";
+        break;
+    }
+    return text;
+  }
+
+  const getSector = (trip:Booking) =>{
+    let text="";
+    switch(trip.bookingType){
+      case BookingTypes.AIR:
+        text = trip.Origin +" - "+ trip.Destination;
+        break;
+      case BookingTypes.HOTEL:
+      case BookingTypes.TRAIN:
+      case BookingTypes.VISA:
+        text = trip.hotelAddress;
+        break;
+      default:
+        text ="";
+        break;
+    }
+    return text;
+  }
+
   return (
     <>
-      <Container>
+      <Container sx={{maxWidth:'1400px!important'}}>
         <SEO title={PAGE.travelStatus.title} description={PAGE.travelStatus.description} />
         <Stack className="padding">
           <Tabs aria-label="travel status tab"
@@ -207,17 +263,17 @@ const TravelStatusHomePage = () => {
                     <TableCell className="tripHeader">CT Number</TableCell>
                     <TableCell className="tripHeader">Description</TableCell>
                     <TableCell className="tripHeader">Sector</TableCell>
-                    <TableCell className="tripHeader">Pax Name</TableCell>
+                    <TableCell className="tripHeader">Pax Name</TableCell>                                                                                                                                                                                                                                            
                     <TableCell className="tripHeader">Arrival Date and Time</TableCell>
+                    {isEmulation && <TableCell className="tripHeader">Status Updated by Traveller</TableCell>}
                     <TableCell className="tripHeader">Travelled</TableCell>
                   </TableRow>
                 </TableHead>
                 {isDataLoaded && travelList.length ? <TableBody>
                   {
-                    travelList && travelList?.map((item: any, index: number) =>
-                      <TableRow key={item.startDate}>
+                    travelList && travelList?.map((item: any, index: number) =>                 
+                      <TableRow key={item.BookingId}>
                         <TableCell className="tripBody">
-
                           <Box sx={{ display: 'flex', alignItems: "center" }}>
                             <div className="gray-dark productNameHolder ">
                               <Stack direction={"row"} alignItems={"center"}>
@@ -229,18 +285,19 @@ const TravelStatusHomePage = () => {
                               </Stack>
                             </div>
                           </Box>
-                        </TableCell>
+                        </TableCell>                                                                                                                                                    
                         <TableCell className="tripBody">{item.BookingId === "-" || item.BookingId === "" ? "NA" : item.BookingId}</TableCell>
-                        <TableCell className="tripBody">{item.hotelName === "-" || item.hotelName === "" ? "NA" : item.hotelName}</TableCell>
-                        <TableCell className="tripBody">{item.hotelAddress === "-" || item.hotelAddress === "" ? "NA" : item.hotelAddress}</TableCell>
+                        <TableCell className="tripBody">{getDescription(item)}</TableCell>
+                        <TableCell className="tripBody">{getSector(item)}</TableCell>
                         <TableCell className="tripBody">{item.PaxName === "-" || item.PaxName === "" ? "NA" : item.PaxName}</TableCell>
-                        <TableCell className="tripBody">{item.startDate === "-" || item.startDate === "" ? "NA" : item.startDate}</TableCell>
-                        <TableCell className="tripBody">
+                        <TableCell className="tripBody">{getArrivalDateTime(item)}</TableCell>
+                        {isEmulation && <TableCell className={`tripBody ${item.updateState =='Availed'? 'text-success' :''} ${item.updateState =='Pending'? 'text-error' :''}`}>{item.updateStatus}</TableCell>}
+                        <TableCell className="tripBody w-12                                                                                                                                                                                                                                                                                                                                                                                                           ">
                           <Stack
                             direction="row"
                             alignItems={"center"}
                             justifyContent="space-between"
-                            spacing={2}
+                            gap={2}
                             className="mr-1 travelActions"
                           >
                             <span>
