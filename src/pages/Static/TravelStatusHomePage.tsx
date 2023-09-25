@@ -265,14 +265,14 @@ const TravelStatusHomePage = () => {
                     <TableCell className="tripHeader">Sector</TableCell>
                     <TableCell className="tripHeader">Pax Name</TableCell>                                                                                                                                                                                                                                            
                     <TableCell className="tripHeader">Arrival Date and Time</TableCell>
-                    {isEmulation && <TableCell className="tripHeader">Status Updated by Traveller</TableCell>}
+                    {!isEmulation && <TableCell className="tripHeader">Status Updated <br/> by Traveller</TableCell>}
                     <TableCell className="tripHeader">Travelled</TableCell>
                   </TableRow>
                 </TableHead>
                 {isDataLoaded && travelList.length ? <TableBody>
                   {
                     travelList && travelList?.map((item: any, index: number) =>                 
-                      <TableRow key={item.BookingId}>
+                      <TableRow key={index}>
                         <TableCell className="tripBody">
                           <Box sx={{ display: 'flex', alignItems: "center" }}>
                             <div className="gray-dark productNameHolder ">
@@ -291,7 +291,7 @@ const TravelStatusHomePage = () => {
                         <TableCell className="tripBody">{getSector(item)}</TableCell>
                         <TableCell className="tripBody">{item.PaxName === "-" || item.PaxName === "" ? "NA" : item.PaxName}</TableCell>
                         <TableCell className="tripBody">{getArrivalDateTime(item)}</TableCell>
-                        {isEmulation && <TableCell className={`tripBody ${item.updateState =='Availed'? 'text-success' :''} ${item.updateState =='Pending'? 'text-error' :''}`}>{item.updateStatus}</TableCell>}
+                        {!isEmulation && <TableCell className={`tripBody ${item.updateState =='Availed'? 'text-success' :''} ${item.updateState =='Pending'? 'text-error' :''}`}>{item.updateStatus}</TableCell>}
                         <TableCell className="tripBody w-12                                                                                                                                                                                                                                                                                                                                                                                                           ">
                           <Stack
                             direction="row"
