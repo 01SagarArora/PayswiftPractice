@@ -1,5 +1,4 @@
 import { commonS2SApi } from 'api';
-import { DUMMY_DATA } from 'constants/commonConstants';
 import { Booking } from 'models/PendingUpdate';
 import { setError } from 'store/Error/ErrorSlice';
 import { setMainData, setToken } from 'store/MainData/MainDataSlice';
@@ -10,10 +9,8 @@ const mainDataRequest = async (store: any, cookie: any) => {
     store.dispatch(commonS2SApi.endpoints.getApi.initiate({ cookie, url: TRAVEL_STATUS_S2S_LIST_API })).then((res: any) => {
         try{
             const response = JSON.parse(res.data);
-            console.log("res.data========",response)
-
             const tempTripData: Booking[] = [];
-            DUMMY_DATA?.data?.forEach((tripDataItem: any) => {
+            response?.data?.forEach((tripDataItem: any) => {
                 tripDataItem.bookings?.forEach((bookingsItem: Booking) => {
                     tempTripData?.push(bookingsItem);
                 })
