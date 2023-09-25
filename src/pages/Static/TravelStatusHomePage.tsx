@@ -12,11 +12,11 @@ import { styled } from '@mui/system';
 import TravelStatusIconSvg from './TravelStatusIconSvg';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import TSDialog from 'pages/TSDialog/TSDialog';
-import { UPDATE_TRAVEL_STATUS } from 'utils/constants';
+import { UPDATE_TRAVEL_STATUS } from 'utils/ApiConstants';
 import { commonApi } from 'api/commonApi/apis';
 import { startLoading, stopLoading } from 'store/Loader/LoaderSlice';
 import { LOADER_MSG } from 'components/Loader/loader.contant';
-import { ALERT_DIALOG, TRAVEL_STATUS_PAGE } from 'constants/commonConstants';
+import { ALERT_DIALOG, TRAVEL_STATUS_PAGE,ProductBookingType,ListPerPage } from 'constants/commonConstants';
 import { setTSDailogData, showTSDialog } from 'store/TSDialogSlice/TSDialogSlice';
 import { NotFoundPage } from 'components/ResultNotFound/NoResultFound';
 import { showAlert } from 'store/Alert/alertSlice';
@@ -57,8 +57,8 @@ const theme = createTheme({
   }
 });
 
-export type BookingType = "HOTEL" | "VISA" | "FLIGHTS" | "TRAIN" | "CAR" | "BUS" | "AIR";
-const itemsPerPage = 10;
+export type BookingType = ProductBookingType;
+const itemsPerPage = ListPerPage;
 
 const TravelStatusHomePage = () => {
   const [page, setPage] = useState<number>(1);

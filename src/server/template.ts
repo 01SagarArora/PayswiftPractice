@@ -7,6 +7,55 @@ type TTemplate = {
   footer: string,
 }
 
+const loading = `
+  <div class="loaderContainer">
+  <div class="loader">
+    <div class="spinner"></div>
+    Loading...
+  </div>
+  </div>
+  <style>
+    .loaderContainer {
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background: rgb(0 0 0 / 25%); 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      z-index: 100;
+    }
+    .loader {
+      background-color: white;
+      padding: 10px;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items:center;
+      width:400px;
+    }
+
+    .spinner {
+      border: 2.9px solid #f34f4f;
+      border-top: 2.9px solid #f3f3f3;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      align-items: center;
+      animation: spin 2s linear infinite;
+      margin: 13px;
+    }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+  </style>
+`;
+
+
 export const getHtmlTemplate = (props: {
   preloadedState: Partial<RootState>,
   helmetData: HelmetServerState,
@@ -34,15 +83,17 @@ export const getHtmlTemplate = (props: {
             ${props.styleTags}
             ${props.frescoData.header}
         </head>
-        <body>
+        <body >
           <noscript>
             <b>Enable JavaScript to run this app.</b>
           </noscript>
-          <div id="root">`,
+          ${!props?.preloadedState?.loader?.isLoading ? `<div id="root">${loading}</div>` : '<div id="root">'}
+          `,
   footer: `</div>
           <script nonce="${props.nonce}">window.__PRELOADED_STATE__ = ${serialize(props.preloadedState)}</script>
           ${props.scriptTags}
         </body>
+
         ${props.frescoData.footer}
       </html>
   ` ,

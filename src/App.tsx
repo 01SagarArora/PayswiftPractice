@@ -7,7 +7,7 @@ import './App.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from "./components/Loader/Loader";
 import { commonApi } from 'api/commonApi/apis';
-import { GET_REASONS } from 'utils/constants';
+import { GET_REASONS } from 'utils/ApiConstants';
 import { REASON_REQUEST } from './models/ReasonData';
 import { setReasonData, setReasonLoaded } from 'store/ReasonSlice/ReasonSlics';
 import { LOADER_MSG } from 'components/Loader/loader.contant';

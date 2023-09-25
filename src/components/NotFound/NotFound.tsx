@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Stack"
 import Button from "@mui/material/Button"
-import { LOGIN_URL, PROD_BASE_URL } from 'utils/constants';
+import { LOGIN_URL, PROD_BASE_URL } from 'utils/ApiConstants';
 import NotFoundSvg from './NotFoundSvg'
 import './NotFound.scss'
 

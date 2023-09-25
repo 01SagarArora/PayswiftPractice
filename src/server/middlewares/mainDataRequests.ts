@@ -2,7 +2,7 @@ import { commonS2SApi } from 'api';
 import { Booking } from 'models/PendingUpdate';
 import { setError } from 'store/Error/ErrorSlice';
 import { setMainData, setToken } from 'store/MainData/MainDataSlice';
-import { TRAVEL_STATUS_S2S_LIST_API } from 'utils/constants';
+import { TRAVEL_STATUS_S2S_LIST_API } from 'utils/ApiConstants';
 import { getKeyFromCookie } from 'utils/helpers';
 
 const mainDataRequest = async (store: any, cookie: any) => { 

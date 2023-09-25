@@ -1,5 +1,5 @@
 import { commonS2SApi } from 'api';
-import { HEADER_URL } from 'utils/constants';
+import { HEADER_URL } from 'utils/ApiConstants';
 import { getKeyFromCookie, urlFormatter } from 'utils/helpers';
 
 const logger = require('../../utils/logger');

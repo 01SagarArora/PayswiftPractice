@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
 import { SubmitErrorHandler, SubmitHandler, useForm} from "react-hook-form";
 import { YT_TRAVEL_DATA } from "utils/helpers";
-import { LOGIN_URL, PROD_BASE_URL, UPDATE_TRAVEL_STATUS } from "utils/constants";
+import { LOGIN_URL, PROD_BASE_URL, UPDATE_TRAVEL_STATUS } from "utils/ApiConstants";
 import { commonApi } from "api/commonApi/apis";
 import { RootState, useAppDispatch } from "store/store";
 import { updateMainListData } from "store/MainData/MainDataSlice";

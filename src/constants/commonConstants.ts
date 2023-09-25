@@ -44,5 +44,6 @@ export const NO_DATA_FOUND_PAGE = {
   NOT_FOUND_TITLE: "There were no Travel Status found for this scenario."
 }
 
-
+export type ProductBookingType = "HOTEL" | "VISA" | "FLIGHTS" | "TRAIN" | "CAR" | "BUS" | "AIR";
+export const ListPerPage = 10;
 

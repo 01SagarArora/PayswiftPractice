@@ -1,6 +1,6 @@
 import { commonS2SApi } from 'api';
 import { getKeyFromCookie, urlFormatter } from 'utils/helpers';
-import { FOOTER_URL } from 'utils/constants'
+import { FOOTER_URL } from 'utils/ApiConstants'
 
 const frescoFooterUrl = FOOTER_URL;
 

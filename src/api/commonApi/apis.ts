@@ -1,6 +1,6 @@
 import { buildCreateApi, coreModule, reactHooksModule, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { isServer } from 'utils';
-import { BASE_URL}  from "../../utils/constants";
+import { BASE_URL}  from "../../utils/ApiConstants";
 
 let createApiFunction = createApi;
 
