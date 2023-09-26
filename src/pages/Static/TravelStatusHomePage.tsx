@@ -72,6 +72,9 @@ const TravelStatusHomePage = () => {
   const isReasonLoaded = useSelector((state: RootState) => state.reasonData.isReasonLoaded);
   const flightReasons = reasonData?.configurations?.travelStatusConfig.domFlight;
   const hotelReasons = reasonData?.configurations?.travelStatusConfig.domHotel;
+  const trainReasoons = reasonData?.configurations?.travelStatusConfig.train;
+  const visaReasons = reasonData?.configurations?.travelStatusConfig.visa;
+
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
   const isEmulation = window.isEmulate ? true:false;
@@ -168,11 +171,30 @@ const TravelStatusHomePage = () => {
       // TSDialog is shown
       const array = JSON.parse(JSON.stringify(travelList));
       array[index].isCloseClicked = true;
-      setTravelList(array);
+      setTravelList(array);   
+         let text="";
+        switch(trip.bookingType){
+          case BookingTypes.AIR:
+            text = flightReasons;
+            break;
+          case BookingTypes.HOTEL:
+            text = hotelReasons;
+            break;
+          case BookingTypes.TRAIN:
+            text = trainReasoons;
+            break;
+          case BookingTypes.VISA:
+            text = visaReasons;
+            break;
+          default:
+            text ="";
+            break;
+        }
+        
       let obj = {
         type: trip.bookingType as string,
         tripData: { ...tripObj },
-        reasonData: trip.bookingType == 'AIR' ? flightReasons : hotelReasons,
+        reasonData: text,
       }
       dispatch(setTSDailogData(obj));
       dispatch(showTSDialog());
@@ -324,7 +346,7 @@ const TravelStatusHomePage = () => {
             </ThemeProvider>
             <Box className="infoContainer">
               <InfoBox>
-                <InfoOutlinedIcon style={{ color: '#333333' }} />
+                <InfoOutlinedIcon/>
                 <Typography variant="body2" className='px-2'>
                   {TRAVEL_STATUS_PAGE.INFO_CONTENT}
                 </Typography>
