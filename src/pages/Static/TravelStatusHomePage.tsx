@@ -68,13 +68,12 @@ const TravelStatusHomePage = () => {
   );
   const [travelList, setTravelList] = useState<any>([]);
   const bookingsData = useSelector((state: RootState) => state.mainData?.mainData) as Booking[];
-  const reasonData = useSelector((state: RootState) => state.reasonData?.data);
+  const reasonData = useSelector((state: RootState) => state?.reasonData?.data);
   const isReasonLoaded = useSelector((state: RootState) => state.reasonData.isReasonLoaded);
   const flightReasons = reasonData?.configurations?.travelStatusConfig.domFlight;
   const hotelReasons = reasonData?.configurations?.travelStatusConfig.domHotel;
   const trainReasoons = reasonData?.configurations?.travelStatusConfig.train;
   const visaReasons = reasonData?.configurations?.travelStatusConfig.visa;
-
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
   const isEmulation = window.isEmulate ? true:false;

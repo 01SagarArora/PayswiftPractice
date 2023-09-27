@@ -20,7 +20,6 @@ const TSDialog = (props: TSDialogProps) => {
     const [showTextField] = useState(false);
     const show = useSelector((state: RootState) => state.tsDialog.show);
     const data = useSelector((state: RootState) => state.tsDialog.data);
-    console.log("DATA REASONS", data)
     const dispatch = useAppDispatch();
     let modelData = {
         title: 'Reason for not travelling',
@@ -28,8 +27,6 @@ const TSDialog = (props: TSDialogProps) => {
         // reasonList: data?.reasonData?.reasonInputMaster,
         isShowReasonDropdown: data?.reasonData?.reasonInputType == 'both' || data?.reasonData?.reasonInputType == 'master' || data?.reasonData?.reasonInputType == 'dropdown'
     }
-    console.log("reasonInputMaster", data)
-
     const onClose = () => {
         //props.setDialogProps({ ...props, show: false })
         props.onClose();

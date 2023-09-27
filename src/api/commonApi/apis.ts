@@ -42,7 +42,7 @@ export const commonS2SApi = createApiFunction({
         'content-type': 'text/plain',
         'cookie':cookie,
        },
-       'body':data,
+       body:data,
        responseHandler: (response: { text: () => any }) => response.text()
       }),
     }),
@@ -56,26 +56,31 @@ export const commonApi = createApiFunction({
   }),
   endpoints: builder => ({
     getApi: builder.query<any, any>({
-      query: ({ url , params }) => {
+      query: ({ cookie, url , params }) => {
         return {
           url,
           headers: {
             'content-type': 'application/json;charset=UTF-8',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'cookie':cookie,
+
           },
           params : params,
         }
       },
     }),
     postApi: builder.query<any, any>({
-      query: ({url, data }) => {
+      query: ({cookie, url, data }) => {
         return {
           url,
           method: 'POST',
           headers: {
             'content-type': 'application/json;charset=UTF-8',
+            'cookie':cookie,
           },
-          'body': data,
+          body: data,
+          responseHandler: (response: { text: () => any }) => response.text()
+
         }
       },
     })

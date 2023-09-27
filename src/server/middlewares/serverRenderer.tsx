@@ -15,7 +15,7 @@ import { getHtmlTemplate } from 'server/template';
 import { IS_RENDER_TO_STREAM } from 'server/constants';
 import { mainDataRequest } from './mainDataRequests';
 import { getKeyFromCookie } from 'utils/helpers';
-
+import { reasonsRequest } from './reasonsRequest';
 
 const serverRenderer = (chunkExtractor: ChunkExtractor):
 RequestHandler => async (req: any, res: Response) => {
@@ -59,6 +59,7 @@ RequestHandler => async (req: any, res: Response) => {
     await headerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
     await footerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
     await mainDataRequest(store,req?.headers?.cookie);
+    await reasonsRequest(store,req?.headers?.cookie);
   }
   preloadedState = { ...store.getState() };
   
