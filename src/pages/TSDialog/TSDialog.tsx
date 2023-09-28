@@ -44,6 +44,10 @@ const TSDialog = (props: TSDialogProps) => {
         dispatch(hideTSDialog());
     }
     const onSubmit: SubmitHandler<any> = (fData) => {
+        if(!modelData.isShowReasonDropdown){
+            alert("Reasons List not fetched from config.")
+            return;
+        }
         const obj = JSON.parse(JSON.stringify(data.tripData));
        
         obj.updateList[0].status = fData.status;
