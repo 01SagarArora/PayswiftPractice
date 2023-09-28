@@ -22,7 +22,7 @@ const TSDialog = (props: TSDialogProps) => {
     const show = useSelector((state: RootState) => state.tsDialog.show);
     const data = useSelector((state: RootState) => state.tsDialog.data);
     const dispatch = useAppDispatch();
-    console.log(data);
+    
     let modelData = {
         title: 'Reason for not travelling',
         statusList: [
@@ -32,13 +32,12 @@ const TSDialog = (props: TSDialogProps) => {
             "Dispute"
         ],
         reasonList: data?.reasonData?.reasonInputMaster,
-        isShowReasonDropdown: data?.reasonData?.reasonInputType == 'both' || data?.reasonData?.reasonInputType == 'master' || data?.reasonData?.reasonInputType == 'dropdown'
+        isShowReasonDropdown: data?.reasonData?.reasonInputType == 'both' || data?.reasonData?.reasonInputType == 'master' || data?.reasonData?.reasonInputType == 'dropdown'||false
     }
-    useEffect(() => {
-        if (data?.reasonData?.reasonInputType)
-            setShowTextField(data.reasonData.reasonInputType === 'text')
-    }, [data])
-
+    useEffect(()=>{
+        if(data?.reasonData?.reasonInputType)
+        setShowTextField(data.reasonData.reasonInputType === 'text')
+    },[data])
     const onClose = () => {
         //props.setDialogProps({ ...props, show: false })
         props.onClose();
@@ -137,7 +136,7 @@ const TSDialog = (props: TSDialogProps) => {
                                 )}
                             </TextField>
 
-                            {errors.status?.type === 'required' && <FormHelperText className="validation-error">Please select status</FormHelperText>}
+                            {errors.status?.type === 'required'||(!modelData?.isShowReasonDropdown) && <FormHelperText className="validation-error">{!modelData.isShowReasonDropdown?'Config issue not getting reasons':'Please select status'}</FormHelperText>}
                         </FormControl>
 
                         {/* REASONS DROPDOWN */}
