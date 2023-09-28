@@ -21,10 +21,16 @@ const TSDialog = (props: TSDialogProps) => {
     const show = useSelector((state: RootState) => state.tsDialog.show);
     const data = useSelector((state: RootState) => state.tsDialog.data);
     const dispatch = useAppDispatch();
+    console.log(data);
     let modelData = {
         title: 'Reason for not travelling',
-        statusList: data?.reasonData?.reasonInputMaster,
-        // reasonList: data?.reasonData?.reasonInputMaster,
+        statusList: [
+            "Cancelled at Yatra",
+             data.type === 'AIR' ? "Cancelled at Airline" : "Cancelled at Hotel",
+            "No Show",
+            "Dispute"
+        ],
+        reasonList: data?.reasonData?.reasonInputMaster,
         isShowReasonDropdown: data?.reasonData?.reasonInputType == 'both' || data?.reasonData?.reasonInputType == 'master' || data?.reasonData?.reasonInputType == 'dropdown'
     }
     const onClose = () => {
@@ -32,12 +38,13 @@ const TSDialog = (props: TSDialogProps) => {
         props.onClose();
         dispatch(hideTSDialog());
     }
-    const onSubmit: SubmitHandler<any> = (data) => {
-        const obj = data.tripData;
-
-        obj.updateList[0].status = data.status;
-        obj.updateList[0].comment = showTextField ? data.reasonText : data.reason;
+    const onSubmit: SubmitHandler<any> = (fData) => {
+        const obj = JSON.parse(JSON.stringify(data.tripData));
+       
+        obj.updateList[0].status = fData.status;
+        obj.updateList[0].comment = showTextField ? fData.reasonText : fData.reason;
         delete obj.type;
+        return;
         dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: obj }))
             .then((res: any) => {
                 try {
