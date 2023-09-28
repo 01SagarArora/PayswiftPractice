@@ -68,6 +68,7 @@ const TravelStatusHomePage = () => {
   );
   const [travelList, setTravelList] = useState<any>([]);
   const bookingsData = useSelector((state: RootState) => state.mainData?.mainData) as Booking[];
+  const userName = useSelector((state:RootState)=>state.mainData?.csrfToken);
   const reasonData = useSelector((state: RootState) => state?.reasonData?.data);
   const isReasonLoaded = useSelector((state: RootState) => state.reasonData.isReasonLoaded);
   const flightReasons = reasonData?.configurations?.travelStatusConfig.domFlight;
@@ -93,6 +94,12 @@ const TravelStatusHomePage = () => {
     });
     setPaginationData({ ...paginationData });
   }
+
+  useEffect(()=>{
+    if(!userName){
+      dispatch(setError());
+    }
+  },[])
 
   // For swapping the classNames of action buttons through the dialog box
   const onDialogClose = () => {
