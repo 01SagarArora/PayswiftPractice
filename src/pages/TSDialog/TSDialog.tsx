@@ -22,7 +22,7 @@ const TSDialog = (props: TSDialogProps) => {
     const show = useSelector((state: RootState) => state.tsDialog.show);
     const data = useSelector((state: RootState) => state.tsDialog.data);
     const dispatch = useAppDispatch();
-    console.log(data);
+    
     let modelData = {
         title: 'Reason for not travelling',
         statusList: [
@@ -32,8 +32,9 @@ const TSDialog = (props: TSDialogProps) => {
             "Dispute"
         ],
         reasonList: data?.reasonData?.reasonInputMaster,
-        isShowReasonDropdown: data?.reasonData?.reasonInputType == 'both' || data?.reasonData?.reasonInputType == 'master' || data?.reasonData?.reasonInputType == 'dropdown'
+        isShowReasonDropdown: data?.reasonData?.reasonInputType == 'both' || data?.reasonData?.reasonInputType == 'master' || data?.reasonData?.reasonInputType == 'dropdown'||false
     }
+    console.log(modelData);
     useEffect(()=>{
         if(data?.reasonData?.reasonInputType)
         setShowTextField(data.reasonData.reasonInputType === 'text')
@@ -44,10 +45,6 @@ const TSDialog = (props: TSDialogProps) => {
         dispatch(hideTSDialog());
     }
     const onSubmit: SubmitHandler<any> = (fData) => {
-        if(!modelData.isShowReasonDropdown){
-            alert("Reasons List not fetched from config.")
-            return;
-        }
         const obj = JSON.parse(JSON.stringify(data.tripData));
        
         obj.updateList[0].status = fData.status;
@@ -133,7 +130,7 @@ const TSDialog = (props: TSDialogProps) => {
                                 )}
                             </TextField>
 
-                            {errors.status?.type === 'required' && <FormHelperText className="validation-error">Please select status</FormHelperText>}
+                            {errors.status?.type === 'required'||(!modelData?.isShowReasonDropdown) && <FormHelperText className="validation-error">{!modelData.isShowReasonDropdown?'Config issue not getting reasons':'Please select status'}</FormHelperText>}
                         </FormControl>
 
                         {/* REASONS DROPDOWN */}
