@@ -18,7 +18,7 @@ interface TSDialogProps {
 const TSDialog = (props: TSDialogProps) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [selectedReason, setSelectedReason] = useState("");
-    const [showTextField,setShowTextField] = useState(false);
+    const [showTextField, setShowTextField] = useState(true);
     const show = useSelector((state: RootState) => state.tsDialog.show);
     const data = useSelector((state: RootState) => state.tsDialog.data);
     const dispatch = useAppDispatch();
@@ -27,33 +27,33 @@ const TSDialog = (props: TSDialogProps) => {
         title: 'Reason for not travelling',
         statusList: [
             "Cancelled at Yatra",
-             data.type === 'AIR' ? "Cancelled at Airline" : "Cancelled at Hotel",
+            data.type === 'AIR' ? "Cancelled at Airline" : "Cancelled at Hotel",
             "No Show",
             "Dispute"
         ],
         reasonList: data?.reasonData?.reasonInputMaster,
         isShowReasonDropdown: data?.reasonData?.reasonInputType == 'both' || data?.reasonData?.reasonInputType == 'master' || data?.reasonData?.reasonInputType == 'dropdown'
     }
-    useEffect(()=>{
-        if(data?.reasonData?.reasonInputType)
-        setShowTextField(data.reasonData.reasonInputType === 'text')
-    },[data])
+    useEffect(() => {
+        if (data?.reasonData?.reasonInputType)
+            setShowTextField(data.reasonData.reasonInputType === 'text')
+    }, [data])
+
     const onClose = () => {
         //props.setDialogProps({ ...props, show: false })
         props.onClose();
         dispatch(hideTSDialog());
     }
     const onSubmit: SubmitHandler<any> = (fData) => {
-        if(!modelData.isShowReasonDropdown){
+        if (!modelData.isShowReasonDropdown) {
             alert("Reasons List not fetched from config.")
             return;
         }
         const obj = JSON.parse(JSON.stringify(data.tripData));
-       
+
         obj.updateList[0].status = fData.status;
         obj.updateList[0].comment = showTextField ? fData.reasonText : fData.reason;
         delete obj.type;
-        return;
         dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: obj }))
             .then((res: any) => {
                 try {
@@ -99,6 +99,10 @@ const TSDialog = (props: TSDialogProps) => {
         setSelectedReason(event.target.value as string);
     };
 
+    const handlePaste = (e: any) => {
+        e.preventDefault();
+    };
+
     return (
         <Dialog open={show} fullWidth={true} maxWidth={'sm'}>
             <DialogTitle>{modelData.title}
@@ -138,39 +142,54 @@ const TSDialog = (props: TSDialogProps) => {
 
                         {/* REASONS DROPDOWN */}
                         {
-                    modelData?.isShowReasonDropdown && 
-                    <FormControl >
-                    <TextField
-                        size="small"
-                        select
-                        className="w-50"
-                        id="nt-reason"
-                        label="Reason"
-                        value={selectedReason}
-                        defaultValue={""}
-                        {...register("reason",{required:true})}
-                        onChange={handleChangeReason}
-                        >
-                            <MenuItem key="select reason" value="" disabled>Select reason</MenuItem>
-                            {modelData.reasonList.map((reason: string) => <MenuItem key={reason} value={reason}>{reason}</MenuItem>)}
-                        </TextField>
-                        
-                            {errors.reason?.type=='required' && <FormHelperText  className="validation-error">Please select reason</FormHelperText>}
-                        </FormControl>
-                    }
+                            modelData?.isShowReasonDropdown &&
+                            <FormControl >
+                                <TextField
+                                    size="small"
+                                    select
+                                    className="w-50"
+                                    id="nt-reason"
+                                    label="Reason"
+                                    value={selectedReason}
+                                    defaultValue={""}
+                                    {...register("reason", { required: true })}
+                                    onChange={handleChangeReason}
+                                >
+                                    <MenuItem key="select reason" value="" disabled>Select reason</MenuItem>
+                                    {modelData.reasonList.map((reason: string) => <MenuItem key={reason} value={reason}>{reason}</MenuItem>)}
+                                </TextField>
 
-                        {showTextField && <FormControl>
-                            <TextField
-                                {...register('reasonText', { required: true, minLength: 10 })}
-                                sx={{ marginTop: '12px' }}
-                                id="outlined-textarea"
-                                className="w-100"
-                                multiline
-                                rows={3}
-                                defaultValue=""
-                            />
-                            {errors.reasonText && <FormHelperText className="validation-error">Enter minimum 10 characters</FormHelperText>}
-                        </FormControl>}
+                                {errors.reason?.type == 'required' && <FormHelperText className="validation-error">Please select reason</FormHelperText>}
+                            </FormControl>
+                        }
+
+                        {showTextField &&
+                            <FormControl>
+                                <TextField
+                                    {...register('reasonText', {
+                                        required: true,
+                                        minLength: 10,
+                                        pattern: /^(?!.*(?:[<>[\]@!#$%^&*()]|href))[a-zA-Z0-9,.-]+$/
+                                    })}
+                                    sx={{ marginTop: '12px' }}
+                                    id="outlined-textarea"
+                                    className="w-100"
+                                    multiline
+                                    rows={3}
+                                    defaultValue=""
+                                    onPaste={handlePaste}
+                                />
+                                {errors.reasonText && errors.reasonText.type === 'required' && (
+                                    <FormHelperText className="validation-error">This field is required</FormHelperText>
+                                )}
+                                {errors.reasonText && errors.reasonText.type === 'minLength' && (
+                                    <FormHelperText className="validation-error">Enter minimum 10 characters</FormHelperText>
+                                )}
+                                {errors.reasonText && errors.reasonText.type === 'pattern' && (
+                                    <FormHelperText className="validation-error">Special characters are not allowed</FormHelperText>
+                                )}
+                            </FormControl>
+                        }
 
                         <Button variant="contained" color="error" size="small" type="submit" className="w-25"
 
