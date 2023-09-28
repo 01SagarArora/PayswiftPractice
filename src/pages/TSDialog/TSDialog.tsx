@@ -1,6 +1,6 @@
 import { Dialog, DialogTitle, IconButton, DialogContent, Button, MenuItem, TextField, Divider, Stack, FormControl, FormHelperText } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import { LOGIN_URL, PROD_BASE_URL, UPDATE_TRAVEL_STATUS } from "utils/ApiConstants";
 import { commonApi } from "api/commonApi/apis";
@@ -10,14 +10,15 @@ import { useSelector } from "react-redux";
 import { hideTSDialog } from "store/TSDialogSlice/TSDialogSlice";
 import { ALERT_DIALOG } from "constants/commonConstants";
 import { showAlert } from "store/Alert/alertSlice";
+import { YT_TRAVEL_DATA } from "utils/helpers";
 
 interface TSDialogProps {
     onClose: () => void
 }
 const TSDialog = (props: TSDialogProps) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    // const [selectedReason, setSelectedReason] = useState("");
-    const [showTextField] = useState(false);
+    const [selectedReason, setSelectedReason] = useState("");
+    const [showTextField,setShowTextField] = useState(false);
     const show = useSelector((state: RootState) => state.tsDialog.show);
     const data = useSelector((state: RootState) => state.tsDialog.data);
     const dispatch = useAppDispatch();
@@ -33,6 +34,10 @@ const TSDialog = (props: TSDialogProps) => {
         reasonList: data?.reasonData?.reasonInputMaster,
         isShowReasonDropdown: data?.reasonData?.reasonInputType == 'both' || data?.reasonData?.reasonInputType == 'master' || data?.reasonData?.reasonInputType == 'dropdown'
     }
+    useEffect(()=>{
+        if(data?.reasonData?.reasonInputType)
+        setShowTextField(data.reasonData.reasonInputType === 'text')
+    },[data])
     const onClose = () => {
         //props.setDialogProps({ ...props, show: false })
         props.onClose();
@@ -48,8 +53,6 @@ const TSDialog = (props: TSDialogProps) => {
         dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: obj }))
             .then((res: any) => {
                 try {
-
-
                     const resp = res.data;
                     if (resp.data && resp.data.status == 'success') {
                         //updating main data
@@ -85,12 +88,12 @@ const TSDialog = (props: TSDialogProps) => {
     const onError: SubmitErrorHandler<any> = (errors, e) => console.log('ereroe', errors, e);
 
     // FUNCTION FOR REASONS DROPDOWN
-    // const handleChangeReason = (event: any) => {
-    //     if (data?.reasonData && data?.reasonData.reasonInputType === YT_TRAVEL_DATA.noReasonBothType) {
-    //         setShowTextField(event.target.value === YT_TRAVEL_DATA.noReasonText)
-    //     }
-    //     setSelectedReason(event.target.value as string);
-    // };
+    const handleChangeReason = (event: any) => {
+        if (data?.reasonData && data?.reasonData.reasonInputType === YT_TRAVEL_DATA.noReasonBothType) {
+            setShowTextField(event.target.value === YT_TRAVEL_DATA.noReasonText)
+        }
+        setSelectedReason(event.target.value as string);
+    };
 
     return (
         <Dialog open={show} fullWidth={true} maxWidth={'sm'}>
@@ -130,7 +133,7 @@ const TSDialog = (props: TSDialogProps) => {
                         </FormControl>
 
                         {/* REASONS DROPDOWN */}
-                        {/* {
+                        {
                     modelData?.isShowReasonDropdown && 
                     <FormControl >
                     <TextField
@@ -150,9 +153,9 @@ const TSDialog = (props: TSDialogProps) => {
                         
                             {errors.reason?.type=='required' && <FormHelperText  className="validation-error">Please select reason</FormHelperText>}
                         </FormControl>
-                    } */}
+                    }
 
-                        <FormControl>
+                        {showTextField && <FormControl>
                             <TextField
                                 {...register('reasonText', { required: true, minLength: 10 })}
                                 sx={{ marginTop: '12px' }}
@@ -163,7 +166,7 @@ const TSDialog = (props: TSDialogProps) => {
                                 defaultValue=""
                             />
                             {errors.reasonText && <FormHelperText className="validation-error">Enter minimum 10 characters</FormHelperText>}
-                        </FormControl>
+                        </FormControl>}
 
                         <Button variant="contained" color="error" size="small" type="submit" className="w-25"
 

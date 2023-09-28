@@ -4,7 +4,7 @@ Core:
 
 - **React** 18+
 - **webpack** 5+ (with optional **SWC** support and SSR or static build)
-- **TypeScript** (with strict rules, including  webpack configuration)
+- **TypeScript** (with strict rules, including webpack configuration)
 
 SSR:
 
@@ -34,7 +34,6 @@ Linters:
 
 - **ESLint**
 - **Stylelint** (including rules order)
-
 
 Other:
 
@@ -70,19 +69,19 @@ Other:
 
 1. Build the project (production bundle will be in the `"travel-status-v2"` folder):
 
-    `npm run build`
+   `npm run build`
 
-    or with Webpack Bundle Analyzer report server:
+   or with Webpack Bundle Analyzer report server:
 
-    `npm run build:report`
+   `npm run build:report`
 
 2. Run a server:
 
-    `npm run run`
+   `npm run run`
 
 3. You can test the server locally:
 
-    `http://localhost:3000/`
+   `http://localhost:3000/`
 
 ### Static development mode with hot reload
 
@@ -120,17 +119,24 @@ All configuration is available in files with constants:
 - `src\constants` - a directory with app files with configuration constants
 - `src\server\constants.ts` - contains a server port and render to stream options
 
-
 ## Basic Flow
 
 1. Request for main data from server side.
- - `src\server\middleware\mainDataRequest` - Main Data request is trigger through the mainDataRequest() from commonS2sApi.
- - `src\server\constants.ts` - TRAVEL_STATUS_S2S_LIST_API- this is the constants variable for the url of mainDataRequest API.
 
- 2. Request for reasons API from client side.
- - `src\App.tsx` - calling reasons API through getReasonsList() from commonApi.
- - `src\server\constants.ts` - GET_REASONS- this is the constants variable for the url of reasons API. 
+- `src\server\middleware\mainDataRequest` - Main Data request is trigger through the mainDataRequest() from commonS2sApi.
+- `src\server\constants.ts` - TRAVEL_STATUS_S2S_LIST_API- this is the constants variable for the url of mainDataRequest API.
 
- 3. Request for update Travel Status Api.
- - `src\pages\Static\TravelStatusHomePage` - calling update travel API through onClickTravelled() from commonApi.
- - `src\server\constants.ts` - UPDATE_TRAVEL_STATUS- this is the constants variable for the url of reasons API. 
+2.  Request for reasons API from client side.
+
+- `src\App.tsx` - calling reasons API through getReasonsList() from commonApi.
+- `src\server\constants.ts` - GET_REASONS- this is the constants variable for the url of reasons API.
+
+3.  Request for update Travel Status Api.
+
+- `src\pages\Static\TravelStatusHomePage` - calling update travel API through onClickTravelled() from commonApi.
+- `src\server\constants.ts` - UPDATE_TRAVEL_STATUS- this is the constants variable for the url of reasons API.
+
+4.  When we click on No Button. A dialog box appears.
+    - Status Dropdown -- Static
+    - Reason dropdown -- Show, based on reasonInputType --> set from config
+    - Text Area -- Show, if reasonInputType is equal to text or in the second dropdown we have selected "others" as reason.
