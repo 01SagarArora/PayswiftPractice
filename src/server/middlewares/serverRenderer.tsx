@@ -4,10 +4,8 @@ import {  Response, RequestHandler } from 'express';
 import { StaticRouter } from 'react-router-dom/server';
 import { ChunkExtractor } from '@loadable/server';
 import { getDataFromTree } from '@apollo/react-ssr';
-
 import { initStore, RootState } from 'store/store';
 import { Provider } from 'react-redux';
-
 import { App } from 'src/App';
 import { ROUTE_CONSTANTS } from 'constants/routeConstants';
 import {headerRequest, footerRequest} from 'server/middlewares';
@@ -15,7 +13,6 @@ import { getHtmlTemplate } from 'server/template';
 import { IS_RENDER_TO_STREAM } from 'server/constants';
 import { mainDataRequest } from './mainDataRequests';
 import { getKeyFromCookie } from 'utils/helpers';
-import { reasonsRequest } from './reasonsRequest';
 
 const serverRenderer = (chunkExtractor: ChunkExtractor):
 RequestHandler => async (req: any, res: Response) => {
@@ -59,7 +56,6 @@ RequestHandler => async (req: any, res: Response) => {
     await headerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
     await footerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
     await mainDataRequest(store,req?.headers?.cookie);
-    await reasonsRequest(store,req?.headers?.cookie);
   }
   preloadedState = { ...store.getState() };
   

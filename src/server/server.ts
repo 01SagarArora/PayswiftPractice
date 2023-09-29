@@ -6,12 +6,15 @@ import { ChunkExtractor } from '@loadable/server';
 import { serverRenderer, nonce } from 'server/middlewares';
 import { IS_RENDER_TO_STREAM, SERVER_PORT, DEV_HTTPS_SERVER, STATS_FILE_PATH, KEY_FILE_PATH, CERT_FILE_PATH } from 'server/constants';
 import { DIST_DIR, HEALTH_CHECK, IS_DEV, SRC_DIR } from '_webpack/constants';
+import {GET_REASONS_AJAX_API} from 'utils/ApiConstants';
+
 import http from 'http';
 import https from "https";
 import fs from "fs";
+import { reasonsRequest } from './middlewares/reasonsRequest';
+import { initStore } from 'store/store';
 
 const logger = require('../../src/utils/logger');
-//const logger = require('../../src/utils/logger')
 const expressSanitizer = require("express-sanitizer");
 
 // Add the morgan middleware
@@ -50,7 +53,14 @@ const chunkExtractor = new ChunkExtractor({ statsFile });
       serverUpTime: new Date(),
       ipAddress: req.socket.remoteAddress
     });
-    // logger.info(`Health check of application working fine!!`);
+  });
+  
+  app.get(GET_REASONS_AJAX_API, async (req, res) => {
+    const store = initStore();
+    let data =  await reasonsRequest(store,req?.headers?.cookie);
+     res.send({
+      data
+    });
   })
 
   

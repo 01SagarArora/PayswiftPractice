@@ -1,7 +1,6 @@
 import { ALERT_DIALOG } from 'constants/commonConstants';
 import { REASON_REQUEST } from '../../models/ReasonData';
 import { showAlert } from 'store/Alert/alertSlice';
-import { setReasonData, setReasonLoaded } from 'store/ReasonSlice/ReasonSlics';
 import { GET_REASONS_S2S } from 'utils/ApiConstants';
 import { commonApi } from 'api/commonApi/apis';
 
@@ -10,9 +9,8 @@ const reasonsRequest = async (store: any, cookie: any) => {
     store.dispatch(commonApi.endpoints.postApi.initiate({ cookie, url: GET_REASONS_S2S, data: req })).then((res: any) => {
         try {
             if (res.data) {
-                //TODO : MANIPULATE DATA
-                store.dispatch(setReasonData(JSON.parse(res.data)));
-                store.dispatch(setReasonLoaded());
+                //TODO : MANIPULATE DATA               
+                return JSON.parse(res.data);
             }
         } catch (e) {
             console.log(e)
