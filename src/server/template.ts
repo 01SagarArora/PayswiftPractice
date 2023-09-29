@@ -87,7 +87,7 @@ export const getHtmlTemplate = (props: {
           <noscript>
             <b>Enable JavaScript to run this app.</b>
           </noscript>
-          ${!props?.preloadedState?.loader?.isLoading ? `<div id="root">${loading}</div>` : '<div id="root">'}
+          ${!props?.preloadedState?.loader?.isLoading ? `<div id="root">${loading}` : '<div id="root">'}
           `,
   footer: `</div>
           <script nonce="${props.nonce}">window.__PRELOADED_STATE__ = ${serialize(props.preloadedState)}</script>
