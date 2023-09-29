@@ -25,7 +25,6 @@ const App: FC = (): ReactElement => {
       dispatch(commonApi.endpoints.getApi.initiate({ url: GET_REASONS_AJAX_API }))
         .then((res) => {
           try {
-            console.log("abc", JSON.parse(res.data.data[0].data))
             dispatch(setReasonData(JSON.parse(res.data.data[0].data)))
             dispatch(setReasonLoaded());
           } catch (e) {

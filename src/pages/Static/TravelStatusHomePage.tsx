@@ -70,7 +70,6 @@ const TravelStatusHomePage = () => {
   const bookingsData = useSelector((state: RootState) => state.mainData?.mainData) as Booking[];
   const userName = useSelector((state:RootState)=>state.mainData?.csrfToken);
   const reasonData = useSelector((state: RootState) => state?.reasonData?.data);
-  console.log("reasonData",reasonData)
   const isReasonLoaded = useSelector((state: RootState) => state.reasonData.isReasonLoaded);
   const flightReasons = reasonData?.configurations?.travelStatusConfig.domFlight;
   const hotelReasons = reasonData?.configurations?.travelStatusConfig.domHotel;
