@@ -8,7 +8,7 @@ import { RootState, useAppDispatch } from "store/store";
 import { updateMainListData } from "store/MainData/MainDataSlice";
 import { useSelector } from "react-redux";
 import { hideTSDialog } from "store/TSDialogSlice/TSDialogSlice";
-import { ALERT_DIALOG } from "constants/commonConstants";
+import { ALERT_DIALOG, TS_DIALOG } from "constants/commonConstants";
 import { showAlert } from "store/Alert/alertSlice";
 import { YT_TRAVEL_DATA } from "utils/helpers";
 
@@ -138,8 +138,8 @@ const TSDialog = (props: TSDialogProps) => {
                                 )}
                             </TextField>
 
-                            {errors.status?.type === 'required'&& <FormHelperText className="validation-error">Please select status</FormHelperText>}
-                            {shoeReasonsValidation && <FormHelperText className="validation-error">Reasons List not fetched from config.</FormHelperText>}
+                            {errors.status?.type === 'required'&& <FormHelperText className="validation-error">{TS_DIALOG.SELECT_STATUS}</FormHelperText>}
+                            {shoeReasonsValidation && <FormHelperText className="validation-error">{TS_DIALOG.LIST_NOT_FETCHED}</FormHelperText>}
 
                         </FormControl>
 
@@ -158,11 +158,11 @@ const TSDialog = (props: TSDialogProps) => {
                                     {...register("reason", { required: true })}
                                     onChange={handleChangeReason}
                                 >
-                                    <MenuItem key="select reason" value="" disabled>Select reason</MenuItem>
+                                    <MenuItem key="select reason" value="" disabled>{TS_DIALOG.SELECT_REASON}</MenuItem>
                                     {modelData.reasonList.map((reason: string) => <MenuItem key={reason} value={reason}>{reason}</MenuItem>)}
                                 </TextField>
 
-                                {errors.reason?.type == 'required' && <FormHelperText className="validation-error">Please select reason</FormHelperText>}
+                                {errors.reason?.type == 'required' && <FormHelperText className="validation-error">{TS_DIALOG.PLEASE_SELECT_REASON}</FormHelperText>}
                             </FormControl>
                         }
 
@@ -183,20 +183,20 @@ const TSDialog = (props: TSDialogProps) => {
                                     onPaste={handlePaste}
                                 />
                                 {errors.reasonText && errors.reasonText.type === 'required' && (
-                                    <FormHelperText className="validation-error">This field is required</FormHelperText>
+                                    <FormHelperText className="validation-error">{TS_DIALOG.REQUIRED_FIELD}</FormHelperText>
                                 )}
                                 {errors.reasonText && errors.reasonText.type === 'minLength' && (
-                                    <FormHelperText className="validation-error">Enter minimum 10 characters</FormHelperText>
+                                    <FormHelperText className="validation-error">{TS_DIALOG.ENTER_CHAR}</FormHelperText>
                                 )}
                                 {errors.reasonText && errors.reasonText.type === 'pattern' && (
-                                    <FormHelperText className="validation-error">Special characters are not allowed</FormHelperText>
+                                    <FormHelperText className="validation-error">{TS_DIALOG.NOT_ALLOWED_CHAR}</FormHelperText>
                                 )}
                             </FormControl>
                         }
 
                         <Button variant="contained" color="error" size="small" type="submit" className="w-25"
 
-                            sx={{ boxShadow: 'none', textTransform: 'none', fontSize: '12px!important', fontWeight: '500', borderRadius: '4px!important' }} >Submit</Button>
+                            sx={{ boxShadow: 'none', textTransform: 'none', fontSize: '12px!important', fontWeight: '500', borderRadius: '4px!important' }} >{TS_DIALOG.SUBMIT}</Button>
                     </Stack>
 
                 </form>

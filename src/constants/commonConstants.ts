@@ -47,3 +47,13 @@ export const NO_DATA_FOUND_PAGE = {
 export type ProductBookingType = "HOTEL" | "VISA" | "FLIGHTS" | "TRAIN" | "CAR" | "BUS" | "AIR";
 export const ListPerPage = 10;
 
+export const TS_DIALOG = {
+  SELECT_STATUS: "Please select status",
+  LIST_NOT_FETCHED:"Reasons list not fetched from config.",
+  SELECT_REASON: "Select reason",
+  PLEASE_SELECT_REASON: "Please select reason",
+  REQUIRED_FIELD: "This field is required",
+  ENTER_CHAR: "Enter minimum 10 characters",
+  NOT_ALLOWED_CHAR: "Special characters are not allowed",
+  SUBMIT: "Submit"
+}
