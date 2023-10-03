@@ -58,7 +58,6 @@ const chunkExtractor = new ChunkExtractor({ statsFile });
   app.get(GET_REASONS_AJAX_API, async (req, res) => {
     const store = initStore();
     let data =  await reasonsRequest(store,req?.headers?.cookie);
-    console.log("DATAAA",data)
      res.send(
       JSON.parse(data[0].data)
     );
