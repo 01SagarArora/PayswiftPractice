@@ -1,7 +1,7 @@
 import SEO from '../../seo/Seo';
 import { PAGE } from '../../seo/seo.constant';
 import "../Static/TravelStatusHomePage.scss";
-import { Container, Box, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Tab, Stack } from '@mui/material';
+import { Container, Box, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Tab, Stack, Tooltip } from '@mui/material';
 import PaginationButton, { PaginationData } from 'components/Pagination/PaginationButton';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -305,9 +305,11 @@ const TravelStatusHomePage = () => {
                           <Box sx={{ display: 'flex', alignItems: "center" }}>
                             <div className="gray-dark productNameHolder ">
                               <Stack direction={"row"} alignItems={"center"}>
+                              <Tooltip title={item.bookingType as BookingType} arrow>
                                 <span className='icon-container'>
                                   <Icon name={item.bookingType as BookingType} color={'red'} size={'medium'} />
                                 </span>
+                                </Tooltip>
                                 &nbsp;&nbsp;
                                 <span>{item.TripId}</span>
                               </Stack>

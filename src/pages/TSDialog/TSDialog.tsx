@@ -18,7 +18,9 @@ interface TSDialogProps {
 const TSDialog = (props: TSDialogProps) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [selectedReason, setSelectedReason] = useState("");
-    const [showTextField, setShowTextField] = useState(true);
+    const [showTextField, setShowTextField] = useState(false);
+    const [shoeReasonsValidation, setShowReasonsValidations] = useState(false);
+
     const show = useSelector((state: RootState) => state.tsDialog.show);
     const data = useSelector((state: RootState) => state.tsDialog.data);
     const dispatch = useAppDispatch();
@@ -45,7 +47,7 @@ const TSDialog = (props: TSDialogProps) => {
     }
     const onSubmit: SubmitHandler<any> = (fData) => {
         if (!modelData.isShowReasonDropdown) {
-            alert("Reasons List not fetched from config.")
+            setShowReasonsValidations(true);
             return;
         }
         const obj = JSON.parse(JSON.stringify(data.tripData));
@@ -136,7 +138,9 @@ const TSDialog = (props: TSDialogProps) => {
                                 )}
                             </TextField>
 
-                            {errors.status?.type === 'required'||(!modelData?.isShowReasonDropdown) && <FormHelperText className="validation-error">{!modelData.isShowReasonDropdown?'Config issue not getting reasons':'Please select status'}</FormHelperText>}
+                            {errors.status?.type === 'required'&& <FormHelperText className="validation-error">Please select status</FormHelperText>}
+                            {shoeReasonsValidation && <FormHelperText className="validation-error">Reasons List not fetched from config.</FormHelperText>}
+
                         </FormControl>
 
                         {/* REASONS DROPDOWN */}

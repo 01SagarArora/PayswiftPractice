@@ -8,8 +8,8 @@ const reasonsRequest = async (store: any, cookie: any) => {
     let req = { ...REASON_REQUEST };
     store.dispatch(commonApi.endpoints.postApi.initiate({ cookie, url: GET_REASONS_S2S, data: req })).then((res: any) => {
         try {
-            if (res.data) {
-                //TODO : MANIPULATE DATA               
+            if (res.data.success) {
+                //TODO : MANIPULATE DATA   
                 return JSON.parse(res.data);
             }
         } catch (e) {
