@@ -16,7 +16,7 @@ interface TSDialogProps {
     onClose: () => void
 }
 const TSDialog = (props: TSDialogProps) => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors}, reset, handleSubmit } = useForm();
     const [selectedReason, setSelectedReason] = useState("");
     const [showTextField, setShowTextField] = useState(false);
     const [shoeReasonsValidation, setShowReasonsValidations] = useState(false);
@@ -24,25 +24,36 @@ const TSDialog = (props: TSDialogProps) => {
     const show = useSelector((state: RootState) => state.tsDialog.show);
     const data = useSelector((state: RootState) => state.tsDialog.data);
     const dispatch = useAppDispatch();
+
     
     let modelData = {
         title: 'Reason for not travelling',
-        statusList: [
+        statusList: data?.reasonData?.travelStatusMaster ? data?.reasonData?.travelStatusMaster : [
             "Cancelled at Yatra",
             data.type === 'AIR' ? "Cancelled at Airline" : "Cancelled at Hotel",
             "No Show",
             "Dispute"
         ],
-        reasonList: data?.reasonData?.reasonInputMaster,
+        reasonList: data?.reasonData?.reasonInputMaster ? data?.reasonData?.reasonInputMaster : [
+            "test",
+            "test34"
+        ],
         isShowReasonDropdown: data?.reasonData?.reasonInputType == 'both' || data?.reasonData?.reasonInputType == 'master' || data?.reasonData?.reasonInputType == 'dropdown'||false
     }
+
+    useEffect(()=>{
+        setSelectedReason(modelData?.reasonList[0])
+    },[modelData]);
+
     useEffect(()=>{
         if(data?.reasonData?.reasonInputType)
         setShowTextField(data.reasonData.reasonInputType === 'text')
     },[data])
     const onClose = () => {
+        reset();
         //props.setDialogProps({ ...props, show: false })
         props.onClose();
+
         dispatch(hideTSDialog());
     }
     const onSubmit: SubmitHandler<any> = (fData) => {
@@ -129,13 +140,15 @@ const TSDialog = (props: TSDialogProps) => {
                                 {...register("status", { required: true })}
 
                                 size="small"
-                                defaultValue={""}
+                                defaultValue={modelData?.statusList[0]}
+                                name="status"
                             >
                                 {modelData?.statusList && modelData?.statusList.map(
                                     (status: any) => (
                                         <MenuItem key={status} value={status}>{status}</MenuItem>
                                     )
                                 )}
+                                
                             </TextField>
 
                             {errors.status?.type === 'required'&& <FormHelperText className="validation-error">{TS_DIALOG.SELECT_STATUS}</FormHelperText>}
@@ -154,12 +167,15 @@ const TSDialog = (props: TSDialogProps) => {
                                     id="nt-reason"
                                     label="Reason"
                                     value={selectedReason}
-                                    defaultValue={""}
                                     {...register("reason", { required: true })}
+                                    defaultValue={modelData?.reasonList[0]}
+                                    name="reason"
+
                                     onChange={handleChangeReason}
+
                                 >
-                                    <MenuItem key="select reason" value="" disabled>{TS_DIALOG.SELECT_REASON}</MenuItem>
-                                    {modelData.reasonList.map((reason: string) => <MenuItem key={reason} value={reason}>{reason}</MenuItem>)}
+                                    {/* <MenuItem key="select reason" value="" disabled>{TS_DIALOG.SELECT_REASON}</MenuItem> */}
+                                    {modelData?.reasonList?.map((reason: string) => <MenuItem key={reason} value={reason}>{reason}</MenuItem>)}
                                 </TextField>
 
                                 {errors.reason?.type == 'required' && <FormHelperText className="validation-error">{TS_DIALOG.PLEASE_SELECT_REASON}</FormHelperText>}
