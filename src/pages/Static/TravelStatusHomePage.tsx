@@ -325,7 +325,7 @@ const TravelStatusHomePage = () => {
               <SearchIcon/>
               <input
                 type="text"
-                placeholder="Enter Trip ID"
+                placeholder="Enter last 4 digits of Trip ID"
                 className='search-input'
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
