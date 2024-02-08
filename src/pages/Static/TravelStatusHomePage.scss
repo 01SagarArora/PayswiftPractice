@@ -76,3 +76,33 @@ button.outlinedButton {
     text-transform: capitalize;
     box-shadow: none;
 }
+
+.search-container {
+    background-color: #fff;
+    height: 30px;
+    border-radius: 20px;
+    width:100%;
+    display: flex;
+    align-items: center;
+    padding: 11px 0px 10px 9px;
+
+}
+
+.search-button {
+    border: none;
+    background: #f34f4f;
+    color: white;
+    padding: 8px;
+    border-radius: 0px 14px 14px 0px;
+    font-weight: 600;
+}
+
+.search-input {
+    border: none;
+    padding: 0px 0px 0px 5px;
+}
+
+.search-input:focus-visible {
+  outline: none;
+}
+
