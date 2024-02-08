@@ -163,7 +163,12 @@ const TravelStatusHomePage = () => {
 
       updatePagination(totalPages, startIndex, endIndex, prepDataForPagination(filteredList).totalLength);
     } else {
-      setTravelList(bookingsData)
+      setTravelList(bookingsData);
+      const totalPages = prepDataForPagination(bookingsData).totalPages;
+      const startIndex = prepDataForPagination(bookingsData).startIndex;
+      const endIndex = prepDataForPagination(bookingsData).endIndex;
+      updatePagination(totalPages, startIndex, endIndex, prepDataForPagination(bookingsData).totalLength);
+
     }
   };
 
