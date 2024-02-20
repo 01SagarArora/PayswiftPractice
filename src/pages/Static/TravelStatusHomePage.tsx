@@ -153,7 +153,7 @@ const TravelStatusHomePage = () => {
 
   const handleSearch = () => {
     if (searchTerm !== "") {
-      const filteredList = bookingsData.filter((item) => item.TripId.includes(searchTerm));
+      const filteredList = bookingsData.filter((item) => item?.TripId?.includes(searchTerm));
       setFilteredTravelList(filteredList);
       setIsSearched(prev=>!prev);
       setPage(1);
