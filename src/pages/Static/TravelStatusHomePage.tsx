@@ -153,7 +153,7 @@ const TravelStatusHomePage = () => {
 
   const handleSearch = () => {
     if (searchTerm !== "") {
-      const filteredList = bookingsData.filter((item) => item.TripId.includes(searchTerm));
+      const filteredList = bookingsData.filter((item) => item?.TripId?.includes(searchTerm));
       setFilteredTravelList(filteredList);
       setIsSearched(prev=>!prev);
       setPage(1);
@@ -330,7 +330,7 @@ const TravelStatusHomePage = () => {
               <SearchIcon/>
               <input
                 type="text"
-                placeholder="Enter last 4 digits of Trip ID"
+                placeholder="Enter Trip ID"
                 className='search-input'
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
