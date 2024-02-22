@@ -140,3 +140,7 @@ All configuration is available in files with constants:
     - Status Dropdown -- Static
     - Reason dropdown -- Show, based on reasonInputType --> set from config
     - Text Area -- Show, if reasonInputType is equal to text or in the second dropdown we have selected "others" as reason.
+
+5.  TO DO: 
+      Need to check the status and reason text box inside TSDialog.tsx.
+      Need to create wrapper API for update status.

@@ -8,6 +8,6 @@ export const HEADER_URL = `http://fresco.ui.service/fresco/corporate/en/flights/
 export const FOOTER_URL = `http://fresco.ui.service/fresco/corporate/en/flights/dom/service?name=FOOTER&dataType=hook&ssoToken={0}&userType={1}`;
 export const TRAVEL_STATUS_S2S_LIST_API = 'http://finch.default.svc.yatra/finch/listPendingUpdates'
 export const GET_REASONS_S2S = 'http://corpservice.yatra.com/falcon/configuration/api'
-export const UPDATE_TRAVEL_STATUS = '/finch/updateTravelStatus'
+export const UPDATE_TRAVEL_STATUS = 'https://secure.yatra.com/travel-status/updateTravelStatus'
 export const GET_REASONS_AJAX_API = '/travel-status-v2/getReasons'
 
