@@ -36,7 +36,9 @@ export const TRAVEL_STATUS_PAGE = {
 
 export const ALERT_DIALOG = {
   TRY_AGAIN_MESSAGE: "Please Try After Sometime",
-  DIALOG_TITLE: "Error"
+  DIALOG_TITLE: "Error",
+  SUCCESSFULLY_UPDATED: "Status Successfully Updated",
+  SUCCESS_TITLE: "Success"
 }
 
 export const NO_DATA_FOUND_PAGE = {

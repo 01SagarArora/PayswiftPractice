@@ -22,12 +22,18 @@ export default function AlertDialog(props: AlertDialogData) {
         <div>
             <Dialog open={props.show}>
                 <DialogTitle>
+                    {props.title == 'Error' ?
                     <IconButton sx={{
                         padding: '0px',
                         marginRight: '6px',
                     }}>
-                        <Icon name={props.title as TripIcon} color={"red"} size={"small"}/>
-                    </IconButton>
+                        <Icon name={props.title as TripIcon} color={'red'} size={"small"}/>
+                    </IconButton> : <IconButton sx={{
+                        padding: '0px',
+                        marginRight: '6px',
+                    }}>
+                        <Icon name={props.title as TripIcon} color={'green'} size={"small"}/>
+                    </IconButton>}
                     {props.title}
                     <IconButton onClick={() => triggerAction('OK')}
                         sx={{

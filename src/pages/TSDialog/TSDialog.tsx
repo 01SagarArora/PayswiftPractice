@@ -70,11 +70,17 @@ const TSDialog = (props: TSDialogProps) => {
             .then((res: any) => {
                 try {
                     const resp = res.data;
-                    if (resp.data && resp.data.status == 'success') {
+                    if (resp && resp.status == 'success') {
                         //updating main data
                         props.onClose();
                         dispatch(updateMainListData(obj.updateList[0].id));
                         dispatch(hideTSDialog());
+                        let alertData = {
+                            title: ALERT_DIALOG.SUCCESS_TITLE,
+                            messages: [ALERT_DIALOG.SUCCESSFULLY_UPDATED],
+                            actions: ['OK'],
+                        };
+                        dispatch(showAlert(alertData));
                     } else if (resp.data.httpCode == 401) {
                         //todo lgoin 
                         const redirectUrl = window.location.href;
