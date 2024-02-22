@@ -19,7 +19,7 @@ const TSDialog = (props: TSDialogProps) => {
     const { register, formState: { errors}, reset, handleSubmit } = useForm();
     const [selectedReason, setSelectedReason] = useState("");
     const [showTextField, setShowTextField] = useState(false);
-    const [shoeReasonsValidation, setShowReasonsValidations] = useState(false);
+    // const [shoeReasonsValidation, setShowReasonsValidations] = useState(false);
 
     const show = useSelector((state: RootState) => state.tsDialog.show);
     const data = useSelector((state: RootState) => state.tsDialog.data);
@@ -57,10 +57,10 @@ const TSDialog = (props: TSDialogProps) => {
         dispatch(hideTSDialog());
     }
     const onSubmit: SubmitHandler<any> = (fData) => {
-        if (!modelData.isShowReasonDropdown) {
-            setShowReasonsValidations(true);
-            return;
-        }
+        // if (!modelData.isShowReasonDropdown) {
+        //     setShowReasonsValidations(true);
+        //     return;
+        // }
         const obj = JSON.parse(JSON.stringify(data.tripData));
 
         obj.updateList[0].status = fData.status;
@@ -152,7 +152,7 @@ const TSDialog = (props: TSDialogProps) => {
                             </TextField>
 
                             {errors.status?.type === 'required'&& <FormHelperText className="validation-error">{TS_DIALOG.SELECT_STATUS}</FormHelperText>}
-                            {shoeReasonsValidation && <FormHelperText className="validation-error">{TS_DIALOG.LIST_NOT_FETCHED}</FormHelperText>}
+                            {/* {shoeReasonsValidation && <FormHelperText className="validation-error">{TS_DIALOG.LIST_NOT_FETCHED}</FormHelperText>} */}
 
                         </FormControl>
 
