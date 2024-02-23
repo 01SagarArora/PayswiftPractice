@@ -69,8 +69,9 @@ const TSDialog = (props: TSDialogProps) => {
         dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: obj }))
             .then((res: any) => {
                 try {
-                    const resp = res.data;
-                    if (resp && resp.status == 'success') {
+                    console.log("res",res)
+                    const resp = res;
+                    if (resp && resp.status.toLowerCase() == 'success') {
                         //updating main data
                         props.onClose();
                         dispatch(updateMainListData(obj.updateList[0].id));
