@@ -192,7 +192,7 @@ const TravelStatusHomePage = () => {
         .then((res: any) => {
           try {
             const resp = res.data;
-            if (resp && resp.status == 'success') {
+            if (resp && resp.status.toLowerCase() == 'success') {
               dispatch(updateMainListData(trip.id))
             } else if (resp.httpCode == 401) {
               dispatch(setError())
