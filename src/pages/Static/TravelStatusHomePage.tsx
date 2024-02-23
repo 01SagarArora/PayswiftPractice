@@ -188,7 +188,7 @@ const TravelStatusHomePage = () => {
       //Todo: Set Loader
       delete tripObj.type;
       //As per production call update travel status api
-      dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: tripObj }))
+      dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS +'?_&n='+Date.now(), data: tripObj }))
         .then((res: any) => {
           try {
             const resp = JSON.parse(res.data);
