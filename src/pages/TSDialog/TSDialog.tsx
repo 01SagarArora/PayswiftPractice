@@ -66,11 +66,11 @@ const TSDialog = (props: TSDialogProps) => {
         obj.updateList[0].status = fData.status;
         obj.updateList[0].comment = showTextField ? fData.reasonText : fData.reason;
         delete obj.type;
-        dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: obj }))
+        dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS +'?_&n='+Date.now(), data: obj }))
             .then((res: any) => {
                 try {
-                    const resp = res;
-                    if (resp && resp.status.toLowerCase() == 'success') {
+                    const resp = JSON.parse(res.data);
+                    if (resp.data && resp.status == 'success') {
                         //updating main data
                         props.onClose();
                         dispatch(updateMainListData(obj.updateList[0].id));
