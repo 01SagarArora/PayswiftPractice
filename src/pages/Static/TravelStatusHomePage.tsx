@@ -192,12 +192,12 @@ const TravelStatusHomePage = () => {
         .then((res: any) => {
           try {
             const resp = res.data;
-            if (resp.data && resp.status == 'success') {
+            if (resp && resp.status == 'success') {
               dispatch(updateMainListData(trip.id))
-            } else if (resp.data.httpCode == 401) {
+            } else if (resp.httpCode == 401) {
               dispatch(setError())
               return false
-            } else if (resp.data.httpCode == 500) {
+            } else if (resp.httpCode == 500) {
               //todo error handling
               let alertData = {
                 title: ALERT_DIALOG.DIALOG_TITLE,
