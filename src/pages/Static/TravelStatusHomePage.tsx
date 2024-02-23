@@ -191,7 +191,7 @@ const TravelStatusHomePage = () => {
       dispatch(commonApi.endpoints.postApi.initiate({ url: UPDATE_TRAVEL_STATUS, data: tripObj }))
         .then((res: any) => {
           try {
-            const resp = res.data;
+            const resp = JSON.parse(res.data);
             if (resp && resp.status.toLowerCase() == 'success') {
               dispatch(updateMainListData(trip.id))
             } else if (resp.httpCode == 401) {
