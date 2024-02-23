@@ -70,7 +70,7 @@ const TSDialog = (props: TSDialogProps) => {
             .then((res: any) => {
                 try {
                     const resp = JSON.parse(res.data);
-                    if (resp.data && resp.status == 'success') {
+                    if (resp.data && resp.status.toLowerCase() == 'success') {
                         //updating main data
                         props.onClose();
                         dispatch(updateMainListData(obj.updateList[0].id));
