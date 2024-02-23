@@ -194,7 +194,7 @@ const TSDialog = (props: TSDialogProps) => {
                                     {...register('reasonText', {
                                         required: true,
                                         minLength: 10,
-                                        pattern: /^(?!.*(?:[<>[\]@!#$%^&*()]|href))[a-zA-Z0-9,.-]+$/
+                                        pattern: /^(?!.*(?:[<>[\]@!#$%^&*()]|href))[ a-zA-Z0-9,.-]+$/
                                     })}
                                     sx={{ marginTop: '12px' }}
                                     id="outlined-textarea"
@@ -217,7 +217,6 @@ const TSDialog = (props: TSDialogProps) => {
                         }
 
                         <Button variant="contained" color="error" size="small" type="submit" className="w-25"
-
                             sx={{ boxShadow: 'none', textTransform: 'none', fontSize: '12px!important', fontWeight: '500', borderRadius: '4px!important' }} >{TS_DIALOG.SUBMIT}</Button>
                     </Stack>
 
