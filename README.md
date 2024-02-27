@@ -144,3 +144,5 @@ All configuration is available in files with constants:
 5.  TO DO: 
       Need to check the status and reason text box inside TSDialog.tsx.
       Need to create wrapper API for update status.
+      need to add uuid.
+      reload at the time of submit the status.

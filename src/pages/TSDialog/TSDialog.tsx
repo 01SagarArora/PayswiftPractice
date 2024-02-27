@@ -81,6 +81,7 @@ const TSDialog = (props: TSDialogProps) => {
                             actions: ['OK'],
                         };
                         dispatch(showAlert(alertData));
+                        window.location.reload();
                     } else if (resp.data.httpCode == 401) {
                         //todo lgoin 
                         const redirectUrl = window.location.href;
