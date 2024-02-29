@@ -82,7 +82,7 @@ const TravelStatusHomePage = () => {
   const visaReasons = reasonData?.configurations?.travelStatusConfig.visa;
   const dispatch = useAppDispatch();
   const loaderDispatch = useDispatch<AppDispatch>();
-  const isEmulation = window.isEmulate ? true : false;
+  // const isEmulation = window.isEmulate ? true : false;
 
 
   // For update the Pagination
@@ -357,7 +357,7 @@ const TravelStatusHomePage = () => {
                       <TableCell className="tripHeader">Sector</TableCell>
                       <TableCell className="tripHeader">Pax Name</TableCell>
                       <TableCell className="tripHeader">Arrival Date and Time</TableCell>
-                      {!isEmulation && <TableCell className="tripHeader">Status Updated <br /> by Traveller</TableCell>}
+                      <TableCell className="tripHeader">Status Updated <br /> by Traveller</TableCell>
                       <TableCell className="tripHeader">Travelled</TableCell>
                     </TableRow>
                   </TableHead>
@@ -385,7 +385,7 @@ const TravelStatusHomePage = () => {
                           <TableCell className="tripBody">{getSector(item)}</TableCell>
                           <TableCell className="tripBody">{item.PaxName === "-" || item.PaxName === "" ? "NA" : item.PaxName}</TableCell>
                           <TableCell className="tripBody">{getArrivalDateTime(item)}</TableCell>
-                          {!isEmulation && <TableCell className={`tripBody ${item.updateState == 'Availed' ? 'text-success' : ''} ${item.updateState == 'Pending' ? 'text-error' : ''}`}>{item.updateStatus}</TableCell>}
+                          <TableCell className={`tripBody ${item.updateState == 'Availed' ? 'text-success' : ''} ${item.updateState == 'Pending' ? 'text-error' : ''}`}>{item.updateStatus}</TableCell>
                           <TableCell className="tripBody w-12                                                                                                                                                                                                                                                                                                                                                                                                           ">
                             <Stack
                               direction="row"
