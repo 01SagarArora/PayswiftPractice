@@ -12,6 +12,7 @@ import {headerRequest, footerRequest} from 'server/middlewares';
 import { getHtmlTemplate } from 'server/template';
 import { IS_RENDER_TO_STREAM } from 'server/constants';
 import { mainDataRequest } from './mainDataRequests';
+import { mainDataPaymentRequest } from './mainDataPayswiftRequests';
 import { getKeyFromCookie } from 'utils/helpers';
 
 const serverRenderer = (chunkExtractor: ChunkExtractor):
@@ -30,7 +31,8 @@ RequestHandler => async (req: any, res: Response) => {
   var frescoData : any = {
     header:'',
     footer:'',
-    mainData:''
+    mainData:'',
+    mainDataPayment:'',
   }
 
   function setHeaderFooterValue(key:string,data:any){
@@ -55,7 +57,8 @@ RequestHandler => async (req: any, res: Response) => {
   if(req?.headers?.cookie && userName){
     await headerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
     await footerRequest(store,req?.headers?.cookie,setHeaderFooterValue);
-    await mainDataRequest(store,req?.headers?.cookie);
+    await mainDataRequest(store,req?.headers?.cookie);    
+    await mainDataPaymentRequest(store,req?.headers?.cookie);
   }
   preloadedState = { ...store.getState() };
   

@@ -5,5 +5,6 @@ export const ROUTE_CONSTANTS = {
   NOT_FOUND: '/405',
   DEFAULT_PAGE : '/DefaultPage',
   FAV_ICON:"/favicon.ico",
-  TRAVEL_STATUS_HOME_PAGE:"/home"
+  TRAVEL_STATUS_HOME_PAGE:"/home",
+  PAYSWIFT_HOME_PAGE:"/payswift"
 };

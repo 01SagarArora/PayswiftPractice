@@ -24,9 +24,7 @@ const App: FC = (): ReactElement => {
     function getReasonsList() {
       dispatch(commonApi.endpoints.getApi.initiate({ url: GET_REASONS_AJAX_API }))
         .then((res) => {
-          try {
-            console.log("RESPONSE",res)
-
+          try {            
             dispatch(setReasonData(res?.data))
             dispatch(setReasonLoaded());
           } catch (e) {

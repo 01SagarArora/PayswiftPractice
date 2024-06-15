@@ -9,11 +9,13 @@ import { commonApi } from 'api/commonApi/apis';
 import { reasonsReducer } from './ReasonSlice/ReasonSlics';
 import { tsDailogReducer } from './TSDialogSlice/TSDialogSlice';
 import { notFoundReducer } from './NotFound/NotFoundSlice';
+import { mainDataPaymentReducer } from './PaymentMainData/PaymentMainDataSlice';
 
 export const rootReducer = {
   alert:alertReducer,
   loader:loaderReducer,
   mainData : mainDataReducer,
+  mainDataPayment: mainDataPaymentReducer,
   tsDialog: tsDailogReducer,
   error: errorReducer,
   reasonData: reasonsReducer,
