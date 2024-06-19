@@ -1,40 +1,32 @@
-export interface PaymentOptionFeature {
-    skipOTP: boolean;
-    showStoredCards: boolean;
-}
 
-export enum PaymentLabel {
-    CC = 'CC',
-    CP = 'CP',
-    DC = 'DC',
-    NB = 'NB'
-}
-
-export type Status = "success" | "error" | "loading";
-
-export const PaymentMethod = {
-    "CC": 'Credit Card',
-    "CP": 'Credit Pool',
-    "DC": 'Debit Card',
-    "NB": 'Net Banking',
-}
-
-export enum PaymentLabelOption {
-    'CC' = 'Credit Card',
+export enum PaymentMethod {
     'CP' = 'Credit Pool',
+    'CC' = 'Credit Card',    
     'DC' = 'Debit Card',
-    'NB' = 'Net Banking'
-}
-
-export interface TripType {
-    official: PaymentLabel,
-    personal: PaymentLabel,
+    'NB' = 'Net Banking',
 }
 
 
-export const TripTypeMethods = {
- 
-    official: PaymentLabel,
-    personal: PaymentLabel,
+export const ButtonType = {
+    'CP': { id: 0, label: 'Credit Pool' },
+    'CC': { id: 1, label: 'Credit Card' },
+    'DC': { id: 1, label: 'Debit Card' },
+    'NB': { id: 2, label: 'Net Banking' },
+  } as const;
+  
+  export type ButtonType = typeof ButtonType[keyof typeof ButtonType];
+
+export type mainDataPayment = {
+    agentProfileType: string,
+    agentPaymentOptions: agentPaymentOptions,
+    paxDetails: string
 }
 
+export type agentPaymentOptions = {
+    paymentOptions: paymentOptions,    
+}
+
+export type paymentOptions = {
+    personal: string[],
+    official: string[]
+}

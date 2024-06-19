@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const mainDataPaymentSlice = createSlice({
     name: 'mainDataPayment',
     initialState: {
-        mainDataPayment: [] as any[],
+        mainDataPayment: {},
     },
     reducers: {
         setPaymentMainData(state, action) {
