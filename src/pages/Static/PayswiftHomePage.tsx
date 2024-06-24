@@ -3,15 +3,20 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { Box, Tab, Tabs } from '@mui/material';
 
-import { mainDataPayment, PaymentMethod, ButtonType } from './../../models/PaymentOptions';
+import { mainDataPayment, PaymentMethod } from './../../models/PaymentOptions';
 
 const PayswiftHomePage = () => {
 
   const mainDataPayment = useSelector((state: RootState) => state.mainDataPayment?.mainDataPayment) as mainDataPayment;
   const tripType = mainDataPayment.agentProfileType;
   const paymentOptions = tripType == "PERSONAL" ? mainDataPayment.agentPaymentOptions.paymentOptions.personal : mainDataPayment.agentPaymentOptions.paymentOptions.official;
+  
+  function formattedPaymentOptions(paymentOptions: string[]) {      
+    let paymentType = new Array(paymentOptions.length);          
+      paymentOptions.map((obj) => paymentType[PaymentMethod[Object.keys(obj)as unknown as keyof typeof PaymentMethod].id] = PaymentMethod[Object.keys(obj)as unknown as keyof typeof PaymentMethod].label)            
+    return paymentType;
+  }
 
-  // const paxDetails = mainDataPayment.paxDetails;  
   const [value, setValue] = React.useState(1);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -59,25 +64,24 @@ const PayswiftHomePage = () => {
             sx={{ borderRight: 1, borderColor: 'divider' }}
             onChange={handleChange}
             aria-label="lab API tabs example">
-            {
-              paymentOptions.map((paymentOptionItem: string) =>
-                <Tab label={PaymentMethod[Object.keys(paymentOptionItem)[0].toString() as keyof typeof PaymentMethod]} />
+            {                         
+              formattedPaymentOptions(paymentOptions).map((paymentOptionItem: string) =>
+                <Tab label={paymentOptionItem as PaymentMethod["label"]} />
               )
             }
           </Tabs>
         </Box>
-
-        <CustomTabPanel value={value} index={ButtonType.CC.id}>
-          {ButtonType.CC.id}
+        <CustomTabPanel value={value} index={PaymentMethod.CP.id}>
+          Item One
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
+        <CustomTabPanel value={value} index={PaymentMethod.CC.id}>
           Item Two
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
+        <CustomTabPanel value={value} index={PaymentMethod.DC.id}>
           Item Three
         </CustomTabPanel>
-
-      </Box>}
+      </Box>
+      }
     </>
   )
 }

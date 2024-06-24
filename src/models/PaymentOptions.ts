@@ -1,20 +1,11 @@
-
-export enum PaymentMethod {
-    'CP' = 'Credit Pool',
-    'CC' = 'Credit Card',    
-    'DC' = 'Debit Card',
-    'NB' = 'Net Banking',
-}
-
-
-export const ButtonType = {
-    'CP': { id: 0, label: 'Credit Pool' },
+export const PaymentMethod = {
+    "CP": { id: 0, label: 'Credit Pool' },
     'CC': { id: 1, label: 'Credit Card' },
-    'DC': { id: 1, label: 'Debit Card' },
-    'NB': { id: 2, label: 'Net Banking' },
-  } as const;
+    'DC': { id: 2, label: 'Debit Card' },
+    'NB': { id: 3, label: 'Net Banking' },
+};
   
-  export type ButtonType = typeof ButtonType[keyof typeof ButtonType];
+export type PaymentMethod = typeof PaymentMethod[keyof typeof PaymentMethod];
 
 export type mainDataPayment = {
     agentProfileType: string,
