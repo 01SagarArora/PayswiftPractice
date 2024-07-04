@@ -1,0 +1,28 @@
+.month {
+  display: inline-flex;
+  width: 13.3ch;
+  justify-content: space-around;
+}
+
+.form1{
+width: 80%;
+margin: auto;
+border: 2px solid black;
+align-items: center;
+justify-content: center;
+// margin-left: 20rem;
+padding: 2rem;
+}
+.cvv{
+  display: flex;
+  width: 9rem;
+  height: 4rem;
+  padding: 1rem;
+  // border: 2px solid red;
+  margin-top: -4.5rem;
+  margin-left: 17.5rem;
+  border-radius: 5px;
+}
+.date2{
+  display: flex;
+}
