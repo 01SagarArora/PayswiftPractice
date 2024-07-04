@@ -29,6 +29,8 @@ const PayswiftHomePage = () => {
     index: number;
     value: number;
   }
+  // index: number;
+
 
   function CustomTabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
