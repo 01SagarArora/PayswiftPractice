@@ -1,19 +1,29 @@
 import * as React from 'react';
+import { FC, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { Box, Tab, Tabs } from '@mui/material';
+// import cn from 'classnames';
 
 import { mainDataPayment, PaymentMethod } from './../../models/PaymentOptions';
+import CreditCardField from './../../components/credit-card-field/CreditCardField'
+// import styles from './creditCard.module.scss'
 
-const PayswiftHomePage = () => {
+interface IMenu {
+  className?: string;
+}
+
+
+const PayswiftHomePage: FC<IMenu> = (): ReactElement => {
 
   const mainDataPayment = useSelector((state: RootState) => state.mainDataPayment?.mainDataPayment) as mainDataPayment;
   const tripType = mainDataPayment.agentProfileType;
   const paymentOptions = tripType == "PERSONAL" ? mainDataPayment.agentPaymentOptions.paymentOptions.personal : mainDataPayment.agentPaymentOptions.paymentOptions.official;
-  
-  function formattedPaymentOptions(paymentOptions: string[]) {      
-    let paymentType = new Array(paymentOptions.length);          
-      paymentOptions.map((obj) => paymentType[PaymentMethod[Object.keys(obj)as unknown as keyof typeof PaymentMethod].id] = PaymentMethod[Object.keys(obj)as unknown as keyof typeof PaymentMethod].label)            
+
+  function formattedPaymentOptions(paymentOptions: string[]) {
+    let paymentType = new Array(paymentOptions.length);
+    paymentOptions.map((paymentOption) => paymentType[PaymentMethod[Object.keys(paymentOption) as unknown as keyof typeof PaymentMethod].id] = PaymentMethod[Object.keys(paymentOption) as unknown as keyof typeof PaymentMethod].label)
+
     return paymentType;
   }
 
@@ -30,7 +40,7 @@ const PayswiftHomePage = () => {
     value: number;
   }
 
-  function CustomTabPanel(props: TabPanelProps) {
+  function CustomTabPanel(props: TabPanelProps, {}) {
     const { children, value, index, ...other } = props;
 
     return (
@@ -41,7 +51,7 @@ const PayswiftHomePage = () => {
         aria-labelledby={`simple-tab-${index}`}
         {...other}
       >
-        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+        {value === index && <Box sx={{ p: 3, width:'35%'   }}>{children}</Box>}
       </div>
     );
   }
@@ -64,7 +74,7 @@ const PayswiftHomePage = () => {
             sx={{ borderRight: 1, borderColor: 'divider' }}
             onChange={handleChange}
             aria-label="lab API tabs example">
-            {                         
+            {
               formattedPaymentOptions(paymentOptions).map((paymentOptionItem: string) =>
                 <Tab label={paymentOptionItem as PaymentMethod["label"]} />
               )
@@ -72,7 +82,9 @@ const PayswiftHomePage = () => {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={PaymentMethod.CP.id}>
-          Item One
+          <>
+            <CreditCardField />
+          </>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={PaymentMethod.CC.id}>
           Item Two
