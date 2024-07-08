@@ -16,7 +16,7 @@ const CreditCardField: FC<IMenu> = ({ className }): ReactElement => (
       className={(styles.form1, className)}
       component="form"
       sx={{
-        '& > :not(style)': { m: 1, width: '40ch' ,display:"block",padding:"0.5rem"},
+        '& > :not(style)': { m: 1, width: '45ch' ,display:"block",padding:"0.5rem"},
       }}
       noValidate
       autoComplete="off"
@@ -34,8 +34,8 @@ const CreditCardField: FC<IMenu> = ({ className }): ReactElement => (
           'day-month-box': {
             display: 'grid',
             gridTemplateAreas: `
-                                'label label'
-                                'day month';
+                                'label label '
+                                'day month cvv';
                                 `,
           },
         }}
@@ -63,7 +63,7 @@ const CreditCardField: FC<IMenu> = ({ className }): ReactElement => (
         <Autocomplete
           className={cn(styles.month, className)}
           sx={{
-            '& .MuiAutocomplete-popupIndicator': {
+            '& .MuiAutocomplete-popupIndicator': {        
               display: 'none',
             },
             gridArea: 'month',
@@ -82,10 +82,9 @@ const CreditCardField: FC<IMenu> = ({ className }): ReactElement => (
         component='div'
         sx={{
           'day-month-box': {
-            display: 'grid',
+            display: 'none',
             gridTemplateAreas: `
-                                'label label'
-                                'month  year';
+                                'label',;
                                 `,
           },
         }}
@@ -94,7 +93,7 @@ const CreditCardField: FC<IMenu> = ({ className }): ReactElement => (
         <InputLabel
 
           sx={{
-            gridArea: 'label',
+            gridArea: 'cvv',
           }}
         >
         </InputLabel>
