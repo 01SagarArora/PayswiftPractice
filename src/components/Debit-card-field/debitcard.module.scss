@@ -1,0 +1,109 @@
+.form{
+    width: 100%;
+}
+// .month {
+//     display: inline-flex;
+//     width: 13.3ch;
+//     justify-content: space-around;
+//   }
+  .state {
+    display: inline-flex;
+    width: 24ch;
+    justify-content: space-around;
+  }
+  .countrie {
+    display: inline-flex;
+    width: 24ch;
+    justify-content: space-around;
+  } 
+
+
+.District1 {
+    // display: inline-flex;
+    width: 24ch;
+    justify-content: space-around;
+  
+  } 
+  .District {
+    display: inline-flex;
+    width: 24ch;
+    justify-content: space-around;
+  
+  } 
+.BillingAddress{
+    margin-bottom: 0rem;
+}
+.DistrictPincode{
+    margin-bottom: 2rem;
+    margin-top:1rem ;
+
+}
+.pincode{
+    width: 35.9ch;
+    justify-content: space-around;
+    margin-top: -1.76rem;
+    margin-left: 6.9rem;
+    display: flex;}
+   
+  .cvv{
+    display: flex;
+    width: 9rem;
+    height: 4rem;
+    padding: 1rem;
+    // margin-top: -4.5rem;
+    // margin-left: 17.5rem;
+    border-radius: 5px;
+  }
+
+.NameField{
+    display: flex;
+    width: 100%;
+}
+
+.PaymetMethod{
+    margin-top: 2rem;
+}
+.NameonCard{
+    display: inline-flex;
+    width: 24ch;
+    justify-content: space-around;
+    margin-left: 0rem;
+
+
+ 
+}
+.cardNumber{
+    display: inline-flex;
+    width: 24ch;
+    justify-content: space-around;
+    margin-left: 0.5rem;
+    
+    
+}
+.Expirydate{
+    display: inline-flex;
+    width: 24ch;
+    justify-content: space-around; 
+    margin-left: 0.5rem;
+    // height: 3.4rem;
+    // padding: 1rem;
+    // // text-align: center;
+    // background-color: transparent;
+    // border: 1px solid rgb(182, 178, 178);
+    // border-radius:5px ;
+    // color: rgb(78, 77, 77);
+
+}
+.security{
+    display: inline-flex;
+    width: 24ch;
+    justify-content: space-around; 
+
+
+}
+.security1{
+    margin-top: 1rem;
+}
+.payment1{
+    margin-bottom:2rem ;
+}

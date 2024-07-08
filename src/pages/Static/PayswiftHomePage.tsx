@@ -7,6 +7,8 @@ import { Box, Tab, Tabs } from '@mui/material';
 
 import { mainDataPayment, PaymentMethod } from './../../models/PaymentOptions';
 import CreditCardField from './../../components/credit-card-field/CreditCardField'
+import DebitCardField from './../../components/Debit-card-field/DebitCardField';
+
 // import styles from './creditCard.module.scss'
 
 interface IMenu {
@@ -23,14 +25,13 @@ const PayswiftHomePage: FC<IMenu> = (): ReactElement => {
   function formattedPaymentOptions(paymentOptions: string[]) {
     let paymentType = new Array(paymentOptions.length);
     paymentOptions.map((paymentOption) => paymentType[PaymentMethod[Object.keys(paymentOption) as unknown as keyof typeof PaymentMethod].id] = PaymentMethod[Object.keys(paymentOption) as unknown as keyof typeof PaymentMethod].label)
-
     return paymentType;
   }
 
   const [value, setValue] = React.useState(1);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    console.log(event, newValue);
+    console.log("this is newvalue and evemt ",event, newValue);
     setValue(newValue);
   };
 
@@ -51,7 +52,7 @@ const PayswiftHomePage: FC<IMenu> = (): ReactElement => {
         aria-labelledby={`simple-tab-${index}`}
         {...other}
       >
-        {value === index && <Box sx={{ p: 3, width:'35%'   }}>{children}</Box>}
+        {value === index && <Box sx={{ p: 3, width:'40%',margin:"2rem"  }}>{children}</Box>}
       </div>
     );
   }
@@ -81,16 +82,18 @@ const PayswiftHomePage: FC<IMenu> = (): ReactElement => {
             }
           </Tabs>
         </Box>
-        <CustomTabPanel value={value} index={PaymentMethod.CP.id}>
+        <CustomTabPanel value={value} index={PaymentMethod.CC.id}>
           <>
             <CreditCardField />
           </>
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={PaymentMethod.CC.id}>
-          Item Two
+        <CustomTabPanel value={value} index={PaymentMethod.CP.id}>
+        Item Two
         </CustomTabPanel>
         <CustomTabPanel value={value} index={PaymentMethod.DC.id}>
-          Item Three
+         <>
+            <DebitCardField/>
+            </>
         </CustomTabPanel>
       </Box>
       }
