@@ -22,11 +22,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => (
       noValidate
       autoComplete="off"
     >
-    
-
-
-
-      <Box
+    <Box
        className={cn(styles.BillingAddress,className)}
         component='div' 
         sx={{
@@ -41,6 +37,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => (
       >
  
         <InputLabel
+        className={cn(styles.Billing ,className)}
           id="dropdown-label"
           sx={{
             gridArea: 'label',
@@ -53,10 +50,10 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => (
         <Autocomplete
           className={cn(styles.countrie, className)}
           sx={{
-            '& .MuiAutocomplete-popupIndicator': {
+            'countrie': {
               display: 'none',
             },
-            gridArea: 'day',
+            gridArea: 'countrie',
           }}
           id="combobox"
           options={countrie}
@@ -74,43 +71,22 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => (
           renderInput={(params) => <TextField {...params} className={cn(styles.state, className)} defaultValue="State" label="State" />}
           style={{ width: '50%' }}
         /> 
-
-        </Box>
-       
-   {/* ////////////////District and pincode */}
-
-   <Box
-       className={cn(styles.DistrictPincode,className)}
-        component='div' 
-        sx={{
-          'day-month-box': {
-            display: 'grid',
-            gridTemplateAreas: `
-                                'label label '
-                                'day month cvv';
-                                `,
-          },
-        }}
-      >
-
-
-       
-     
-
-        <Autocomplete
+        {/* ////////////////District and pincode */}
+<Autocomplete
         
-          className={cn(styles.District1, className)}
-          sx={{
-            '& .MuiAutocomplete-popupIndicator': {
-              display:"inline-flex"
-            },
-            gridArea: 'day',
-          }}
-          id="combobox"
-          options={District}
-          renderInput={(params) => <TextField {...params} className={cn(styles.District1, className)} defaultValue="Dirstrict" label="District" />}
-        />
-        <Box
+        className={cn(styles.District, className)}
+        sx={{
+          '& .MuiAutocomplete-popupIndicator': {
+            display:"inline-flex"
+          },
+          gridArea: 'day',
+        }}
+        id="combobox"
+        options={District}
+        renderInput={(params) => <TextField {...params} className={cn(styles.District, className)} defaultValue="Dirstrict" label="District" />}
+      />
+
+<Box
         className={cn(styles.pincode, className)}
 
         component='div'
@@ -129,71 +105,27 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => (
      
         </Box>
 
-
-
-
-
-
-
-{/* //////////////////////////Payment method  */}
-        
-        <Box
-       className={cn(styles.PaymetMethod,className)}
-        component='div' 
-        sx={{
-          'day-month-box': {
-            display: 'grid',
-            gridTemplateAreas: `
-                                'label label '
-                                'day month cvv';
-                                `,
-          },
-        }}
-      >
+    
  
-        <InputLabel
+         <InputLabel
         className={cn(styles.payment1,className)}
           id="dropdown-label"
           sx={{
             gridArea: 'label',
           }}
         >Payment Method
-        </InputLabel>
-      {/* <TextField required className={cn(styles.NameonCard, className)} label="Name on card"  variant='outlined'  /> */}
+        </InputLabel> 
        
-       {/* <input required type='text' placeholder='Name of card'className={cn(styles.NameonCard,className)}/> */}
        <TextField required className={cn(styles.NameonCard, className)} defaultValue="Name on Card" label="Name on Card" />
      
      <TextField required className={cn(styles.cardNumber, className)} defaultValue="Card Number" label="Card Number"  inputProps={{ maxLength: 16 }}/>
-       
+     <TextField required className={cn(styles.security, className)} label="CVV"  defaultValue="CVV"  inputProps={{ maxLength: 3 }}/>
+     <TextField required className={cn(styles.Expirydate, className)} label="MM/YY" defaultValue="Expiry Date" inputProps={{ maxLength: 4 }} />
+     
 
         </Box>
        
-   {/* ////////////////District and pincode */}
-
-   <Box
-       className={cn(styles.security1,className)}
-        component='div' 
-        sx={{
-          'day-month-box': {
-            display: 'grid',
-            gridTemplateAreas: `
-                                'label label '
-                                'day month cvv';
-                                `,
-          },
-        }}
-      >
  
-     <TextField required className={cn(styles.security, className)} label="CVV"  defaultValue="CVV"  inputProps={{ maxLength: 3 }}/>
-     <TextField required className={cn(styles.Expirydate, className)} label="MM/YY" defaultValue="Expiry Date" inputProps={{ maxLength: 4 }} />
-     {/* <input type='text' placeholder='MM/YY'className={cn(styles.Expirydate,className)}required  maxLength={4}/> */}
-     
-       
-     
-       
-    </Box>
-    </Box>
       
      
     </Box>
