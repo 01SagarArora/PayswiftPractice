@@ -8,6 +8,7 @@ import { Box, Tab, Tabs } from '@mui/material';
 import { mainDataPayment, PaymentMethod } from './../../models/PaymentOptions';
 import CreditCardField from './../../components/credit-card-field/CreditCardField'
 import DebitCardField from './../../components/Debit-card-field/DebitCardField';
+import NetbankingPaymentForm from 'components/Net-Banking-field/NetBankField';
 
 // import styles from './creditCard.module.scss'
 
@@ -88,7 +89,9 @@ const PayswiftHomePage: FC<IMenu> = (): ReactElement => {
           </>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={PaymentMethod.CP.id}>
-        Item Two
+        <>
+            <NetbankingPaymentForm/>
+            </>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={PaymentMethod.DC.id}>
          <>
