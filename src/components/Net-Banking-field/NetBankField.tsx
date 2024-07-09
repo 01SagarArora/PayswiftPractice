@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useState } from 'react';
-import { Box, TextField, Button, MenuItem } from '@mui/material';
+import { Box, TextField, MenuItem,InputLabel } from '@mui/material';
 import cn from 'classnames';
 
 import styles from './NetBanking.module.scss'; // Import the SCSS file for styling
@@ -65,6 +65,11 @@ const NetbankingPaymentForm: FC<IMenu> = ({ className }): ReactElement => {
       className={cn(styles.netbankingForm, className)} // Apply the 'netbankingForm' class for styling
       onSubmit={handleSubmit}
     >
+       <InputLabel>
+          
+            Net Banking 
+          </InputLabel>
+
       <TextField
       
         select
@@ -97,14 +102,14 @@ const NetbankingPaymentForm: FC<IMenu> = ({ className }): ReactElement => {
         className={cn(styles.formField,className)} // Apply the 'form-field' class for styling
       />
 
-      <Button
+      {/* <Button
         type="submit"
         variant="contained"
         color="primary"
         className={cn(styles.submitButton,className)} // Apply the 'submit-button' class for styling
       >
         Pay Now
-      </Button>
+      </Button> */}
     </Box>
   );
 };
