@@ -25,7 +25,23 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
     // Update state with formatted input
     setCardNumber(formattedInput);
   };
-
+  // const PaymentForm = () => {
+    const [expiry, setExpiry] = useState('');
+  
+    const handleExpiryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      let input = event.target.value;
+      
+      // Remove non-numeric characters
+      input = input.replace(/\D/g, '');
+  
+      // Format the input as MM/YY
+      if (input.length > 2) {
+        input = input.slice(0, 2) + '/' + input.slice(2);
+      }
+  
+      // Update state
+      setExpiry(input);
+    };
   return (
     <>
       <Box
@@ -80,11 +96,12 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
               '& .MuiAutocomplete-popupIndicator': {
                 display: 'none',
               },
+
               gridArea: 'month',
             }}
             id="combobox"
             options={state}
-            renderInput={(params) => <TextField {...params} className={cn(styles.state, className)} defaultValue="State" label="State" />}
+            renderInput={(params) => <TextField {...params} className={cn(styles.state, className)} label="State" />}
             style={{ width: '50%' }}
           />
           <Autocomplete
@@ -97,7 +114,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
             }}
             id="combobox"
             options={District}
-            renderInput={(params) => <TextField {...params} className={cn(styles.District, className)} defaultValue="District" label="District" />}
+            renderInput={(params) => <TextField {...params} className={cn(styles.District, className)}  label="District" />}
           />
 
           <Box
@@ -112,7 +129,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
               },
             }}
           >
-            <TextField required className={cn(styles.pincode, className)} defaultValue="Pincode" label="Pincode" variant="outlined" />
+            <TextField required className={cn(styles.pincode, className)}  label="Pincode" variant="outlined" />
           </Box>
           <InputLabel
             className={cn(styles.payment1, className)}
@@ -123,18 +140,22 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
           >
             Payment Method
           </InputLabel>
-          <TextField required className={cn(styles.NameonCard, className)} defaultValue="Name on Card" label="Name on Card" />
+          <TextField required className={cn(styles.NameonCard, className)}  label="Name on Card" />
           <TextField
             required
             className={cn(styles.cardNumber, className)}
             value={cardNumber}
             onChange={handleCardNumberChange}
-            defaultValue=""
+          
             label="Card Number"
             inputProps={{ maxLength: 19 }}
           />
-          <TextField required className={cn(styles.security, className)} label="CVV" defaultValue="CVV" inputProps={{ maxLength: 3 }} />
-          <TextField required className={cn(styles.Expirydate, className)} label="MM/YY" defaultValue="Expiry Date" inputProps={{ maxLength: 4 }} />
+          <TextField required className={cn(styles.security, className)} label="CVV"  inputProps={{ maxLength: 3 }} />
+          <TextField required className={cn(styles.Expirydate, className)}
+           label="MM/YY" 
+           value={expiry}
+           onChange={handleExpiryChange}
+           inputProps={{ maxLength: 5 }} />
         </Box>
       </Box>
     </>
