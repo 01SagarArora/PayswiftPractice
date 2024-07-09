@@ -12,7 +12,6 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #f9f9f9;
-  // padding-left: 6rem;
     width: 100%;
     display: grid;
     align-items: center;
@@ -26,7 +25,7 @@
 
  
   .countrie {
-    display: block;
+    display: flex;
     width: 24ch;
     justify-content: space-around;
     grid-column: 1/span 2;
@@ -44,7 +43,7 @@
 
 
   .District {
-    display: inline-flex;
+    display: flex;
     width: 24ch;
     justify-content: space-around;
     grid-column: 1/span 2;
@@ -57,15 +56,13 @@
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    display: block;
+    display: flex;
     grid-column: 2/  3;
     grid-row: 3/3;
   }
 
 
-// .BillingAddress{
-//   width: 100%;
-// }
+
 .Billing-1{
   grid-column: 1/  2;
   grid-row: 1/3;
@@ -102,13 +99,12 @@
 }
 
 .PaymetMethod{
-  display: block;
+  display: flex;
  
-    // border: 2px solid black;
 }
 
 .NameonCard{
-    display: inline-flex;
+    display: flex;
     width: 24ch;
     justify-content: space-around;
 
@@ -117,7 +113,7 @@
  
 }
 .cardNumber{
-    display: inline-flex;
+    display: flex;
     width: 24ch;
     justify-content: space-around;
     grid-column: 2/ -1;
