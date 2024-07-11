@@ -1,9 +1,9 @@
 
 import React, { FC, ReactElement, useState } from 'react';
-import { Box, TextField, Autocomplete, InputLabel } from '@mui/material';
+import { Box, TextField , InputLabel } from '@mui/material';
 import cn from 'classnames';
 
-import { countrie, state, District } from './../../models/PaymentOptions';
+// import { countrie, state, District } from './../../models/PaymentOptions';
 import styles from './debitcard.module.scss';
 
 interface IMenu {
@@ -68,7 +68,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
             },
           }}
         >
-          <InputLabel
+          {/* <InputLabel
             className={cn(styles.Billing, className)}
             id="dropdown-label"
             sx={{
@@ -129,8 +129,8 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
               },
             }}
           >
-            <TextField required className={cn(styles.pincode, className)}  label="Pincode" variant="outlined" />
-          </Box>
+            <TextField required className={cn(styles.pincode, className)}  label="Pincode" variant="outlined" /> */}
+          {/* </Box> */}
           <InputLabel
             className={cn(styles.payment1, className)}
             id="dropdown-label"
@@ -138,7 +138,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
               gridArea: 'label',
             }}
           >
-            Payment Method
+          Enter card details
           </InputLabel>
           <TextField required className={cn(styles.NameonCard, className)}  label="Name on Card" />
           <TextField

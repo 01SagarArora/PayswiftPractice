@@ -7,8 +7,9 @@ import { Box, Tab, Tabs } from '@mui/material';
 
 import { mainDataPayment, PaymentMethod } from './../../models/PaymentOptions';
 import CreditCardField from './../../components/credit-card-field/CreditCardField'
-import DebitCardField from './../../components/Debit-card-field/DebitCardField';
+// import DebitCardField from './../../components/Debit-card-field/DebitCardField';
 import NetbankingPaymentForm from 'components/Net-Banking-field/NetBankField';
+import CreditCardField2 from 'components/Credit-Card/credit-card-2';
 
 // import styles from './creditCard.module.scss'
 
@@ -53,7 +54,7 @@ const PayswiftHomePage: FC<IMenu> = (): ReactElement => {
         aria-labelledby={`simple-tab-${index}`}
         {...other}
       >
-        {value === index && <Box sx={{ p: 3, width:'40%',margin:"2rem"  }}>{children}</Box>}
+        {value === index && <Box sx={{ p: 3, width:'50%',margin:"2rem" }}>{children}</Box>}
       </div>
     );
   }
@@ -73,7 +74,7 @@ const PayswiftHomePage: FC<IMenu> = (): ReactElement => {
           <Tabs
             orientation="vertical"
             value={value}
-            sx={{ borderRight: 1, borderColor: 'divider' }}
+            sx={{ borderRight: 1, borderColor: 'divider',  }}
             onChange={handleChange}
             aria-label="lab API tabs example">
             {
@@ -95,7 +96,8 @@ const PayswiftHomePage: FC<IMenu> = (): ReactElement => {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={PaymentMethod.DC.id}>
          <>
-            <DebitCardField/>
+            {/* <DebitCardField/> */}
+            <CreditCardField2/>
             </>
         </CustomTabPanel>
       </Box>

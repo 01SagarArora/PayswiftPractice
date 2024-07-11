@@ -70,6 +70,25 @@ export const day = [
     { label: '30', id: 30 },
     { label: '31', id: 31 }    
 ]
+
+export const year = [
+    { label: '2024', id: 1 },
+    { label: '2025', id: 2 },
+    { label: '2026', id: 3 },
+    { label: '2027', id: 4 },
+    { label: '2028', id: 5 },
+    { label: '2029', id: 6 },
+    { label: '2030', id: 7 },
+    { label: '2031', id: 8 },
+    { label: '2032', id: 9 },
+    { label: '2033', id: 10 },
+    { label: '2034', id: 11 },
+    { label: '2035', id: 12 },
+    { label: '2036', id: 13 },
+    { label: '2037', id: 14 },
+    { label: '2038', id: 15 },
+    { label: '2039', id: 16 }
+]
 export const countrie = [
     { label: 'India', id: 1 },
     { label: 'United States', id: 2 },
