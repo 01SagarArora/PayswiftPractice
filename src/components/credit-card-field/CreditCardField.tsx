@@ -1,9 +1,10 @@
 import { FC, ReactElement } from 'react';
-import { Box, TextField, Autocomplete, InputLabel } from '@mui/material';
+import { Box, TextField, Autocomplete, InputLabel,Button } from '@mui/material';
 import cn from 'classnames';
 
 import { month, day} from './../../models/PaymentOptions'
 import styles from './creditCard.module.scss'
+
 
 interface IMenu {
   className?: string;
@@ -101,7 +102,13 @@ const CreditCardField: FC<IMenu> = ({ className }): ReactElement => (
         variant="outlined" />
         </Box>
         </Box>
-      
+        <Box
+    className={cn(styles.button,className)}
+    >
+      <Button className={cn(styles.btn,className)} >
+        pay
+      </Button>
+    </Box>
     </Box>
   </>
 )

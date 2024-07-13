@@ -1,9 +1,10 @@
+
 import React, { FC, ReactElement, useState } from 'react';
-import { Box,  InputLabel, Select, MenuItem ,Button} from '@mui/material';
+import { Box, TextField , InputLabel,Button } from '@mui/material';
 import cn from 'classnames';
 
-import { month, year } from './../../models/PaymentOptions'; // Assuming month and year are imported from models
-import styles from './Credit-card.module.scss';
+// import { countrie, state, District } from './../../models/PaymentOptions';
+import styles from './Credit-card.module.scss'
 
 interface IMenu {
   className?: string;
@@ -11,8 +12,6 @@ interface IMenu {
 
 const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
   const [cardNumber, setCardNumber] = useState('');
-  const [selectedMonth, setSelectedMonth] = useState('');
-  const [selectedYear, setSelectedYear] = useState('');
 
   const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let input = event.target.value;
@@ -26,111 +25,137 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
     // Update state with formatted input
     setCardNumber(formattedInput);
   };
-
-
+  // const PaymentForm = () => {
+    const [expiry, setExpiry] = useState('');
+  
+    const handleExpiryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      let input = event.target.value;
+      
+      // Remove non-numeric characters
+      input = input.replace(/\D/g, '');
+  
+      // Format the input as MM/YY
+      if (input.length > 2) {
+        input = input.slice(0, 2) + '/' + input.slice(2);
+      }
+  
+      // Update state
+      setExpiry(input);
+    };
   return (
     <>
-      <InputLabel className={cn(styles.head, className)}>Enter Card Details</InputLabel>
       <Box
         className={cn(styles.form, className)}
         component="form"
         sx={{
-          m: '1rem',
-          width: '49ch',
-          display: 'grid',
+          m: 1,
+          width: '45ch',
+          padding: '0.5rem',
         }}
+        noValidate
+        autoComplete="off"
       >
         <Box
-          className={cn(styles.cardfield, className)}
-          component="div"
-        >
-          <InputLabel  className={cn(styles.cardnumber1, className)} sx={{  fontWeight:'800',color:'black', width:"10rem",textAlign:'end', }}>Card Number</InputLabel>
-          <input
-            required
-
-            className={cn(styles.textfield, className)}
-            value={cardNumber}
-            onChange={handleCardNumberChange}
-             maxLength= {19}
-          />
-        </Box>
-
-        <Box
-          className={cn(styles.cardfield, className)}
-          component="div"
-          sx={{
-            
-              display: 'none',
-             
-              gridTemplateAreas: `'label',`,
-        
-          }}
-        >
-
-          <InputLabel className={cn(styles.nick,className)} sx={{ gridArea: 'NickName', fontWeight:'800',color:'black', width:"10rem",textAlign:'end'}}>Nickname</InputLabel>
-          <input required  className={cn(styles.textfield,className)} />
-        </Box>
-
-        <Box
-          className={cn(styles.main, className)}
+          className={cn(styles.BillingAddress, className)}
           component="div"
           sx={{
             'day-month-box': {
               display: 'grid',
-              gridTemplateAreas: `'label label';`,
+              gridTemplateAreas: `
+                'label label '
+                'day month cvv';
+              `,
             },
           }}
         >
-          <InputLabel className={cn(styles.label3)} sx={{ gridArea: 'label',width:"10rem",justifyContent:'end', }}>
-            Expiry Date
+          {/* <InputLabel
+            className={cn(styles.Billing, className)}
+            id="dropdown-label"
+            sx={{
+              gridArea: 'label',
+            }}
+          >
+            Billing Address
           </InputLabel>
 
-          <Box 
-          className={cn(styles.month1,className)}
-        >
-            <Select
-              value={selectedMonth}
-              className={cn(styles.month, className)}
-              label="Month"
-              fullWidth
-              onChange={(e)=>setSelectedMonth(e.target.value)}>
-              {month.map((month) => (
-                <MenuItem key={month.id} value={month.id}>
-                  {month.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </Box>
+          <Autocomplete
+            className={cn(styles.countrie, className)}
+            sx={{
+              'countrie': {
+                display: 'none',
+              },
+              gridArea: 'countrie',
+            }}
+            id="combobox"
+            options={countrie}
+            renderInput={(params) => <TextField {...params} className={cn(styles.countrie, className)} defaultValue="Countrie" label="Countrie" />}
+          />
+          <Autocomplete
+            className={cn(styles.state, className)}
+            sx={{
+              '& .MuiAutocomplete-popupIndicator': {
+                display: 'none',
+              },
+
+              gridArea: 'month',
+            }}
+            id="combobox"
+            options={state}
+            renderInput={(params) => <TextField {...params} className={cn(styles.state, className)} label="State" />}
+            style={{ width: '50%' }}
+          />
+          <Autocomplete
+            className={cn(styles.District, className)}
+            sx={{
+              '& .MuiAutocomplete-popupIndicator': {
+                display: 'inline-flex',
+              },
+              gridArea: 'day',
+            }}
+            id="combobox"
+            options={District}
+            renderInput={(params) => <TextField {...params} className={cn(styles.District, className)}  label="District" />}
+          />
 
           <Box
-          className={cn(styles.year1,className)}
+            className={cn(styles.pincode, className)}
+            component="div"
+            sx={{
+              'day-month-box': {
+                display: 'none',
+                gridTemplateAreas: `
+                  'label',
+                `,
+              },
+            }}
           >
-           
-            <Select
-              className={cn(styles.year, className)}
-              label=""
-            value={selectedYear} 
-            onChange={(e)=>setSelectedYear(e.target.value)}>
-
-         
-              {year.map((year) => (
-                <MenuItem key={year.id} value={year.id}>
-                  {year.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </Box>
-          <Box className={cn(styles.cvv1, className)}>
-       <input
-         required
-         
-         className={cn(styles.cvv, className)}
-         maxLength={3} 
-         placeholder='CVV'
-         // Set the maxLength attribute directly on the input element
-        />
-    </Box>
-  
+            <TextField required className={cn(styles.pincode, className)}  label="Pincode" variant="outlined" /> */}
+          {/* </Box> */}
+          <InputLabel
+            className={cn(styles.payment1, className)}
+            id="dropdown-label"
+            sx={{
+              gridArea: 'label',
+            }}
+          >
+          Enter card details
+          </InputLabel>
+          <TextField required className={cn(styles.NameonCard, className)}  label="Name on Card" />
+          <TextField
+            required
+            className={cn(styles.cardNumber, className)}
+            value={cardNumber}
+            onChange={handleCardNumberChange}
+          
+            label="Card Number"
+            inputProps={{ maxLength: 19 }}
+          />
+          <TextField required className={cn(styles.security, className)} label="CVV"  inputProps={{ maxLength: 3 }} />
+          <TextField required className={cn(styles.Expirydate, className)}
+           label="MM/YY" 
+           value={expiry}
+           onChange={handleExpiryChange}
+           inputProps={{ maxLength: 5 }} />
         </Box>
         <Box
     className={cn(styles.button,className)}

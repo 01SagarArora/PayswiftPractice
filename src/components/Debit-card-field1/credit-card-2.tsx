@@ -1,18 +1,15 @@
-
-
 import React, { FC, ReactElement, useState } from 'react';
 import { Box,  InputLabel, Select, MenuItem ,Button} from '@mui/material';
 import cn from 'classnames';
 
 import { month, year } from './../../models/PaymentOptions'; // Assuming month and year are imported from models
-import styles from './debitcard.module.scss'
-
+import styles from './debitcard.module.scss';
 
 interface IMenu {
   className?: string;
 }
 
-const  DebitCardField : FC<IMenu> = ({ className }): ReactElement => {
+const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
   const [cardNumber, setCardNumber] = useState('');
   const [selectedMonth, setSelectedMonth] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
@@ -145,6 +142,4 @@ const  DebitCardField : FC<IMenu> = ({ className }): ReactElement => {
   );
 };
 
-export default DebitCardField ;
-
-
+export default CreditCardField2;
