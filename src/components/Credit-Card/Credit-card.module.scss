@@ -1,141 +1,111 @@
-.head{
-  padding: 1rem;
-  width: 100%;
-  color: black;
-}
 .form{
-    display: flex;
-    flex-direction: column;
-    max-width: 452px;
-    width: 100%;
-    margin: auto;
-    padding: 31px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    color: #0f1111;
-.main{
-  margin-top: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-  color: #0f1111;
-.label3{
-  color: #0f1111;
-
-  display: flex;
-  margin-left: .3rem;
-  align-items: center;
-  font-weight: 800;
-  
-}
-.month {
-    color: #0f1111;
-  
-    display: flex;
-    width: 7.9ch;
-    height: 2.2rem;
-    border-radius: 10px;
-    margin-left: 1rem;
-    box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
-    background-color: rgba(223, 220, 220, 0.37);
-    font-size: .9rem;
-  
-  }
-.year {
-    width: 10ch;
-    border-radius: 10px;
-    height:2.2rem ;
-    margin-left: 1rem;
-    transition: all .1s linear;
-    background-color: rgba(223, 220, 220, 0.37);
-    color: #0f1111;
-     box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
-     font-size: .9rem;
-
-  }
-}
-
-.cvv{
-  width: 6.5ch;
-  border-radius: 10px;
-  height:2.2rem ;
-  margin-left: 1rem;
-  transition: all .1s linear;
-  background-color: rgba(223, 220, 220, 0.37);
-  color: #0f1111;
-   box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
-  border: 1px solid  lightgrey;
-  padding: 10px;
-  font-size: .9rem;
-
-  
-}
-
-
-
-.cardfield{
-  display: flex;
-  text-align: center;
-  color: #0f1111;
-  font-weight: 800;
-  height: 2.7rem;
-  font-size: 1rem;
+  width: 120%;
+  display: block;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  margin-top: .5rem;
-  // border: 2px solid black;
 
 }
 
-  .textfield{
-    height: 2.2rem;
-    width: 16rem;
-    display: flex;
-    color: #0f1111;
-    align-items: center;
-    text-align: center;
-    font-weight: 100;
-    padding: .5rem;
-    font-size: 1rem;
-    margin-left: 1.5rem;
-    background-color: transparent;
-    border: 1px solid  lightgrey;
-    border-radius: 5px;
-  
-  
-    &:focus {
-      border: 1px solid black;
-        box-shadow: 0rem 0rem .5rem rgba(#6ce7e7,2);
-        outline: none;
-
-      }
-  }
-  .button{
-    display: flex ;
+.BillingAddress{
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
     width: 100%;
-    margin: 2rem 0rem;
+    display: grid;
+    align-items: center;
     justify-content: center;
-    text-align: end;
-    // border: 2px solid black;
-    .btn{
-      background-color: red;
-      width: 12rem;
-      border-radius: none;
-      color: white;
-      font-size: 1rem;
-      font-weight: 800  ;
-     transition: all .1s linear;
-     box-shadow: 0rem 0rem .6rem rgba(#d45656, 0.5);
-     &:hover{
-
-      box-shadow: 0rem 0rem 2rem rgba(#d45656, 0.5);
-    }
-    }
-  }
-  
+    text-align: center;
+    margin-left: 1rem;
+    grid-row-gap: 20px;
+    grid-template-columns: repeat(2 ,250px);
+    grid-template-rows: repeat(2,60px);
 }
 
+ 
+
+.payment1{
+  margin-top: -1rem;
+  display: block;
+  grid-column: 1/-1;
+  grid-row: 1/2;
+  align-items: start;
+  text-align: start;
+  margin-left: 1rem;
+}
   
 
+   
+  
+
+.NameField{
+    display: flex;
+    width: 100%;
+}
+
+.PaymetMethod{
+  display: flex;
+ 
+}
+
+.NameonCard{
+    display: flex;
+    width: 24ch;
+    justify-content: space-around;
+
+    grid-column: 1/2;
+    grid-row: 2/3;
+ 
+}
+.cardNumber{
+    display: flex;
+    width: 24ch;
+    justify-content: space-around;
+    grid-column: 2/ -1;
+    grid-row: 2/3;
+    
+    
+}
+.Expirydate{
+    display: inline-flex;
+    width: 24ch;
+    justify-content: space-around; 
+    grid-column: 2 / 3;
+    grid-row: 3/ 4;
+
+}
+.security{
+    display: inline-flex;
+    width: 24ch;
+    justify-content: space-around; 
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+
+
+}
+.security1{
+    margin-top: 0rem;
+}
+.button{
+  display: flex ;
+  width: 100%;
+  margin: 2rem 0rem;
+  justify-content: center;
+  text-align: end;
+  // border: 2px solid black;
+  .btn{
+    background-color: red;
+    width: 12rem;
+    border-radius: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 800  ;
+   transition: all .1s linear;
+   box-shadow: 0rem 0rem .2rem rgba(#d45656, 0.5);
+   &:hover{
+
+    box-shadow: 0rem 0rem .2rem rgba(#d45656, 0.5);
+  }
+  }
+}
