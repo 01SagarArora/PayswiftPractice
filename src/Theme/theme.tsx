@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material';
 import { blue, green, red } from '@mui/material/colors';
-export const theme = createTheme({
+export const Theme = createTheme({
   typography: {
     fontFamily: 'Rubik, sans-serif',
     body1: {
@@ -14,7 +14,7 @@ export const theme = createTheme({
     error: {
       main: '#f34f4f'
     },
-    info : {
+    info: {
       main: '#2a92c5'
     }
   },
@@ -32,7 +32,7 @@ export const theme = createTheme({
             boxShadow: 'none'
           }
         },
-        
+
         containedPrimary: {
           ':hover:not(:disabled)': {
             background: '#f34f4f'
@@ -188,6 +188,15 @@ export const theme = createTheme({
           }
         }
       }
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'red',
+          },
+        },
+      },
     }
   },
 });
