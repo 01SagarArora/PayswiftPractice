@@ -73,7 +73,7 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
         
           }}
         >
-          
+
           <InputLabel className={cn(styles.nick,className)} sx={{ gridArea: 'NickName', fontWeight:'800',color:'black',marginLeft:'1rem' }}>Nickname</InputLabel>
           <input required  className={cn(styles.textfield,className)} />
         </Box>
@@ -134,7 +134,8 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
        <input
          required
          className={cn(styles.cvv, className)}
-         maxLength={3} // Set the maxLength attribute directly on the input element
+         maxLength={3} 
+         // Set the maxLength attribute directly on the input element
         />
     </Box>
         </Box>
