@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useState } from 'react';
-import { Box,  InputLabel, Select, MenuItem } from '@mui/material';
+import { Box,  InputLabel, Select, MenuItem ,Button} from '@mui/material';
 import cn from 'classnames';
 
 import { month, year } from './../../models/PaymentOptions'; // Assuming month and year are imported from models
@@ -43,15 +43,8 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
         <Box
           className={cn(styles.cardfield, className)}
           component="div"
-          sx={{
-            'day-month-box': {
-                border:"2px solid red",
-                backgroundColor:"red",
-              gridTemplateAreas: `'label',`,
-            },
-          }}
         >
-          <InputLabel sx={{ gridArea: 'Card Number' }} className={cn(styles.cardnumber1, className)}>Card Number</InputLabel>
+          <InputLabel  className={cn(styles.cardnumber1, className)} sx={{  fontWeight:'800',color:'black', width:"10rem",textAlign:'end', }}>Card Number</InputLabel>
           <input
             required
 
@@ -73,8 +66,8 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
         
           }}
         >
-          
-          <InputLabel className={cn(styles.nick,className)} sx={{ gridArea: 'NickName', fontWeight:'800',color:'black',marginLeft:'1rem' }}>Nickname</InputLabel>
+
+          <InputLabel className={cn(styles.nick,className)} sx={{ gridArea: 'NickName', fontWeight:'800',color:'black', width:"10rem",textAlign:'end'}}>Nickname</InputLabel>
           <input required  className={cn(styles.textfield,className)} />
         </Box>
 
@@ -88,13 +81,12 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
             },
           }}
         >
-          <InputLabel className={cn(styles.label3)} sx={{ gridArea: 'label' }}>
+          <InputLabel className={cn(styles.label3)} sx={{ gridArea: 'label',width:"10rem",justifyContent:'end', }}>
             Expiry Date
           </InputLabel>
 
           <Box 
           className={cn(styles.month1,className)}
-        //   sx={{ gridArea: 'month' }}
         >
             <Select
               value={selectedMonth}
@@ -112,13 +104,11 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
 
           <Box
           className={cn(styles.year1,className)}
-        //   sx={{ gridArea: 'year' }}
           >
            
             <Select
               className={cn(styles.year, className)}
               label=""
-              fullWidth
             value={selectedYear} 
             onChange={(e)=>setSelectedYear(e.target.value)}>
 
@@ -133,11 +123,22 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
           <Box className={cn(styles.cvv1, className)}>
        <input
          required
+         
          className={cn(styles.cvv, className)}
-         maxLength={3} // Set the maxLength attribute directly on the input element
+         maxLength={3} 
+         placeholder='CVV'
+         // Set the maxLength attribute directly on the input element
         />
     </Box>
+  
         </Box>
+        <Box
+    className={cn(styles.button,className)}
+    >
+      <Button className={cn(styles.btn,className)} >
+        pay
+      </Button>
+    </Box>
       </Box>
     </>
   );

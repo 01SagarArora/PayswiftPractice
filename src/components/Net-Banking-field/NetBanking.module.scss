@@ -18,5 +18,11 @@
   
   .submitButton {
     margin-top: 1rem;
+    transition: all .1s linear;
+    box-shadow: 0rem 0rem .2rem rgba(#d45656, 0.5);
   }
-  
+  .submitButton:hover{
+    color:white;
+    transition: all 1 ;
+    background-color: red;
+  }
