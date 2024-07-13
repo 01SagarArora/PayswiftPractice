@@ -98,14 +98,16 @@
 
 
 
-.cardnumber{
+.cardfield{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  text-align: center;
   color: #0f1111;
   font-weight: 800;
-  height: 2.2rem;
+  height: 2.7rem;
   font-size: 1rem;
   align-items: center;
+  margin-top: .5rem;
   // border: 2px solid black;
 
 }
@@ -116,29 +118,7 @@
 
 
 }
-.cardnumber2{
-  height: 2.2rem;
-  width: 16rem;
-  display: flex;
-  justify-content: space-around;
-  color: #0f1111;
-  align-items: center;
-  font-weight: 100;
-  margin-top: 1rem;
-  margin-left: 1.4rem;
-  align-items: center;
-  padding: .5rem;
-  font-size: 1rem;
-  background-color: transparent;
-  border: 1px solid  lightgrey;
-  border-radius: 5px;
- 
-  font-size: 1rem;
-  .cardnumber2:hover{
-    border: 1px solid  blue;
-  
-    }
-}
+
 
 .Nickname{
   height: 2.2rem;
@@ -151,21 +131,9 @@
   text-align: center;
   height: 2.5rem;
 
-  .nick{
-    height: 2.2rem;
-    
-    margin-left: 1.1rem;
-    color: #0f1111;
-    align-items: center;
-    font-weight: 800;
-    justify-content: center;
-    text-align: center;
-    margin-top: 1.5rem;
-    border-radius: 5px;
-  
-  
+ 
   }
-  .Nickname2{
+  .textfield{
     height: 2.2rem;
     width: 16rem;
     display: flex;
@@ -174,13 +142,13 @@
     font-weight: 100;
     padding: .5rem;
     font-size: 1rem;
-  margin-left: -0.5rem;
+  margin-left: 1.5rem;
     margin-top: 1rem;
     background-color: transparent;
     border: 1px solid  lightgrey;
     border-radius: 5px;
   
-    .Nickname2:hover{
+    .textfield:hover{
       border: 1px solid  rgb(94, 175, 212);
     
       }
@@ -188,6 +156,6 @@
   }
   
 }
-}
+
   
 

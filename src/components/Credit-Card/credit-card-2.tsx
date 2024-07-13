@@ -41,7 +41,7 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
         }}
       >
         <Box
-          className={cn(styles.cardnumber, className)}
+          className={cn(styles.cardfield, className)}
           component="div"
           sx={{
             'day-month-box': {
@@ -55,7 +55,7 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
           <input
             required
 
-            className={cn(styles.cardnumber2, className)}
+            className={cn(styles.textfield, className)}
             value={cardNumber}
             onChange={handleCardNumberChange}
              maxLength= {19}
@@ -63,7 +63,7 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
         </Box>
 
         <Box
-          className={cn(styles.Nickname, className)}
+          className={cn(styles.cardfield, className)}
           component="div"
           sx={{
             
@@ -73,8 +73,9 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
         
           }}
         >
-          <InputLabel className={cn(styles.nick,className)} sx={{ gridArea: 'NickName',  }}>Nickname</InputLabel>
-          <input required  className={cn(styles.Nickname2,className)} />
+          
+          <InputLabel className={cn(styles.nick,className)} sx={{ gridArea: 'NickName', fontWeight:'800',color:'black',marginLeft:'1rem' }}>Nickname</InputLabel>
+          <input required  className={cn(styles.textfield,className)} />
         </Box>
 
         <Box
