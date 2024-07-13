@@ -68,69 +68,7 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
             },
           }}
         >
-          {/* <InputLabel
-            className={cn(styles.Billing, className)}
-            id="dropdown-label"
-            sx={{
-              gridArea: 'label',
-            }}
-          >
-            Billing Address
-          </InputLabel>
-
-          <Autocomplete
-            className={cn(styles.countrie, className)}
-            sx={{
-              'countrie': {
-                display: 'none',
-              },
-              gridArea: 'countrie',
-            }}
-            id="combobox"
-            options={countrie}
-            renderInput={(params) => <TextField {...params} className={cn(styles.countrie, className)} defaultValue="Countrie" label="Countrie" />}
-          />
-          <Autocomplete
-            className={cn(styles.state, className)}
-            sx={{
-              '& .MuiAutocomplete-popupIndicator': {
-                display: 'none',
-              },
-
-              gridArea: 'month',
-            }}
-            id="combobox"
-            options={state}
-            renderInput={(params) => <TextField {...params} className={cn(styles.state, className)} label="State" />}
-            style={{ width: '50%' }}
-          />
-          <Autocomplete
-            className={cn(styles.District, className)}
-            sx={{
-              '& .MuiAutocomplete-popupIndicator': {
-                display: 'inline-flex',
-              },
-              gridArea: 'day',
-            }}
-            id="combobox"
-            options={District}
-            renderInput={(params) => <TextField {...params} className={cn(styles.District, className)}  label="District" />}
-          />
-
-          <Box
-            className={cn(styles.pincode, className)}
-            component="div"
-            sx={{
-              'day-month-box': {
-                display: 'none',
-                gridTemplateAreas: `
-                  'label',
-                `,
-              },
-            }}
-          >
-            <TextField required className={cn(styles.pincode, className)}  label="Pincode" variant="outlined" /> */}
-          {/* </Box> */}
+         
           <InputLabel
             className={cn(styles.payment1, className)}
             id="dropdown-label"
