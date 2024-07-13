@@ -1,5 +1,4 @@
 .head{
-  // background-color: rgb(218, 214, 214);
   padding: 1rem;
   width: 100%;
   color: black;
@@ -15,19 +14,12 @@
     border-radius: 4px;
     background-color: #f9f9f9;
     color: #0f1111;
-
-    
-   
-
-
 .main{
-  margin-top: 2rem;
+  margin-top: 1rem;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
   color: #0f1111;
-
-}
 .label3{
   color: #0f1111;
 
@@ -37,45 +29,35 @@
   font-weight: 800;
   
 }
-
-
-.month1 {
-  display: flex;
-  color: #0f1111;
-  .month {
+.month {
     color: #0f1111;
   
     display: flex;
-    width: 7.5ch;
+    width: 7.9ch;
     height: 2.2rem;
     border-radius: 10px;
     margin-left: 1rem;
     box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
     background-color: rgba(223, 220, 220, 0.37);
+    font-size: .9rem;
   
   }
-}
-.year1{
-  color: #0f1111;
-  .year {
-    width: 9.5ch;
+.year {
+    width: 10ch;
     border-radius: 10px;
     height:2.2rem ;
     margin-left: 1rem;
     transition: all .1s linear;
-    line-height: 19px;
     background-color: rgba(223, 220, 220, 0.37);
     color: #0f1111;
      box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
-    
-  
-  
-  
+     font-size: .9rem;
+
   }
 }
 
 .cvv{
-  width: 6ch;
+  width: 6.5ch;
   border-radius: 10px;
   height:2.2rem ;
   margin-left: 1rem;
@@ -85,74 +67,72 @@
    box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
   border: 1px solid  lightgrey;
   padding: 10px;
-  font-size: 1rem;
-  .cvv1{
-    width: 6ch;
-    border-radius: 10px;
-    height:2.4rem ;
-    // margin-left: 1rem;
-   
+  font-size: .9rem;
+
   
-  }
 }
 
 
 
 .cardfield{
   display: flex;
-  justify-content: space-evenly;
   text-align: center;
   color: #0f1111;
   font-weight: 800;
   height: 2.7rem;
   font-size: 1rem;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   margin-top: .5rem;
   // border: 2px solid black;
 
 }
-.cardnumber1{
-  color: #0f1111;
-  font-weight: 800;
-  margin-top: 1rem;
 
-
-}
-
-
-.Nickname{
-  height: 2.2rem;
-  display: flex;
-  justify-content: space-between;
-  color: #0f1111;
-  align-items: center;
-  font-weight: 800;
-  margin-top: 1rem;
-  text-align: center;
-  height: 2.5rem;
-
- 
-  }
   .textfield{
     height: 2.2rem;
     width: 16rem;
     display: flex;
     color: #0f1111;
     align-items: center;
+    text-align: center;
     font-weight: 100;
     padding: .5rem;
     font-size: 1rem;
-  margin-left: 1.5rem;
-    margin-top: 1rem;
+    margin-left: 1.5rem;
     background-color: transparent;
     border: 1px solid  lightgrey;
     border-radius: 5px;
   
-    .textfield:hover{
-      border: 1px solid  rgb(94, 175, 212);
-    
+  
+    &:focus {
+      border: 1px solid black;
+        box-shadow: 0rem 0rem .5rem rgba(#6ce7e7,2);
+        outline: none;
+
       }
-     
+  }
+  .button{
+    display: flex ;
+    width: 100%;
+    margin: 2rem 0rem;
+    justify-content: center;
+    text-align: end;
+    // border: 2px solid black;
+    .btn{
+      background-color: red;
+      width: 12rem;
+      border-radius: none;
+      color: white;
+      font-size: 1rem;
+      font-weight: 800  ;
+     transition: all .1s linear;
+     box-shadow: 0rem 0rem .6rem rgba(#d45656, 0.5);
+     &:hover{
+
+      box-shadow: 0rem 0rem 2rem rgba(#d45656, 0.5);
+    }
+    }
   }
   
 }
