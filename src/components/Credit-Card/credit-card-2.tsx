@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useState } from 'react';
-import { Box, TextField, InputLabel, Select, MenuItem } from '@mui/material';
+import { Box,  InputLabel, Select, MenuItem } from '@mui/material';
 import cn from 'classnames';
 
 import { month, year } from './../../models/PaymentOptions'; // Assuming month and year are imported from models
@@ -27,13 +27,6 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
     setCardNumber(formattedInput);
   };
 
-//   const handleMonthChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-//     setSelectedMonth(event.target.value as string);
-//   };
-
-//   const handleYearChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-//     setSelectedYear(event.target.value as string);
-//   };
 
   return (
     <>
@@ -59,14 +52,13 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
           }}
         >
           <InputLabel sx={{ gridArea: 'Card Number' }} className={cn(styles.cardnumber1, className)}>Card Number</InputLabel>
-          <TextField
+          <input
             required
 
             className={cn(styles.cardnumber2, className)}
             value={cardNumber}
             onChange={handleCardNumberChange}
-            label=""
-            inputProps={{ maxLength: 19 }}
+             maxLength= {19}
           />
         </Box>
 
@@ -82,11 +74,7 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
           }}
         >
           <InputLabel className={cn(styles.nick,className)} sx={{ gridArea: 'NickName',  }}>Nickname</InputLabel>
-          <TextField required  variant="outlined" className={cn(styles.Nickname,className)}label=""
-          sx={{
-            width: '100%', // Adjust width as needed
-            height: '50px', // Adjust height as needed
-          }} />
+          <input required  className={cn(styles.Nickname2,className)} />
         </Box>
 
         <Box
@@ -141,6 +129,13 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
               ))}
             </Select>
           </Box>
+          <Box className={cn(styles.cvv1, className)}>
+       <input
+         required
+         className={cn(styles.cvv, className)}
+         maxLength={3} // Set the maxLength attribute directly on the input element
+        />
+    </Box>
         </Box>
       </Box>
     </>

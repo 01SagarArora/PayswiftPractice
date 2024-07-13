@@ -1,31 +1,30 @@
-
-
-  .form{
+.head{
+  // background-color: rgb(218, 214, 214);
+  padding: 1rem;
+  width: 100%;
+  color: black;
+}
+.form{
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 452px;
     width: 100%;
     margin: auto;
-    padding: 20px;
+    padding: 31px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f9f9f9;
     color: #0f1111;
 
-    }
-    .head{
-      // background-color: rgb(218, 214, 214);
-      padding: 1rem;
-      width: 100%;
-      color: black;
-    }
+    
+   
 
 
 .main{
   margin-top: 2rem;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
   color: #0f1111;
 
 }
@@ -33,50 +32,68 @@
   color: #0f1111;
 
   display: flex;
-  margin-left: -2.5rem;
+  margin-left: .3rem;
   align-items: center;
   font-weight: 800;
   
 }
-.month {
-  color: #0f1111;
 
-  display: flex;
-  width: 8ch;
-  height: 2.4rem;
-  border-radius: 10px;
-  justify-content: space-around;
-  margin-left: 1rem;
-  box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
-  background-color: rgba(223, 220, 220, 0.37);
-
-}
 
 .month1 {
   display: flex;
-  margin-left: -5rem;
   color: #0f1111;
-
-}.year1{
-  margin-left: -5rem;
-  color: #0f1111;
-
+  .month {
+    color: #0f1111;
+  
+    display: flex;
+    width: 7.5ch;
+    height: 2.2rem;
+    border-radius: 10px;
+    margin-left: 1rem;
+    box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
+    background-color: rgba(223, 220, 220, 0.37);
+  
+  }
 }
-.year {
-  justify-content: space-around;
-  width: 10ch;
+.year1{
+  color: #0f1111;
+  .year {
+    width: 9.5ch;
+    border-radius: 10px;
+    height:2.2rem ;
+    margin-left: 1rem;
+    transition: all .1s linear;
+    line-height: 19px;
+    background-color: rgba(223, 220, 220, 0.37);
+    color: #0f1111;
+     box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
+    
+  
+  
+  
+  }
+}
+
+.cvv{
+  width: 6ch;
   border-radius: 10px;
-  height:2.4rem ;
+  height:2.2rem ;
   margin-left: 1rem;
   transition: all .1s linear;
-  line-height: 19px;
   background-color: rgba(223, 220, 220, 0.37);
   color: #0f1111;
-  box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
+   box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
+  border: 1px solid  lightgrey;
+  padding: 10px;
+  font-size: 1rem;
+  .cvv1{
+    width: 6ch;
+    border-radius: 10px;
+    height:2.4rem ;
+    // margin-left: 1rem;
+   
   
-
-
-
+  }
 }
 
 
@@ -86,39 +103,91 @@
   justify-content: space-around;
   color: #0f1111;
   font-weight: 800;
-height: 2.4rem;
-align-items: center;
+  height: 2.2rem;
+  font-size: 1rem;
+  align-items: center;
   // border: 2px solid black;
 
 }
 .cardnumber1{
   color: #0f1111;
   font-weight: 800;
+  margin-top: 1rem;
 
 
-  // border: 2px solid black;
 }
-// .cardnumber2{
-//   border: 2px solid black;
-// }
-.Nickname{
-  height: 3rem;
+.cardnumber2{
+  height: 2.2rem;
+  width: 16rem;
   display: flex;
   justify-content: space-around;
   color: #0f1111;
   align-items: center;
+  font-weight: 100;
+  margin-top: 1rem;
+  margin-left: 1.4rem;
+  align-items: center;
+  padding: .5rem;
+  font-size: 1rem;
+  background-color: transparent;
+  border: 1px solid  lightgrey;
+  border-radius: 5px;
+ 
+  font-size: 1rem;
+  .cardnumber2:hover{
+    border: 1px solid  blue;
+  
+    }
+}
+
+.Nickname{
+  height: 2.2rem;
+  display: flex;
+  justify-content: space-between;
+  color: #0f1111;
+  align-items: center;
   font-weight: 800;
   margin-top: 1rem;
+  text-align: center;
+  height: 2.5rem;
 
+  .nick{
+    height: 2.2rem;
+    
+    margin-left: 1.1rem;
+    color: #0f1111;
+    align-items: center;
+    font-weight: 800;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1.5rem;
+    border-radius: 5px;
+  
+  
+  }
+  .Nickname2{
+    height: 2.2rem;
+    width: 16rem;
+    display: flex;
+    color: #0f1111;
+    align-items: center;
+    font-weight: 100;
+    padding: .5rem;
+    font-size: 1rem;
+  margin-left: -0.5rem;
+    margin-top: 1rem;
+    background-color: transparent;
+    border: 1px solid  lightgrey;
+    border-radius: 5px;
+  
+    .Nickname2:hover{
+      border: 1px solid  rgb(94, 175, 212);
+    
+      }
+     
+  }
+  
 }
-.nick{
-  height: 3rem;
-  // border: 2px solid black;
-padding: 0.5rem;
-text-align: end;
-margin-left: 1rem;
-color: #0f1111;
-align-items: center;
-  font-weight: 800;
+}
+  
 
-}
