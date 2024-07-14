@@ -190,13 +190,20 @@ export const Theme = createTheme({
       }
     },
     MuiTextField: {
-      styleOverrides: {
-        root: {
-          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'red',
+      variants: [
+        {
+          props: { variant: 'outlined', type: 'border-glow' },
+          style: {
+            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#6ce7e7',
+              boxShadow: '0rem 0rem 1rem 0.2rem #6ce7e7',              
+            }
           },
         },
+      ],
+      defaultProps: {
+        variant: 'outlined',
       },
     }
-  },
+  }
 });
