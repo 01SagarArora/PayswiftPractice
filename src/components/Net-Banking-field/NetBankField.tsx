@@ -98,15 +98,15 @@ const NetbankingPaymentForm: FC<IMenu> = ({ className }): ReactElement => {
         error={!!formErrors.accountNumber}
         helperText={formErrors.accountNumber}
         required
-        fullWidth // Ensures the TextField takes full width
-        className={cn(styles.formField,className)} // Apply the 'form-field' class for styling
+        fullWidth 
+        className={cn(styles.formField,className)} 
       />
 
       <Button
         type="submit"
         variant="contained"
         color="primary"
-        className={cn(styles.submitButton,className)} // Apply the 'submit-button' class for styling
+        className={cn(styles.submitButton,className)} 
       >
         Pay Now
       </Button>

@@ -1,18 +1,15 @@
-
-
 import React, { FC, ReactElement, useState } from 'react';
-import { Box,  InputLabel, Select, MenuItem ,Button, TextField} from '@mui/material';
+import { Box,  InputLabel, Select, MenuItem ,Button} from '@mui/material';
 import cn from 'classnames';
 
 import { month, year } from './../../models/PaymentOptions'; // Assuming month and year are imported from models
-import styles from './debitcard.module.scss'
-
+import styles from './debitcard.module.scss';
 
 interface IMenu {
   className?: string;
 }
 
-const  DebitCardField : FC<IMenu> = ({ className }): ReactElement => {
+const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
   const [cardNumber, setCardNumber] = useState('');
   const [selectedMonth, setSelectedMonth] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
@@ -48,22 +45,13 @@ const  DebitCardField : FC<IMenu> = ({ className }): ReactElement => {
           component="div"
         >
           <InputLabel  className={cn(styles.cardnumber1, className)} sx={{  fontWeight:'800',color:'black', width:"10rem",textAlign:'end', }}>Card Number</InputLabel>
-          <TextField
-            sx={{
-              '& .MuiInputBase-root': {
-                  height: '2.2rem', 
-                  position:'absolute',
-                  outline:'none',
-                  marginTop:'-.6rem',
-                },
-        
-              }}
+          <input
             required
 
             className={cn(styles.textfield, className)}
             value={cardNumber}
             onChange={handleCardNumberChange}
-            inputProps={{maxLength:19}}
+             maxLength= {19}
           />
         </Box>
 
@@ -80,18 +68,7 @@ const  DebitCardField : FC<IMenu> = ({ className }): ReactElement => {
         >
 
           <InputLabel className={cn(styles.nick,className)} sx={{ gridArea: 'NickName', fontWeight:'800',color:'black', width:"10rem",textAlign:'end'}}>Nickname</InputLabel>
-          <TextField 
-           sx={{
-          '& .MuiInputBase-root': {
-              height: '2.2rem', 
-              // border:'2px solid black',
-              position:'absolute',
-              outline:'none',
-              marginTop:'-.6rem',
-            },
-    
-          }}
-          required  className={cn(styles.textfield,className)} />
+          <input required  className={cn(styles.textfield,className)} />
         </Box>
 
         <Box
@@ -142,26 +119,14 @@ const  DebitCardField : FC<IMenu> = ({ className }): ReactElement => {
             </Select>
           </Box>
           <Box >
-          <TextField
-      required
-      inputProps={{ maxLength: 3 }}
-      defaultValue="CVV"
-      sx={{
-        width: '4rem', 
-        marginLeft:'.5rem',
-        backgroundColor: "rgba(223, 220, 220, 0.37)",
-        borderRadius:'10px',
-        boxShadow:'0rem 0rem .2rem rgba(#504f4f, 0.5)',
-
-        '& .MuiInputBase-root': {
-          height: '2.2rem', 
-        },
-
-        '& .MuiInputLabel-root': {
-          top: '-.5rem',
-        }
-      }}
-    />
+       <input
+         required
+         
+         className={cn(styles.cvv, className)}
+         maxLength={3} 
+         placeholder='CVV'
+         // Set the maxLength attribute directly on the input element
+        />
     </Box>
   
         </Box>
@@ -177,6 +142,4 @@ const  DebitCardField : FC<IMenu> = ({ className }): ReactElement => {
   );
 };
 
-export default DebitCardField ;
-
-
+export default CreditCardField2;

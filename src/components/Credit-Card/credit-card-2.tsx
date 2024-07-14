@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import { FC, ReactElement, useState } from 'react';
 import { Box, InputLabel, Select, MenuItem, Button } from '@mui/material';
+=======
+
+import React, { FC, ReactElement, useState } from 'react';
+import { Box, TextField , InputLabel,Button } from '@mui/material';
+>>>>>>> 744ac11729d926624c210af8680eacc5f021f4a7
 import cn from 'classnames';
 import { TextField } from '@mui/material';
 // import { styled } from '@mui/system';
@@ -8,8 +14,8 @@ import { TextField } from '@mui/material';
 // import { theme } from './../../Theme/theme';
 
 
-import { month, year } from './../../models/PaymentOptions'; // Assuming month and year are imported from models
-import styles from './Credit-card.module.scss';
+// import { countrie, state, District } from './../../models/PaymentOptions';
+import styles from './Credit-card.module.scss'
 
 interface IMenu {
   className?: string;
@@ -25,9 +31,13 @@ interface IMenu {
 // }));
 
 const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
+<<<<<<< HEAD
   // const [cardNumber, setCardNumber] = useState('');
   const [selectedMonth, setSelectedMonth] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
+=======
+  const [cardNumber, setCardNumber] = useState('');
+>>>>>>> 744ac11729d926624c210af8680eacc5f021f4a7
 
   // const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   let input = event.target.value;
@@ -38,24 +48,49 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
   //   // Format the input with spaces after every 4 digits
   //   let formattedInput = input.replace(/(\d{4})/g, '$1 ').trim();
 
+<<<<<<< HEAD
   //   // Update state with formatted input
   //   setCardNumber(formattedInput);
   // };
 
 
+=======
+    // Update state with formatted input
+    setCardNumber(formattedInput);
+  };
+  // const PaymentForm = () => {
+    const [expiry, setExpiry] = useState('');
+  
+    const handleExpiryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      let input = event.target.value;
+      
+      // Remove non-numeric characters
+      input = input.replace(/\D/g, '');
+  
+      // Format the input as MM/YY
+      if (input.length > 2) {
+        input = input.slice(0, 2) + '/' + input.slice(2);
+      }
+  
+      // Update state
+      setExpiry(input);
+    };
+>>>>>>> 744ac11729d926624c210af8680eacc5f021f4a7
   return (
     <>
-      <InputLabel className={cn(styles.head, className)}>Enter Card Details</InputLabel>
       <Box
         className={cn(styles.form, className)}
         component="form"
         sx={{
-          m: '1rem',
-          width: '49ch',
-          display: 'grid',
+          m: 1,
+          width: '45ch',
+          padding: '0.5rem',
         }}
+        noValidate
+        autoComplete="off"
       >
         <Box
+<<<<<<< HEAD
           className={cn(styles.cardfield, className)}
           component="div"
         >
@@ -81,14 +116,21 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
 
         <Box
           className={cn(styles.main, className)}
+=======
+          className={cn(styles.BillingAddress, className)}
+>>>>>>> 744ac11729d926624c210af8680eacc5f021f4a7
           component="div"
           sx={{
             'day-month-box': {
               display: 'grid',
-              gridTemplateAreas: `'label label';`,
+              gridTemplateAreas: `
+                'label label '
+                'day month cvv';
+              `,
             },
           }}
         >
+<<<<<<< HEAD
           <InputLabel className={cn(styles.label3)} sx={{ gridArea: 'label', width: "10rem", justifyContent: 'end', }}>
             Expiry Date
           </InputLabel>
@@ -139,6 +181,34 @@ const CreditCardField2: FC<IMenu> = ({ className }): ReactElement => {
             />
           </Box>
 
+=======
+         
+          <InputLabel
+            className={cn(styles.payment1, className)}
+            id="dropdown-label"
+            sx={{
+              gridArea: 'label',
+            }}
+          >
+          Enter card details
+          </InputLabel>
+          <TextField required className={cn(styles.NameonCard, className)}  label="Name on Card" />
+          <TextField
+            required
+            className={cn(styles.cardNumber, className)}
+            value={cardNumber}
+            onChange={handleCardNumberChange}
+          
+            label="Card Number"
+            inputProps={{ maxLength: 19 }}
+          />
+          <TextField required className={cn(styles.security, className)} label="CVV"  inputProps={{ maxLength: 3 }} />
+          <TextField required className={cn(styles.Expirydate, className)}
+           label="MM/YY" 
+           value={expiry}
+           onChange={handleExpiryChange}
+           inputProps={{ maxLength: 5 }} />
+>>>>>>> 744ac11729d926624c210af8680eacc5f021f4a7
         </Box>
 
         <Box

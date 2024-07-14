@@ -11,6 +11,7 @@
   justify-content: center;
   // margin-left: 20rem;
   padding: 2rem;
+  height: 40rem;
   }
 .cvv{
   display: flex;
@@ -23,4 +24,26 @@
 }
 .date2{
   display: flex;
+}
+.button{
+  display: flex ;
+  width: 100%;
+  margin: 2rem 0rem;
+  justify-content: center;
+  text-align: center;
+  // border: 2px solid black;
+  .btn{
+    background-color: red;
+    width: 12rem;
+    border-radius: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 800  ;
+   transition: all .1s linear;
+   box-shadow: 0rem 0rem .2rem rgba(#d45656, 0.5);
+   &:hover{
+
+    box-shadow: 0rem 0rem .2rem rgba(#d45656, 0.5);
+  }
+  }
 }
