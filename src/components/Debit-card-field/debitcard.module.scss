@@ -1,97 +1,96 @@
-
-
-.head{
+.head {
   padding: 1rem;
   width: 100%;
   color: black;
 }
-.form{
-    display: flex;
-    flex-direction: column;
-    max-width: 452px;
-    width: 100%;
-    margin: auto;
-    padding: 31px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    color: #0f1111;
-.main{
-  margin-top: 1rem;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 452px;
+  width: 100%;
+  margin: auto;
+  padding: 31px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  color: #0f1111;
+
+  .main {
+    margin-top: 1rem;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-  color: #0f1111;
-.label3{
-  color: #0f1111;
-
-  display: flex;
-  margin-left: .3rem;
-  align-items: center;
-  font-weight: 800;
-  
-}
-.month {
     color: #0f1111;
-  
-    display: flex;
-    width: 7.9ch;
-    height: 2.2rem;
-    border-radius: 10px;
-    margin-left: 1rem;
-    box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
-    background-color: rgba(223, 220, 220, 0.37);
-    font-size: .9rem;
-  
+
+    .label3 {
+      color: #0f1111;
+      display: flex;
+      margin-left: .3rem;
+      align-items: center;
+      font-weight: 800;
+    }
+
+    .month {
+      color: #0f1111;
+
+      display: flex;
+      width: 7.9ch;
+      height: 2.2rem;
+      border-radius: 10px;
+      margin-left: 1rem;
+      box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
+      background-color: rgba(223, 220, 220, 0.37);
+      font-size: .9rem;
+
+    }
+
+    .year {
+      width: 10ch;
+      border-radius: 10px;
+      height: 2.2rem;
+      margin-left: 1rem;
+      transition: all .1s linear;
+      background-color: rgba(223, 220, 220, 0.37);
+      color: #0f1111;
+      box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
+      font-size: .9rem;
+
+    }
   }
-.year {
-    width: 10ch;
+
+  .cvv {
+    width: 9.5ch;
     border-radius: 10px;
-    height:2.2rem ;
+    height: 2.2rem;
     margin-left: 1rem;
     transition: all .1s linear;
     background-color: rgba(223, 220, 220, 0.37);
     color: #0f1111;
-     box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
-     font-size: .9rem;
+    //  box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
+    // border: 1px solid  lightgrey;
+    padding: 10px;
+    font-size: .8rem;
+
 
   }
-}
-
-.cvv{
-  width: 9.5ch;
-  border-radius: 10px;
-  height:2.2rem ;
-  margin-left: 1rem;
-  transition: all .1s linear;
-  background-color: rgba(223, 220, 220, 0.37);
-  color: #0f1111;
-  //  box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
-  // border: 1px solid  lightgrey;
-  padding: 10px;
-  font-size: .8rem;
-
-  
-}
 
 
 
-.cardfield{
-  display: flex;
-  text-align: center;
-  color: #0f1111;
-  font-weight: 800;
-  height: 2.7rem;
-  font-size: 1rem;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-top: .5rem;
-  // border: 2px solid black;
+  .cardfield {
+    display: flex;
+    text-align: center;
+    color: #0f1111;
+    font-weight: 800;
+    height: 2.7rem;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: .5rem;    
+  }
 
-}
-
-  .textfield{
+  .textfield {
     height: 2.2rem;
     width: 16rem;
     display: flex;
@@ -102,44 +101,45 @@
     padding: .5rem;
     font-size: 1rem;
     margin-left: 1.5rem;
-    background-color: transparent;
-    border: 1px solid  lightgrey;
+    background-color: transparent;    
     border-radius: 5px;
-    &.MuiInputBase-root{
+
+    &.MuiInputBase-root {
       outline: none;
       border: none;
     }
-    
+
     &:focus {
       border: 1px solid black;
-        box-shadow: 0rem 0rem .5rem rgba(#6ce7e7,2);
-        outline: none;
+      box-shadow: 0rem 0rem .5rem rgba(#6ce7e7, 2);
+      outline: none;
 
-      }
+    }
   }
-  .button{
-    display: flex ;
+
+  .button {
+    display: flex;
     width: 100%;
     margin: 2rem 0rem;
     justify-content: center;
     text-align: end;
+
     // border: 2px solid black;
-    .btn{
+    .btn {
       background-color: red;
       width: 12rem;
       border-radius: none;
       color: white;
       font-size: 1rem;
-      font-weight: 800  ;
-     transition: all .1s linear;
-     box-shadow: 0rem 0rem .2rem rgba(#d45656, 0.5);
-     &:hover{
-
+      font-weight: 800;
+      transition: all .1s linear;
       box-shadow: 0rem 0rem .2rem rgba(#d45656, 0.5);
-    }
+
+      &:hover {
+
+        box-shadow: 0rem 0rem .2rem rgba(#d45656, 0.5);
+      }
     }
   }
-  
-}
 
-  
+}

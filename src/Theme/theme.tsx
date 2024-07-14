@@ -194,12 +194,24 @@ export const Theme = createTheme({
         {
           props: { variant: 'outlined', type: 'border-glow' },
           style: {
-            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#6ce7e7',
-              boxShadow: '0rem 0rem 1rem 0.2rem #6ce7e7',              
-            }
-          },
-        },
+            //   '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            //     borderColor: '#6ce7e7',
+            //     boxShadow: '0rem 0rem 1rem 0.2rem #6ce7e7',              
+            //   }
+            // },
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+              },
+              '&:hover fieldset': {
+                borderColor: '#6ce7e7',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#6ce7e7',
+                boxShadow: '0rem 0rem 1rem 0.2rem #6ce7e7',
+              },
+            },
+          }
+        }
       ],
       defaultProps: {
         variant: 'outlined',
