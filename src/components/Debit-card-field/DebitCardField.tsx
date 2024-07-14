@@ -48,7 +48,7 @@ const  DebitCardField : FC<IMenu> = ({ className }): ReactElement => {
           component="div"
         >
           <InputLabel  className={cn(styles.cardnumber1, className)} sx={{  fontWeight:'800',color:'black', width:"10rem",textAlign:'end', }}>Card Number</InputLabel>
-          <TextField
+          {/* <TextField
             sx={{
               '& .MuiInputBase-root': {
                   height: '2.2rem', 
@@ -64,7 +64,10 @@ const  DebitCardField : FC<IMenu> = ({ className }): ReactElement => {
             value={cardNumber}
             onChange={handleCardNumberChange}
             inputProps={{maxLength:19}}
-          />
+          /> */}
+
+
+          <TextField type='border-glow' />
         </Box>
 
         <Box
