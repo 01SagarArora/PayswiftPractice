@@ -209,7 +209,13 @@ export const Theme = createTheme({
                 borderColor: '#6ce7e7',
                 boxShadow: '0rem 0rem 1rem 0.2rem #6ce7e7',
               },
+            
             },
+            '& .MuiInputBase-root': {
+              height: '2.2rem',
+              width: '16rem',
+              fontSize: '1rem'
+            }
           }
         }
       ],

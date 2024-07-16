@@ -15,16 +15,16 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
 
   const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let input = event.target.value;
-    input = input.replace(/\D/g, ''); // Remove non-numeric characters from input    
-    let formattedInput = input.replace(/(\d{4})/g, '$1 ').trim();    // Format the input with spaces after every 4 digits
-    setCardNumber(formattedInput); // Update state with formatted input
+    input = input.replace(/\D/g, '');       // Remove non-numeric characters from input    
+    let formattedInput = input.replace(/(\d{4})/g, '$1 ').trim();       // Format the input with spaces after every 4 digits
+    setCardNumber(formattedInput);        // Update state with formatted input
   };
 
   const handleOpen = () => {
     setLabelVisible(false);
   };
 
-  const [labelVisible, setLabelVisible] = useState(true);
+  const [monthLabelVisible, setLabelVisible] = useState(true);
 
   return (
     <Box className={cn(styles.form, className)} component="form" sx={{ m: '1rem', width: '49ch', display: 'grid' }}>
@@ -34,19 +34,16 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
         <TextField
           required
           type='border-glow'
-          sx={{ '& .MuiInputBase-root': { height: '2.2rem', width: '16rem', } }}
           className={cn(styles.textfield, className)}
           value={cardNumber}
           onChange={handleCardNumberChange}
           inputProps={{ maxLength: 19 }}
         />
       </Box>
-
       <Box className={cn(styles.cardfield, className)} component="div">
         <InputLabel className={cn(styles.nick, className)} sx={{ fontWeight: '800', color: 'black', width: "10rem", textAlign: 'end' }}>Nickname</InputLabel>
         <TextField
           type='border-glow'
-          sx={{ '& .MuiInputBase-root': { height: '2.2rem', width: '16rem', fontSize: '1rem', } }}
           className={cn(styles.textfield, className)}
           required
         />
@@ -56,17 +53,15 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
         <InputLabel className={cn(styles.label3)} sx={{ gridArea: 'label', width: "10rem", justifyContent: 'end' }}>Expiry Date</InputLabel>
 
         <Box sx={{ display: 'flex' }}>
-          {/* <InputLabel id="select-label">01</InputLabel> */}
-          {/* {labelVisible && (
-        <InputLabel
-          id="select-label"
-          className={cn({ hidden: !labelVisible })}
-        >
-          Select an option
-        </InputLabel>
-      )} */}
+          {monthLabelVisible && (
+            <InputLabel
+              id="monthLabel"
+              className={cn({ hidden: !monthLabelVisible })}
+            >2024
+            </InputLabel>
+          )}
           <Select
-            labelId="select-label"
+            labelId="monthLabel"
             id="select"
             sx={{
               '& .MuiSelect-icon': { margin: '-1px 4px 0px', },
@@ -83,24 +78,22 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
               ))
             }
           </Select>
-          {labelVisible && (
+          {monthLabelVisible && (
             <InputLabel
-              id="select-label2"
-              className={cn({ hidden: !labelVisible })}
-            >
-              2024
+              id="yearLabel"
+              className={cn({ hidden: !monthLabelVisible })}
+            >2024
             </InputLabel>
           )}
           <Select
-            labelId="select-label2"
-
+            labelId="yearLabel"
             sx={{
               '& .MuiSelect-icon': {
                 margin: '-1px 4px 0px',
               },
             }}
             // className={cn(styles.year, className)}
-            className={cn(styles.year, { 'label-hidden': !labelVisible }, className)}
+            className={cn(styles.year, { 'label-hidden': !monthLabelVisible }, className)}
             value={selectedYear}
             onChange={(e) => setSelectedYear(e.target.value)}
             onOpen={handleOpen}
