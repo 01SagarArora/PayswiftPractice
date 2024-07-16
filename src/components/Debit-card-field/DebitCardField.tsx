@@ -54,7 +54,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
         <InputLabel className={cn(styles.label3)} sx={{ gridArea: 'label', width: "10rem", justifyContent: 'end' }}>Expiry Date</InputLabel>
 
         <Box sx={{ display: 'flex' }}>
-          <Select sx={{'& .MuiSelect-icon': {margin:'-1px 4px 0px', },
+          <Select sx={{'& .MuiSelect-icon': {margin:'-1px 2px 0px',width:'1.3ewm', },
                        }}
             value={selectedMonth}
             className={cn(styles.month, className)}
@@ -68,13 +68,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
             ))}
           </Select>
           <Select
-          sx={{
-            '& .MuiSelect-icon': {
-              margin: '-1px 4px 0px',
-            
-            },
-            
-          }}
+          sx={{'& .MuiSelect-icon': {margin: '-1px 4px 0px',width:'1.3rem'}}}
             className={cn(styles.year, className)}
             label=""
             value={selectedYear}
