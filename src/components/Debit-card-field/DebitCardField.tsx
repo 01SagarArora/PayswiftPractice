@@ -87,9 +87,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
               boxShadow: '0rem 0rem .2rem rgba(#504f4f, 0.5)',
               '& .MuiInputBase-root': { height: '2.4rem',width:'4rem', fontSize:'1rem', },
               '& .MuiInputLabel-root': { top: '-.5rem'},
-              '& .MuiInputBase-root': { height: '2.4rem', width: '4rem', fontSize: '1rem', },
-              '& .MuiInputLabel-root': { top: '-.5rem' },
-            }}
+               }}
           />
         </Box>
       </Box>
