@@ -14,16 +14,15 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
   const defaultYearId='3';
   const [selectedMonth, setSelectedMonth] = useState(defaultMonth);
   const [selectedYear, setSelectedYear] = useState(defaultYearId);
-// const [selectedMonth, setSelectedMonth] = useState(defaultMonth);
-// const [selectedYear, setSelectedYear] = useState(defaultYear);
+
   const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let input = event.target.value;
-    input = input.replace(/\D/g, '');       // Remove non-numeric characters from input    
-    let formattedInput = input.replace(/(\d{4})/g, '$1 ').trim();       // Format the input with spaces after every 4 digits
-    setCardNumber(formattedInput);        // Update state with formatted input
+    input = input.replace(/\D/g, '');         
+    let formattedInput = input.replace(/(\d{4})/g, '$1 ').trim();       
+    setCardNumber(formattedInput);     
   };
 
-  const [monthLabelVisible, setLabelVisible] = useState(true);
+  // const [monthLabelVisible, setLabelVisible] = useState(true);
   return (
     <Box className={cn(styles.form, className)} component="form" sx={{ m: '1rem', width: '49ch', display: 'grid' }}>
       <InputLabel className={cn(styles.head, className)}>Enter Card Details</InputLabel>
