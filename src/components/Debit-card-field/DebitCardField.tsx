@@ -15,24 +15,26 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
 
   const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let input = event.target.value;
-    // Remove non-numeric characters from input
-    input = input.replace(/\D/g, '');
-    // Format the input with spaces after every 4 digits
-    let formattedInput = input.replace(/(\d{4})/g, '$1 ').trim();
-    // Update state with formatted input
-    setCardNumber(formattedInput);
+    input = input.replace(/\D/g, ''); // Remove non-numeric characters from input    
+    let formattedInput = input.replace(/(\d{4})/g, '$1 ').trim();    // Format the input with spaces after every 4 digits
+    setCardNumber(formattedInput); // Update state with formatted input
   };
+
+  const handleOpen = () => {
+    setLabelVisible(false);
+  };
+
+  const [labelVisible, setLabelVisible] = useState(true);
 
   return (
     <Box className={cn(styles.form, className)} component="form" sx={{ m: '1rem', width: '49ch', display: 'grid' }}>
       <InputLabel className={cn(styles.head, className)}>Enter Card Details</InputLabel>
-
       <Box className={cn(styles.cardfield, className)} component="div">
         <InputLabel className={cn(styles.cardnumber1, className)} sx={{ fontWeight: '800', color: 'black', width: "10rem", textAlign: 'end' }}>Card Number</InputLabel>
         <TextField
           required
           type='border-glow'
-          sx={{ '& .MuiInputBase-root': { height: '2.2rem',width:'16rem',  } }}
+          sx={{ '& .MuiInputBase-root': { height: '2.2rem', width: '16rem', } }}
           className={cn(styles.textfield, className)}
           value={cardNumber}
           onChange={handleCardNumberChange}
@@ -44,7 +46,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
         <InputLabel className={cn(styles.nick, className)} sx={{ fontWeight: '800', color: 'black', width: "10rem", textAlign: 'end' }}>Nickname</InputLabel>
         <TextField
           type='border-glow'
-          sx={{ '& .MuiInputBase-root': { height: '2.2rem',width:'16rem',fontSize:'1rem', } }}
+          sx={{ '& .MuiInputBase-root': { height: '2.2rem', width: '16rem', fontSize: '1rem', } }}
           className={cn(styles.textfield, className)}
           required
         />
@@ -54,35 +56,58 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
         <InputLabel className={cn(styles.label3)} sx={{ gridArea: 'label', width: "10rem", justifyContent: 'end' }}>Expiry Date</InputLabel>
 
         <Box sx={{ display: 'flex' }}>
-          <Select sx={{'& .MuiSelect-icon': {margin:'-1px 4px 0px', },
-                       }}
+          {/* <InputLabel id="select-label">01</InputLabel> */}
+          {/* {labelVisible && (
+        <InputLabel
+          id="select-label"
+          className={cn({ hidden: !labelVisible })}
+        >
+          Select an option
+        </InputLabel>
+      )} */}
+          <Select
+            labelId="select-label"
+            id="select"
+            sx={{
+              '& .MuiSelect-icon': { margin: '-1px 4px 0px', },
+            }}
+            fullWidth
             value={selectedMonth}
             className={cn(styles.month, className)}
-            label="Month"
-            fullWidth
             onChange={(e) => setSelectedMonth(e.target.value)}>
-            {month.map((month) => (
-              <MenuItem  key={month.id} value={month.id}>
-                {month.label}
-              </MenuItem>
-            ))}
+            {
+              month.map((month) => (
+                <MenuItem key={month.id} value={month.id}>
+                  {month.label}
+                </MenuItem>
+              ))
+            }
           </Select>
+          {labelVisible && (
+            <InputLabel
+              id="select-label2"
+              className={cn({ hidden: !labelVisible })}
+            >
+              2024
+            </InputLabel>
+          )}
           <Select
-          sx={{
-            '& .MuiSelect-icon': {
-              margin: '-1px 4px 0px',
-            
-            },
-            
-          }}
-            className={cn(styles.year, className)}
-            label=""
+            labelId="select-label2"
+
+            sx={{
+              '& .MuiSelect-icon': {
+                margin: '-1px 4px 0px',
+              },
+            }}
+            // className={cn(styles.year, className)}
+            className={cn(styles.year, { 'label-hidden': !labelVisible }, className)}
             value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}>
+            onChange={(e) => setSelectedYear(e.target.value)}
+            onOpen={handleOpen}
+          >
             {year.map((year) => (
-              <MenuItem 
-              
-              key={year.id} value={year.id}>
+              <MenuItem
+                key={year.id} value={year.id}>
                 {year.label}
               </MenuItem>
             ))}
@@ -94,14 +119,11 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
             sx={{
               width: '4rem',
               marginLeft: '.5rem',
-             
               backgroundColor: "rgba(223, 220, 220, 0.37)",
               borderRadius: '10px',
               boxShadow: '0rem 0rem .2rem rgba(#504f4f, 0.5)',
-              '& .MuiInputBase-root': { height: '2.4rem',width:'4rem', fontSize:'1rem', },
-              '& .MuiInputLabel-root': { top: '-.5rem'},
-            
-
+              '& .MuiInputBase-root': { height: '2.4rem', width: '4rem', fontSize: '1rem', },
+              '& .MuiInputLabel-root': { top: '-.5rem' },
             }}
           />
         </Box>
