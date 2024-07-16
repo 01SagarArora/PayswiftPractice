@@ -103,18 +103,6 @@
     margin-left: 1.5rem;
     background-color: transparent;    
     border-radius: 5px;
-
-    &.MuiInputBase-root {
-      outline: none;
-      border: none;
-    }
-
-    &:focus {
-      border: 1px solid black;
-      box-shadow: 0rem 0rem .5rem rgba(#6ce7e7, 2);
-      outline: none;
-
-    }
   }
 
   .button {
