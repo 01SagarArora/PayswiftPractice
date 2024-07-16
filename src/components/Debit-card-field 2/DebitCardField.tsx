@@ -64,14 +64,6 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
             inputProps={{ maxLength: 19 }}
           />
 
-
-          {/* <TextField required 
-            type='border-glow'        
-            className={cn(styles.textfield, className)}
-            value={cardNumber}
-            onChange={handleCardNumberChange}
-            inputProps={{maxLength:19}} /> */}
-
         </Box>
 
         <Box

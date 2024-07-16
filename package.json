@@ -21,11 +21,8 @@
     "build:static": "npm run clean  && cross-env NODE_ENV=production NO_SSR=true webpack --mode production"
   },
   "devDependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
     "@hookform/error-message": "^2.0.1",
     "@mui/icons-material": "^5.11.11",
-    "@mui/material": "^5.16.1",
     "@mui/x-date-pickers": "^5.0.16",
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.10",
     "@svgr/webpack": "6.5.1",
