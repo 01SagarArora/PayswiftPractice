@@ -79,12 +79,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
             inputProps={{ maxLength: 3 }}
             defaultValue="CVV"
             sx={{
-              width: '4rem',
-              marginLeft: '.5rem',
-              backgroundColor: "rgba(223, 220, 220, 0.37)",
-              borderRadius: '10px',
-              boxShadow: '0rem 0rem .2rem rgba(#504f4f, 0.5)',
-              '& .MuiInputBase-root': { height: '2.4rem',width:'4rem', fontSize:'1rem', },
+              '& .MuiInputBase-root': { height: '2.4rem',width:'4rem', fontSize:'.8rem', },
               '& .MuiInputLabel-root': { top: '-.5rem'},
                }}
           />

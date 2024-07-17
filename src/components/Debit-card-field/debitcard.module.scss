@@ -7,6 +7,7 @@
 }
 
 .form {
+ 
   display: grid;
   max-width: 506px;
   width: 100%;
@@ -16,28 +17,66 @@
   border-radius: 4px;
   background-color: #f9f9f9;
   color: #0f1111;
-  grid-template-columns: auto-fit(minmax(200px,1fr)) ;
-  grid-template-rows: min-content(140px);
+  flex-direction: row;
   position: relative;
   
+  @media only screen and (max-width:55em ) {
+width: 100%;
+padding: 2rem;
+justify-content: center;
+align-content: center;
+
+  }
+  @media only screen and (max-width:35.2em ) {
+    width: 100%;
+    padding: 2rem;
+    justify-content: center;
+    align-content: center;
+  grid-gap: 1.5rem;
+
+      }
   .main {
     margin-top: 1rem;
-    margin-left: 1.5rem;
+    margin-left: 1rem;
     width: 98.5%;
     display: flex;
     justify-content: space-between;
+    @media only screen and (max-width:55em ) {
+      width: 22rem;
+      margin: auto;
+    justify-content: space-around;
+    padding: .5rem;
+      
+   
+        }
+        @media only screen and (max-width:35.2em ) {
+          width: 100%;
+          justify-content: center;
+           margin-top: 1rem;
+    padding: .5rem;
+    display: block;
+            }
     .label3 {
       color: #0f1111;
       display: flex;
       align-items: center;
-      font-weight: 800;
+      font-weight: 600;
       width: 10rem;
-      justify-content: end ;
-     
+   justify-content: end ;
+   @media only screen and (max-width:35.2em ) {
+    justify-content: center ;
+    text-align: center;
+    font-size: .9rem;   
+    width: 100%;
+    // border: 2px solid black;
+    display: block;
+    margin-bottom: 1rem;
+    
+      }
     }
     .month {
       display: flex;
-      width: 7.2ch;
+      width: 4.2rem;
       height: 2.4rem;
       border-radius: 10px;
       margin-left: 1rem;
@@ -47,10 +86,20 @@
      .MuiSelect-icon {
     margin: -1px 2px 0px;
     width: 1.3em;
+
 }
+@media only screen and (max-width:55em ) {
+  width: 3.8rem;
+  font-size: .8rem;
+
+    }
+    @media only screen and (max-width:35em ) {
+      width: 3.8rem;
+      justify-content: center;
+    }
 }
     .year {
-      width: 8.9ch;
+      width: 5.5rem;
       border-radius: 10px;
       height: 2.4rem;
       margin-left: .5rem;
@@ -63,27 +112,71 @@
         margin: -1px 4px 0px;
         width: 1.3em;
     }
+    @media only screen and (max-width:55em ) {
+      width: 5rem;
+      font-size: .8rem;
+    
+        }
+        @media only screen and (max-width:35.2em ) {
+          width: 5rem;
+          justify-content: center;
+        }
     }
+  }
+
+  .cvv{
+    width: 4rem;
+    margin-left: .5rem;
+    background-color: rgba(223, 220, 220, 0.37);
+    border-radius: 10px;
+    box-shadow: 0rem 0rem .2rem rgba(#504f4f, 0.5);
+    .MuiInputBase-root { 
+      height:2.4rem;
+      width:4rem; 
+      font-size:1rem;
+     }
+  .MuiInputLabel-root
+  { top: -.5rem;
+  }
   }
   .cardfield {
     display: flex;
     text-align: center;
     color: #0f1111;
     font-weight: 800;
-    height: 2.7rem;
+    height: 2.4rem;
     font-size: 1rem;
     margin-top: .5rem;    
+    @media only screen and (max-width:55em ) {
+      width: 100%;
+        }
+        @media only screen and (max-width:35.2em ) {
+          width: 100%;
+          display: block;
+          
+            }
   }
- 
 
-     
   .textfield {
     font-size: 1rem;
     height: 2.2rem;
     width: 15rem;
-    padding: .5rem;
     margin-left: 1.5rem;
     justify-content: center;
+    @media only screen and (max-width:55em ) {
+      width: 100%;
+      justify-content:center;
+      margin-left: 1rem;
+      // display: block;
+      
+   
+        }
+        @media only screen and (max-width:35.3em ) {
+          width: 100%;
+          justify-content: center;
+          margin-left: 0;
+          
+            }
   }
 
   .cardnumber1,
@@ -92,6 +185,7 @@
     color: black; 
     width: 10rem; 
     text-align: end;
+    // margin-top: -1rem;
   }
   .button {
     display: flex;
