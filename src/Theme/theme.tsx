@@ -190,17 +190,32 @@ export const Theme = createTheme({
       }
     },
     MuiTextField: {
-   
       // styleOverrides: {
       //   root: {
       //     '& .MuiInputBase-root': {
       //       height: '2.2rem',
-      //       width: '16rem',
+      //       width: '15rem',
       //       fontSize: '1rem',
-      //       // border:"2px solid balck",
+      //       marginLeft:'1rem',
+  
+      //       // Media queries for responsiveness
+      //       '@media (max-width: 55em)': {
+      //         width: '13rem',
+      //         marginLeft:'-.5rem',
+      //         fontSize: '0.9rem',
+
+      //       },
+      //       '@media (max-width: 35.2em)': {
+      //         width: '11rem',
+      //         marginLeft:'-.5rem',
+
+      //         fontSize: '0.8rem',
+
+      //       },
       //     },
       //   },
       // },
+    
       variants: [
         {
           props: { variant: 'outlined', type: 'border-glow' },
@@ -212,6 +227,7 @@ export const Theme = createTheme({
             // },
             '& .MuiOutlinedInput-root': {
               '& fieldset': {
+                
               },
               '&:hover fieldset': {
                 borderColor: '#6ce7e7',
@@ -225,8 +241,16 @@ export const Theme = createTheme({
             },
             '& .MuiInputBase-root': {
               height: '2.2rem',
-              width: '16rem',
-              fontSize: '1rem'
+              width: '15rem',
+              fontSize: '1rem',
+             ' @media (max-width: 55em)': {
+                width: '13.5rem',
+                fontSize: '0.9rem',
+              },
+              '@media (max-width: 35.2em)':{
+                width: '11.6rem',
+                fontSize: '0.8rem',
+              }
             }
           }
         }

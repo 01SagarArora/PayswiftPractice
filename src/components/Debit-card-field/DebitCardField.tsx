@@ -29,21 +29,24 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
       <Box className={cn(styles.cardfield, className)} component="div">
         <InputLabel className={cn(styles.cardnumber1, className)} >Card Number</InputLabel>
         <TextField
+         type='border-glow'
           required
-          type='border-glow'
           className={cn(styles.textfield, className)}
           value={cardNumber}
           onChange={handleCardNumberChange}
           inputProps={{ maxLength: 19 }}
+        
         />
+       
       </Box>
       <Box className={cn(styles.cardfield, className)} component="div">
         <InputLabel className={cn(styles.nick, className)} >Nickname</InputLabel>
         <TextField
-          type='border-glow'
-          className={cn(styles.textfield, className)}
+        type='border-glow'
           required
+          className={cn(styles.textfield, className)}
         />
+        
       </Box>
       <Box className={cn(styles.main, className)} component="div" sx={{ display: 'grid', gridTemplateAreas: `'label label'` }}>
         <InputLabel className={cn(styles.label3)}>Expiry Date</InputLabel>
@@ -79,7 +82,12 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
             inputProps={{ maxLength: 3 }}
             defaultValue="CVV"
             sx={{
-              '& .MuiInputBase-root': { height: '2.4rem',width:'4rem', fontSize:'.8rem', },
+              '& .MuiInputBase-root': { height: '2.4rem',width:'4rem', fontSize:'.8rem',
+                '@media (max-width: 35.2em)': {
+                  width: '3.1rem',
+                  fontSize: '0.7rem',
+                },
+               },
               '& .MuiInputLabel-root': { top: '-.5rem'},
                }}
           />
