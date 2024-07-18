@@ -1,5 +1,6 @@
 .head {
   padding: 1.5rem;
+  margin-left: 2.7rem;
   width: 100%;
   font-weight: 400;
   font-size: 1rem;
@@ -8,15 +9,15 @@
 
 .form {
   display: grid;
-  max-width: 506px;
+  margin: 0rem 0rem 0rem;
   width: 100%;
-  margin: 0rem -2rem 0rem;
-  padding-right: 10rem;
+  padding-right: 6rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #f9f9f9;
   color: #0f1111;
   position: relative;
+  justify-content: center;
   
   @media only screen and (max-width:55em ) {
     width: 100%;
@@ -151,7 +152,7 @@ align-items: center;
   .textfield {
     font-size: 1rem;
     height: 2.2rem;
-    width: 15rem;
+    width: 16rem;
     align-items: center;
     margin-left: 1.5rem;
     justify-content: center;
@@ -184,7 +185,7 @@ align-items: center;
   .button {
     display: flex;
     width: 100%;
-    margin: 2rem 0rem;
+    margin: 2rem 2rem;
     justify-content: center;
     text-align: end;
     .btn {

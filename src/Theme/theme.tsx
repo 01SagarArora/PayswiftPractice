@@ -241,7 +241,7 @@ export const Theme = createTheme({
             },
             '& .MuiInputBase-root': {
               height: '2.2rem',
-              width: '15rem',
+              width: '16rem',
               fontSize: '1rem',
              ' @media (max-width: 55em)': {
                 width: '13.5rem',

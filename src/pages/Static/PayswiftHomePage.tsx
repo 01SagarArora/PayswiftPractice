@@ -54,7 +54,7 @@ const PayswiftHomePage: FC<IMenu> = (): ReactElement => {
         aria-labelledby={`simple-tab-${index}`}
         {...other}
       >
-        {value === index && <Box sx={{ p: 3, width:'100%',margin:"2rem" }}>{children}</Box>}
+        {value === index && <Box sx={{ p: 3, width:'56ch',margin:"2rem",backgroundColor:'white', }}>{children}</Box>}
       </div>
     );
   }
