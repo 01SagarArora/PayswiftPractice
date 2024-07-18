@@ -24,7 +24,7 @@ const DebitCardField: FC<IMenu> = ({ className }): ReactElement => {
 
   // const [monthLabelVisible, setLabelVisible] = useState(true);
   return (
-    <Box className={cn(styles.form, className)} component="form" sx={{ m: '1rem', width: '52ch', display: 'grid' }}>
+    <Box className={cn(styles.form, className)} component="form" sx={{ m: '1rem', width: '49ch', display: 'grid',marginLeft:'-2rem' }}>
       <InputLabel className={cn(styles.head, className)}>Enter Card Details</InputLabel>
       <Box className={cn(styles.cardfield, className)} component="div">
         <InputLabel className={cn(styles.cardnumber1, className)} >Card Number</InputLabel>

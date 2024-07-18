@@ -12,7 +12,7 @@ interface IMenu {
 
 
 const CreditCardField: FC<IMenu> = ({ className }): ReactElement => (
-  <>
+  <><Box className={cn(styles.form,className)}>
     <Box
       className={(styles.form1, className)}
       component="form"
@@ -89,7 +89,7 @@ const CreditCardField: FC<IMenu> = ({ className }): ReactElement => (
         pay
       </Button>
     </Box>
-    </Box>
+    </Box></Box>
   </>
 )
 

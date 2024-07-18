@@ -8,9 +8,10 @@
 }
 
 .form {
+  margin-left: 1rem;
   display: grid;
-  margin: 0rem 0rem 0rem;
   width: 100%;
+  min-width: 52ch;
   padding-right: 6rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -25,13 +26,18 @@
     justify-content: center;
     align-content: center;
     text-align: center;
+    // margin-left: 1rem;
+    margin: auto;
       }
   @media only screen and (max-width:35.2em ) {
     width: 100%;
     padding: 2rem;
     justify-content: center;
     align-content: center;
-    grid-gap: .5rem;
+    grid-gap: -.5rem;
+    // margin-left: -1rem;
+    margin: auto;
+    min-width: 35ch;
 
       }
   .main {
@@ -55,10 +61,11 @@
     .label3 {
       color: #0f1111;
       display: flex;
-      align-items: center;
+      align-items: end;
       font-weight: 600;
-justify-content: end;
-width: 10rem;
+      justify-content: end;
+      margin-left: .7rem;
+      width: 10rem;
    @media only screen and (max-width:35.2em ) {
     width: 100%;
     font-size: .8rem;
