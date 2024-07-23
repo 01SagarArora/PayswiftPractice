@@ -33,7 +33,7 @@ const PayswiftHomePage: FC<IMenu> = (): ReactElement => {
   const [value, setValue] = React.useState(1);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    console.log("this is newvalue and evemt ",event, newValue);
+    console.log("this is newvalue and event ",event, newValue);
     setValue(newValue);
   };
 

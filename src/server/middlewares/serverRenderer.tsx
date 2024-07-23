@@ -27,7 +27,7 @@ RequestHandler => async (req: any, res: Response) => {
   res.type('html')   
 
   const location: string = req.url;
-  
+    
   var frescoData : any = {
     header:'',
     footer:'',

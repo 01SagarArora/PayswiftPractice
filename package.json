@@ -15,10 +15,11 @@
     "dev": "npm run clean && npm-run-all --print-label --parallel start:webpack start:server",
     "start": "npm run dev",
     "server": "npx json-server --watch public/data/paymentDetail.json --port 3001",
+    "server2": "npx http-server --watch public/data/frescoHeaderDummyData.htm --port 3002",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --mode production",
     "start:prod": "node --max_old_space_size=400 travel-status-v2/server.js",
-    "start:static": "npm run clean  && cross-env NODE_ENV=development NO_SSR=true webpack serve --mode development --open",
-    "build:static": "npm run clean  && cross-env NODE_ENV=production NO_SSR=true webpack --mode production"
+    "start:static": "npm run clean && cross-env NODE_ENV=development NO_SSR=true webpack serve --mode development --open",
+    "build:static": "npm run clean && cross-env NODE_ENV=production NO_SSR=true webpack --mode production"
   },
   "devDependencies": {
     "@hookform/error-message": "^2.0.1",
@@ -49,7 +50,7 @@
     "classnames": "2.3.2",
     "cross-env": "7.0.3",
     "css-hot-loader": "1.4.4",
-    "css-loader": "6.7.3",
+    "css-loader": "^6.7.3",
     "csso-webpack-plugin": "^2.0.0-beta.3",
     "dayjs": "^1.11.7",
     "eslint": "8.33.0",
@@ -67,6 +68,7 @@
     "sass": "1.58.0",
     "sass-loader": "13.2.0",
     "shelljs": "^0.8.5",
+    "style-loader": "^4.0.0",
     "swc-loader": "0.2.3",
     "ts-loader": "9.4.2",
     "ts-node": "10.9.1",

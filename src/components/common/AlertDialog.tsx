@@ -15,6 +15,7 @@ import { Icon, TripIcon} from 'pages/Static/Icon';
 
 export default function AlertDialog(props: AlertDialogData) {
     const alertDisapatch = useDispatch<AppDispatch>();
+    
     function triggerAction(_action: string) {
         alertDisapatch(hideAlert());
     }

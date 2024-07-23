@@ -1,0 +1,1169 @@
+<script type="text/javascript">
+    var crossSellVariation = 1;
+	var showSponsoredFlight = false;
+	var frescoIsExternal = "";
+	var newMonthViewServiceEnable ="true";
+	var newMonthViewServiceUrl = "/air-lowest-fares/dom2/getFares";
+	var domWeekViewEnable = "true";
+	var showDownloadApp = "false";
+	var appStoreUrl = "";
+	var getAppStoreName = "application store";
+	var isABT = "false";
+	var abtUserName = "";
+	var baseDir = "beetle/";
+	var categoryName = "Home";
+	var categoryId = "76";
+	var themeName = "Beetle B2B";
+	var frescoThemeId = "14";
+	var menuId = "home";
+	var tenantId = "8";
+	var frescoSiteId = "1";
+	var frescoTenantId = "8";
+	var frescoTenantScope = "corporate";
+	var airTenantScope= "dom2";
+	var login = "true";
+	var serverDate = "Sun, 21 Jul 2024 12:33:19 +0530";
+	var categoryLink = "/";
+	var dirImglocalurl = "https://www.yatra.com/fresco/resources/beetle/images/";
+	var micrositeData = '';
+	var microsite = micrositeData!="" ? JSON.parse(micrositeData) : micrositeData;
+	var lazyLoadModules = "";
+	if(typeof(applicationProp) == "undefined"){
+		var applicationProp = {
+				flightAutocompleteMinChar:'1',
+				flightAutocompleteWithoutAjax:'true'
+		};
+	}
+	if(typeof(flightStatsURL) == "undefined"){
+		var flightStatsURL = "//www.yatra.com/air-service/dom2/search/flightStats";
+	}
+	if(typeof(isECashEnable) == "undefined"){
+		var isECashEnable = "true";
+	}
+	if(typeof(priceUrl) == "undefined"){
+		var priceUrl = "https://secure.yatra.com/air-checkout/dom2/price";
+	}
+	var appProp = {
+			 baseDir:baseDir.replace("/", ""),
+			 application_context_name:'fresco',
+			 site_environment_variable:'prod',
+			 yatra_js_location:'https://www.yatra.com/fresco/resources/{base.dir}js/',
+			 yatra_jsplugin_location:'//www.yatra.com/fresco/resources/js/',
+			 yatra_js_version:'?version=202406201227',
+			 yatra_image_location:'//img.yatra.com/ythomepagecms/media/',
+			 yatra_font_location:'//www.yatra.com/fresco/resources/{base.dir}fonts/',
+			 yatra_css_location:'https://www.yatra.com/fresco/resources/{base.dir}css/',
+			 fresco_app_location:'https://www.yatra.com/fresco/',
+			 /** common_ajax_url:'null',
+			  corpapi_service_url:'http://falcon.yatra.com/falcon/corporateApi',*/
+			 b2b_content_url:'/fresco/getB2bContent',
+			 fresco_navigation_app_location:'https://www.yatra.com/',
+			 local_image_location:'/fresco/resources/css/common/images',
+			 yatra_external_js_location:'https://js.yatra.com/content/js',
+			 abtLoginUrl:'https://secure.yatra.com/creditpool/login',
+			 abtLogoutUrl:'https://secure.yatra.com/creditpool/logout',
+			 abtHomeUrl:'https://secure.yatra.com/creditpool/abt/home',
+			 domesticTenant:'dom',
+			 internationalTenant:'int',
+			 usTenant:'us',
+			 domesticNimbleTenant:'dom2',
+			 domNimbleOn:'true',
+			 intNimbleOn:'true',
+			 intNimbleRedirectPercentage:'100',
+			 isSsoOn:'true',
+			 ssoLoginUrl:'/signin/createUserCookie',
+			 socialSignInUrl:'https://secure.yatra.com/social/common/yatra/signin',
+			 ssoTokenGetUrl:'/signin/getSSOToken',
+			 ssoTokenRemoveUrl:'/signin/removeSSOToken',
+			 ssoLogoutUrl:'https://yatra.com/social/common/user/doLogout.htm',
+			 flightDomSearchUrl:'//flight.yatra.com/air-search-ui/dom2/trigger',
+			 flightIntSearchUrl:'//flight.yatra.com/air-search-ui/int2/trigger',
+			 flightAirfareIntUrl:'//www.yatra.com/lowest-fare-service/int2/get-fare',
+			 flightAirfareIntEnabled:'true',
+			 flightUsSearchUrl:'//flight.yatra.com/flights-india-yt/us/flight/search',
+			 flightUsSearchUrlNew: '//flight.yatra.com/air-search/us/trigger',
+			 nimbleDomSearchUrl:'//flight.yatra.com/air-search/dom2/trigger',
+			 nimbleDomSearchdataUrl:"//www.yatra.com/air-service/dom2/trigger",
+			 nimbleIntSearchUrl:'//flight.yatra.com/air-search/int2/trigger',
+			 wapFlightDomSearchUrl:'//flight.yatra.com/air-search-ui/dom2/trigger',
+			 wapFlightIntSearchUrl:'//flight.yatra.com/air-search-ui/int2/trigger',
+			 wapFlightUsSearchUrl:'//flight.yatra.com/wap/muswap/trigger',
+			 BEFlightAirFareCalendarUrl:'//www.yatra.com/lowest-fare-service/dom2/get-fare',
+			 exploreVacationIdeasUrl:'//www.yatra.com/holidays/holiday-json.htm?component=PackageList',
+			 hotelDomSearchUrl:'//hotel.yatra.com/hotel-search/dom/search',
+			 hotelWapDomSearchUrl:'//hotel.yatra.com/hotel-search/mdom/search',
+			 hotelDomNewSearchUrl:'//hotel.yatra.com/hotel-search/dom/search',
+			 hotelDomPgSearchUrl:'//hotel.yatra.com/hotel-search/dom/hotelSearch',
+			 hotelIntSearchUrl:'//hotel.yatra.com/hotel-search/int/search',
+			 hotelWapIntSearchUrl:'//hotel.yatra.com/hotel-search/mint/search',
+			 hotelOffersUrl:'//hotel.yatra.com/hotels-india/hotel/details.htm?source=SEARCH&productType=HOTEL&name=Lloyds%20Tourist%20Rooms&isFromSearchResults=true&noOfNights=3&noOfRooms=1&totalNoOfAdults=1&totalNoOfChildren=0&comfortRatingValue=0.0&userRating=0.0&noOfReviews=0&anchorTo=SELECT_ROOM',
+			 dynapackHomeUrl:'//www.yatra.com/fresco/flights-hotels',
+			 dynapackDomSearchUrl:'http://dpack.yatra.com/flights-hotels/dyna/wait',
+			 holidayDomSearchUrl:'//packages.yatra.com/holidays/dom/wait.htm',
+			 holidayIntSearchUrl:'//packages.yatra.com/holidays/intl/wait.htm',
+			 holidayThemeSearchUrl:'//packages.yatra.com/holidays/wait.htm',
+			 holidayThemeSearchMobileUrl:'//packages.yatra.com/holidays/mobile/{device}/wait.htm',
+			 b2bholidayInitiateUrl:'/fresco/getData/holidayChat',
+			 holidayB2bSearchUrl:'https://packages.yatra.com/holidaysb2b/search',
+			 flightAutolookupUrl:'//www.yatra.com/flights-india-yt/autosuggest/autosuggestion',
+			 hotelAutolookupUrl:'//cdn.travelguru.com/api/v4/autosuggest',
+			 hotelAutolookupCategoryWiseUrl:'//cdn.travelguru.com/api/v2/autosuggest',
+			 hotelAutolookup:'//cdn.travelguru.com/api/v4/autosuggest',
+			 hotelAutolookupkeyB2C:'G0O6MHNGv9HU4kIfRIWm',
+			 hotelAutolookupkeyB2B:'8B1E4165834349BFC103',
+			 hotelAutolookupkeyFranchisee:'A9RgQWUIJ8mwXlJcQb6m',
+			 hotelAutolookupkeySmePersonal:'sdF3TE7Ds3Sg6WLBHK0o',
+			 hotelAutolookupkeySmeOfficial:'wCkwrumqhNjBRhqPQDk7',
+			 hotelAutolookupkeyGpay:'5zRhYCnfgrxm2lODnXVb',
+			 hotelAutolookupkeyPhonepe:'cjsSPzsi5lV4CGr53QDh',
+			 hotelAutolookupkeyTravelguruSeo:'YW57riP8dSImG1foJIA3',
+			 homeStayAutolookupkeyTravelguruSeo:'KNYAMxsjHO8JgSHzjks2',
+       hotelAutolookupkeyCorporate:'v91DmEGMtQEAj38KiGBy',
+			 hotelB2bAutolookupCategoryWiseUrl:'//cdn.travelguru.com/api/v3/autosuggest',
+			 hotelCorpAutolookupCategoryWiseUrl:'//cdn.travelguru.com/api/v4/autosuggest',
+			 holidayAutolookupUrl:'//www.yatra.com/holidays/holiday-json.htm?component=BookingEngine',
+			 ajaxServiceUrl:'//www.yatra.com/fresco/getWSContent',
+			 targetMantraUrl:'//api.targetingmantra.com/TMWidgets',
+			 frescoServiceUrl:'//www.yatra.com/fresco/internalService',
+			 isQBOn:'false',
+			 pageID:'home',
+			 flight_app_location:'//www.yatra.com/flights-india-yt',
+			 isQuickBookPromotionsDiscountingEnabled:'false',
+			 isQuickBookPromotionsEnabled:'false',
+			 priceCalendar:'true',
+			 priceCalendarForMulticity: 'false',
+			 priceCalendarAlignEnable:'true',
+			 isIntDynapackOn:'true',
+			 dynapackIntSearchUrl:'http://dpack.yatra.com/flights-hotels/dyna/wait',
+			 trainAutolookupUrl:'//www.yatra.com/trains/b2c/autosuggestion',
+			 trainV2AutolookupUrl:'https://rail.yatra.com/TrainAutoSuggest/b2c/autosuggest/getstations',
+			 trainDomSearchUrl:'//rail.yatra.com/trains/b2c/search',
+			 trainNewUIB2B:'true',			
+             trainDomWapSearchUrl:'//rail.yatra.com/trains/wap/search',
+			 hotelQbDiscountingService:'//www.yatra.com/hotels-india/hotel/ajax/getqbDiscount.htm',
+			 flightDomQbDiscountingService:'//www.yatra.com/air-pay-book-service/dom/discountService/getDiscounts',
+			 flightIntQbDiscountingService:'//www.yatra.com/air-pay-book-service/int/discountService/getDiscounts',
+			 isQuickBookOnTablet:'true',
+			 originCityNearbyAirportsEnabled:'true',
+			 arrivalCityNearbyAirportsEnabled:'true',
+			 BEnonStopFlag:'true',
+			 BEfareRefundableFlag:'false',
+			 BEDompreferredAirlineFlag:'true',
+			 BEIntpreferredAirlineFlag:'true',
+			 BEUspreferredAirlineFlag:'true',
+			 BEnearByAirportOrgArrFlag:'false',
+			 flightAutocompleteMinChar:'1',
+			 flightAutocompleteWithoutAjax:'true',
+			 extremeSearchurl:'//www.yatra.com/fresco/featureservices/getextremesearch?',
+			 extremeSearchLimit:'300',
+			 hotelDetailURL:'//hotel.yatra.com/hotel-search/int/details',
+			 hotelWapDetailURL:'//hotel.yatra.com/hotel-search/mint/details',
+			 hotelDomDetailURL:'//hotel.yatra.com/hotel-search/dom/details',
+			 hotelWapDomDetailURL:'//hotel.yatra.com/hotel-search/mdom/details',
+			 homestayDetailURL:'//homestays.yatra.com/homestay-search/domhs/details',
+			 homestayDomDetailURL:'//homestays.yatra.com/homestay-search/domhs/details',
+			 homestayDomSearchUrl:'//homestays.yatra.com/homestay-search/domhs/search',
+			 homestayDomNewSearchUrl:'//homestayss.yatra.com/homestay-search/domhs/search',
+			 homestayIntSearchUrl:'//homestays.yatra.com/homestay-india/hotel/search.htm',
+			 homeStayDayAfter:'1',
+			 flightDomSpecialOfferOn:'{"b2b":{"dom":{"offers": [""]},"int":{"offers": ["student"]}},"b2c":{"dom":{"offers": ["student","armedforces","seniorcitizen"]},"int":{"offers": ["student"]}}}',
+			 flightIntSpecialOfferOn:'true',
+			 flightUsSpecialOfferOn:'false',
+			 flightDomHandBaggagePopup:'true',
+			 flightDomHandBaggageDays:'15',
+			 miscositeHotelDetailsUrl:'https://www.yatra.com/hotel-search/dom/microDetails',
+			 flightAutoSuggestUrl:'/fresco/autosuggest/flights',
+			 microSiteHotelUrl:'https://www.yatra.com',
+			 flightCityCountUpdateUrl:'/fresco/autosuggest/flights/updateCount',
+			 flightautosuggestDataFromUrl:'true',
+			 agentPageUrl:'//www.yatra.com/agents',
+			 corporatePageUrl:'https://secure.yatra.com/social/custom/crp/login.htm',
+			 emulatePageUrl:'null',
+			 flightFareMatrixUrl:'//www.yatra.com/farematrix/get-lowest-fares',
+			 flightAutoSuggestNearByUrl:'/nearby-service/autoSuggest',
+			 flightautosuggestNearByDataFromUrl:'true',
+			 ann_api_authorisation_header:'TTQxeVo1cExDQTpxcSppaG9JJXdC',
+			 auto_search_adventures_url:'http://www.adventurenation.com/api/search/metalist',
+                         exploreSearchUrl:'//www.yatra.com/etw-desktop/dailychart',
+                         cheapestExploreSearchUrl:'//www.yatra.com/etw-desktop/monthlychart',
+                         mediatorUrl :'//www.yatra.com/fresco/getWSMediator',
+                         fbTenant:{
+                           intUrl:'//flight.yatra.com/air-search-ui/fbint_flight/trigger',
+                           domUrl:'//flight.yatra.com/air-search-ui/fbdom_flight/trigger'
+                         },
+			 srpURLs : {
+				 bongo: {
+					 domIsON : 'true',
+					 intIsON : 'true',
+					 domSearch : '//flight.yatra.com/air-search-ui/dom2/trigger',
+					 intSearch : '//flight.yatra.com/air-search-ui/int2/trigger'
+				 },
+				 b2b : {
+					 domSearch : '//flight.yatra.com/air-search-ui/b2bdom/trigger',
+					 intSearch : '//flight.yatra.com/air-search-ui/b2bint/trigger',
+					 hoteldomSearch : '//hotel.yatra.com/b2b-hotel-search/dom/search',
+					 hotelintSearch:  '//hotel.yatra.com/b2b-hotel-search/int/search',
+                     advanceSearch: 'https://secure.yatra.com/partnersv3/b2b/flight/advance_results.html',
+					 annSearch: '//www.yatra.com/ann/{tenant}/search'
+				 },
+				 crp : {
+					 domSearch : '//flight.yatra.com/corp-air-search/crpdom/trigger',
+					 intSearch : '//flight.yatra.com/corp-air-search/crpint/trigger',
+					 hoteldomSearch : '//hotel.yatra.com/corp-hotel-search/crpdom/search',
+					 hotelintSearch: '//hotel.yatra.com/corp-hotel-search/crpint/search'
+				 }
+			 },
+			detailUrls:{
+				b2b:{
+					hotelDomDetails: '//hotel.yatra.com/b2b-hotel-search/dom/details',
+					hotelIntDetails:'//hotel.yatra.com/b2b-hotel-search/int/details'
+				},
+				crp:{
+					hotelDomDetails:'//hotel.yatra.com/corp-hotel-search/crpdom/details',
+					hotelIntDetails:'//hotel.yatra.com/corp-hotel-search/crpint/details'
+				}
+			},
+			 recentSearchProp:{
+				logUrl:{
+							logs:'personalization',
+							saveLog:'personalization/activity/save',
+							deleteLog:'personalization/activity/delete',
+							getLog:'personalization/activity/get'
+						},
+				 urls: {
+					  desktop: {
+						  flights:{"search":{dom:'//flight.yatra.com/air-search-ui/dom2/trigger', international:'//flight.yatra.com/air-search-ui/int2/trigger'},
+					  		    review:{dom:'https://secure.yatra.com/checkout-ui/dom2/price', international:'https://secure.yatra.com/checkout-ui/int2/price'}},
+					  	  hotels:{"search":{dom:'//hotel.yatra.com/hotel-search/dom/search', international:'//hotel.yatra.com/hotel-search/int/search'},
+					  			review:{dom:'//secure.yatra.com/hotel-checkout/dom/hotel/review', international:'//secure.yatra.com/hotel-checkout/int/hotel/review'}},
+					      holidays:{"search":{dom:'//packages.yatra.com/holidays/india-tour-packages/wait.htm', international:'null'},
+						  		review:{dom:'//packages.yatra.com/holidays/india-tour-packages/wait.htm', international:'//packages.yatra.com/holidays/india-tour-packages/wait.htm'}},
+
+							bus:{"search":{dom:'//ebus.yatra.com/bus/search'},
+						  		review:{dom:'//ebus.yatra.com/bus/search'}}
+},
+					  mobile: {
+						  flights:{"search":{dom:'//flight.yatra.com/air-search-ui/dom2/trigger', international:'//flight.yatra.com/air-search-ui/int2/trigger'},
+					  		    review:{dom:'https://secure.yatra.com/checkout-ui/dom2/price', international:'https://secure.yatra.com/checkout-ui/int2/price'}},
+					  	  hotels:{"search":{dom:'//hotel.yatra.com/hotel-search/dom/search', international:'//hotel.yatra.com/hotel-search/int/search'},
+					  			review:{dom:'//secure.yatra.com/hotel-checkout/dom/hotel/review', international:'//secure.yatra.com/hotel-checkout/int/hotel/review'}},
+					  	  holidays:{"search":{dom:'//packages.yatra.com/holidays/india-tour-packages/wait.htm', international:'//packages.yatra.com/holidays/india-tour-packages/wait.htm'},
+						  		review:{dom:'//packages.yatra.com/holidays/india-tour-packages/wait.htm', international:'//packages.yatra.com/holidays/india-tour-packages/wait.htm'}},
+						bus:{"search":{dom:'//ebus.yatra.com/bus/search'},
+						  		review:{dom:'//ebus.yatra.com/bus/search'}}
+}
+				},
+				ajaxPricing: false,
+				visibleRows: 3
+			 },
+			 bus:{
+				searchURL:'//ebus.yatra.com/bus/search',
+				deviceBasedsearchURL:'//ebus.yatra.com/busview/{device}/search',
+				autocompleteURL:'//www.yatra.com/bus/autosuggestion',
+				snipeAutocompleteURL:'https://ebus.yatra.com/busautosuggest/b2c/jsonautosuggest.htm',
+				newAutocompleteURL:'/businfo/b2c/autosuggest',
+				topbusroute:'//www.yatra.com/bus/getTopBusRoute',
+				mobileBusHomeUrl: '//www.yatra.com/bus-booking',
+				b2bSearchUrl: 'https://ebus.yatra.com/b2bBusview/busb2b/search'
+			 },
+			 car:{
+				desktopSearchURL:'//cars.yatra.com/cars/p2p/search.htm',
+				mobileSearchURL:'//cars.yatra.com/cars/p2p/search.htm',
+				autoLookUpURL:'//www.yatra.com/cars/autosuggest/autosuggest/destinations'
+			 },
+			  cabs:{
+				searchURL:'https://www.yatra.com/cab/search',
+				autoLookUpURL:'https://www.yatra.com/cabs/v1.2/cities',
+				gmapApiUrl:'https://maps.googleapis.com/maps/api/place/autocomplete/json',
+				
+			 },
+			 eCashUrl:'/EwalletCacheService/getUserECash.htm',
+			 addEcashUrl:'/activity-engine/add-ecash.htm',
+			 eCashEnable:'true',
+			 eCashPower:'on',
+			 eCashAmount:'0',
+			 eCashLoggedInMsg:'<div style="float: left;font-size: 14px;display: inline-block;padding: 1px 0;cursor:pointer;">Hi {userName}, you have <span style="font-family:&quot;WebRupee&quot;;">Rs.</span>{ecashamt} in your eCash account. <a onclick="" data-trackvalue="" data-trackaction="" data-trackcategory="" class="registerQuickBook eventTrackable" target="_blank" href="//www.yatra.com/online/ecash-faq">Know More.</a></div>',
+			 eCashNotLoggedInMsg:'<div style="float: left;font-size: 14px;display: inline-block;padding: 1px 0;cursor:pointer;"><a data-trackvalue="" data-trackaction="" data-trackcategory="" class="registerQuickBook eventTrackable logIn" href="javascript:void(0);">Sign in</a> to Yatra &amp; book using eCash. <a onclick="" data-trackvalue="" data-trackaction="" data-trackcategory="" class="registerQuickBook eventTrackable" target="_blank" href="//www.yatra.com/online/ecash-faq">Know More.</a></div>',
+			 eCashGeneralMsg:'<span class="eventTrackable" style="position:absolute;top:25%;left:1%;cursor:pointer"data-trackvalue="Banner Close" data-trackaction="Close" data-trackcategory="Ecash Banner" onclick="eCash.clearBanner()"><i style="font-weight: bold;font-size: 12px;">X</i></span><div style="float: left;font-size: 13px;display:block;padding:1px 0;cursor:pointer;background-color:#ffc300;text-align:center;padding:10px;width:100%"><span style="font-weight:bold">Hi {userName}</span>, {ecashmsg}<a style="background-color: #ec9b1b;padding: 5px;display: inline-block;border-radius: 2px;font-weight: bold;" onclick="sso.login()" data-trackvalue="Banner Login" data-trackaction="Login" data-trackcategory="Ecash Banner" class="bannerLogin eventTrackable" href="javascript:void(0)">Login Now</a>Not  {userName}!<a class="eventTrackable" data-trackvalue="Ecash Banner SignUp" data-trackaction="SignUp" data-trackcategory="Ecash Banner" href="https://secure.yatra.com/social/common/yatra/register" href="javascript:void(0)" style="text-decoration: underline;"> Click here!</a></div>',
+			 refreshTimeInterval:'600',
+			 visaServiceUrl:'//www.yatra.com/flights-india-yt/visaservice',
+			 mobileSigninUrl: 'https://secure.yatra.com/social/common/yatra/signin.htm',
+			 featureServices: {
+				cityByIP_Power:'off',
+				hotelOffers_Power:'off',
+				cityByIP_URL:'/flights-india-yt/getCityByIP/getCity',
+				hotelOffers_URL:'/fresco/featureservices/hoteloffers/fetch',
+				dynaPrice_Power:'off',
+				dynaPrice_URL:'//www.yatra.com/personalization/fareCacheEntry/fetch'
+			 },
+			 mobileTrainDomSearchUrl:'//rail.yatra.com/trains/wap/search',
+			 mobileTrainDomAutoLookUpUrl:'/trains/wap/autosuggestion',
+			 homepage: {
+				 enableSinglePage: 'false'
+			 },
+			  nlp: {
+				 showLink: 'true'
+			 },
+                         holiday:{
+                             autoLookupUrl:  'https://www.yatra.com/holidays/autosuggest/destinations',
+														 autoLookupUrlB2B:  '//www.yatra.com/holidaysstaticdataservice/suggestions',
+                             dataByCityURL_WG:  'http://www.yatra.com/holidays/service/weekend-getaways/city.htm',
+                             searchURL_WG:  '//www.yatra.com/holidays/weekend-getaways/city.htm',
+                             weekendURL:  '//www.yatra.com/holidays/weekend-getaways/city.htm?popularcityname=Delhi',
+                             groupToursURL:  '//packages.yatra.com/holidays/themes/landing.htm?packageTheme=Group%20Tours',
+                             holidaysIdeasURL:  '//packages.yatra.com/holidays/themes/home.htm',
+                             offerURL:  '//www.yatra.com/offer/dom/listing/holiday-deals',
+                             adventureURL:  'https://www.adventurenation.com/trip/search/map-list?yatra=adventure'
+                         },
+                         cruise:{
+                             searchURL: '//www.yatra.com/cruise/searchCruise.htm',
+                             serviceURL: '/cruise/getCruiseSearchOptions.htm'
+                         },
+                         beetle: {
+                             todaysPicText : 'true'
+						},
+                        header : {
+                            logout: {
+                                usingService : 'true'
+                            },
+                            cards: {
+                                show:'false',
+                                eligibiltyURL: '/VMDiscountingService/isValidBin'
+                            },
+                            chat: {
+                                jsPaths: 'https://secure.yatra.com/ytchat/static/dist/js/'
+                            }
+                        },
+                        activities : {
+                            autolookupURL: 'https://www.yatra.com/activities/actdesktop/autocomplete',
+                            srpURL: 'https://www.yatra.com/activities/search',
+                            detailsURL: 'https://www.yatra.com/activities/details',
+                            agent:{
+                                    srpURL: '/activities/agent/search',
+                                    detailsURL: '/activities/agent/details'
+                            }
+                        },monuments : {
+                            autolookupURL: '//www.yatra.com/get-asi-data/asiAPI/suggestions/{txt}',
+                            srpURL:'//www.yatra.com/monuments/list',
+                            detailURL:'//www.yatra.com/monuments/details',
+                        },
+                        multiLingual: {
+                            on : 'true'
+                        },
+                        byop : {
+                            urls: {
+		                    	srp: '//www.yatra.com/byop/search'
+                         }
+                    	},
+                        showB2bLogin:'',
+                        customEnhanceGA:('Flights').split(','),
+                        isHttpsEnabled:'true',
+						isRemarksEnabled:'true',
+						xploreEnable: "false",
+						serviceWorkerEnable: "false",
+						geoLocationEnable: "false",
+						xploreOfferUrl:'/explore-the-world/cheapest-fare',
+						yatraImageLocation: '//img.yatra.com/ythomepagecms/media/',
+						yatraXploreofferDomImg: '//www.yatra.com/ythomepagecms/media/imagemanager/2017/Dec/e146fa679a3487469c66fb92cb6d7faf.png',
+						yatraXploreofferIntImg: '//www.yatra.com/ythomepagecms/media/imagemanager/2017/Dec/71b4a3503be83bafbf4bae5e687d28d0.png',
+						holidaysPrefill:'{"origin":"New Delhi","destination":"Andaman and Nicobar Islands","depart":1}',
+						faq:{
+							menu: '//labs.yatra.com/external-faq/getMenu',
+							ques: '//labs.yatra.com/external-faq/getFaqs',
+							autosuggest: '//labs.yatra.com/common/externalFAQ/query_1',
+							featured: '//labs.yatra.com/external-faq/getFeatured',
+							logs: '//labs.yatra.com/chatbot/log/faq',
+						},
+						b2b_singleSignin : {
+							createSuperSession :'/fresco/b2b/single-signin/createSuperSession ', 
+							allLoggedInAccounts :'/fresco/b2b/single-signin/allLoggedInAccounts',
+							switchAccount :'/fresco/b2b/single-signin/switchAccount',
+							removeSession :'/fresco/b2b/single-signin/removeSession',
+							removeSuperSession :'null'
+						}
+	};
+
+	if(typeof(pageID) == "undefined"){
+		var pageID = typeof(appProp.pageID) != "undefined" && appProp.pageID ? appProp.pageID : "";
+	}
+	if(typeof(isECashEnable) == "undefined"){
+		var isECashEnable = typeof(appProp.eCashEnable) != "undefined" && appProp.eCashEnable ? appProp.eCashEnable : "false";
+	}
+	if(typeof(pollingURL) == "undefined"){
+		var pollingURL = "//www.yatra.com/air-service/dom2/poll";
+	}
+	if(typeof(jsonURL) == "undefined"){
+		var jsonURL = typeof(appProp.nimbleDomSearchdataUrl) != "undefined" && appProp.nimbleDomSearchdataUrl ? appProp.nimbleDomSearchdataUrl : "";
+	}
+	if(typeof(priceCheckURL) == "undefined"){
+		var priceCheckURL = '//www.yatra.com/flights-india-yt/dom2/book/bookAjax';
+	}
+	if(typeof(fareRuleUrl) == "undefined"){
+		var fareRuleUrl = '//www.yatra.com/air-service/dom2/getFareRules';
+	}
+	if(typeof(searchURL) == "undefined"){
+		var searchURL = typeof(appProp.nimbleDomSearchUrl) != "undefined" && appProp.nimbleDomSearchUrl ? appProp.nimbleDomSearchUrl : "";
+	}
+	if(typeof(enableAirCheckoutPricing) == "undefined"){
+		var enableAirCheckoutPricing = '1';
+	}
+	if(typeof(specialfaretype) == "undefined"){
+		var specialfaretype = "";
+	}
+	if(typeof(isSpecialFareVisible) == "undefined"){
+		var isSpecialFareVisible = false;
+	}
+
+	if(typeof(mainData) == "undefined"){
+		var mainData = {};
+	}
+	if(typeof(isWebSocket) == "undefined"){
+		var isWebSocket=false;
+		if("WebSocket" in window){
+			isWebSocket = eval('true');
+			if(typeof(isWebSocket) != "boolean"){
+				isWebSocket = false;
+			}
+		}
+	}
+	if(typeof(tenantScope) == "undefined"){
+		var tenantScope = "dom2";
+	}
+	if(typeof(userName) == "undefined"){
+		var userName = "";
+	}
+	if(typeof(isQuickBookPromotionsEnabled) == "undefined"){
+		var isQuickBookPromotionsEnabled = false;
+	}
+	if(typeof(isQuickBookPromotionsDiscountingEnabled) == "undefined"){
+		var isQuickBookPromotionsDiscountingEnabled = false;
+	}
+	if(typeof(isDiscountingOn) == "undefined"){
+		var isDiscountingOn = 'false';
+	}
+	if(typeof(eCashAutoInit) == "undefined"){
+		var eCashAutoInit = true;
+	}
+	if(typeof(priceTrendOn) == "undefined"){
+		var priceTrendOn = eval('true');
+	}
+	if(typeof(priceTrendPollURL) == "undefined"){
+		var priceTrendPollURL='/personalization/pricetrend/get';
+	}
+	if(typeof(pollURL) == "undefined"){
+		var pollURL='//www.yatra.com/personalization/crosssell/1.2/get';
+	}
+	if(typeof(isLowFareAlertEnabled) == "undefined"){
+		var isLowFareAlertEnabled=eval('true');
+	}
+	if(typeof(shouldInduceAdaptivePolling) == "undefined"){
+		var shouldInduceAdaptivePolling=eval('true');
+	}
+	if(typeof(socketTimeOut) == "undefined"){
+		var socketTimeOut='60000';
+	}
+	if(typeof(enableSmartSearch) == "undefined"){
+		var enableSmartSearch='true';
+	}
+	if(typeof(fbDomain) == "undefined"){
+		var fbDomain='//www.yatra.com';
+	}
+
+	if(baseDir.replace(/\//, "")=="mobile") {
+		appProp.recentSearchProp = {
+					ajaxPricing: false,
+					visibleRows: 5
+				 };
+	}
+
+	for(var key in appProp){
+		if(typeof(baseDir) != "undefined" && baseDir){
+			var index = baseDir.indexOf("/");
+			if(index == -1){
+				baseDir = baseDir+"/";
+			}
+		}
+		if(typeof appProp[key]!="object") {
+			appProp[key] = appProp[key].replace(/{base.dir}/,baseDir);
+		}
+	}
+	var lockdownDate = '05/03/2020';
+	lockdownDate = new Date(lockdownDate);
+	var nowDate = new Date();
+	nowDate = nowDate.setHours(0,0,0,0);
+	if(lockdownDate.toString() == "Invalid Date"){
+		lockdownDate = false;
+	} else if(nowDate > lockdownDate){
+		lockdownDate = false;
+	}
+</script>
+<div class="footer-beetle-new">
+    <div class="tabletHidden ytAboutFooter clearfix">
+        <div class="aboutYatraTab">
+            <div class="js_yt_AboutFooter">
+                <div class="ytAbt-track footer-container ytContainerFull"><a href="javascript:void(0);"
+                        class="abtTxtFresco" data-linkattr="link0">About
+                        Us<i class="sprite-footer ico-arrow ml10 ytServiceSprite arrow ml10">&nbsp;</i></a></div>
+            </div>
+        </div>
+        <div id="link0" class="aboutYatraContent">
+            <div class="footer-container ytContainerFull">
+                <p>Yatra.com is a leading online travel services provider in India, US and UK. We offer best deals on
+                    flight bookings, hotel bookings, bus tickets, irctc train tickets, fly and stay and holiday
+                    packages. Find cheap domestic flights to destinations in India or book cheap international flights
+                    within minutes. You can also easily book/cancel IRCTC train tickets on Yatra. With over
+                    <span class="hotelCount">83,000</span> hotels in India and more than 430,000 hotels associated with
+                    us worldwide, rest assured, we'll get you an appropriate hotel no matter the budget. Creating happy
+                    and satisfied travellers is our motto!</p>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .agent .weAcceptFooter,
+    .corporate .weAcceptFooter,
+    .agent .Connect-with-us-footer,
+    .corporate .Connect-with-us-footer {
+        display: none;
+    }
+
+    .agent .servicesFooterHide,
+    .corporate .servicesFooterHide {
+        display: block !important;
+    }
+
+    .parentLI #PriorityMembers {
+        display: none
+    }
+</style>
+<script>
+    var behaveAsSecure_footer = false;
+</script>
+<link href="https://www.yatra.com/fresco/resources/beetle/css/footer.min.css?version=202406201227" type="text/css"
+    rel="stylesheet" />
+<div class="footer-beetle-new corporate">
+    <div class="ytContainerFluid ytNormFooter fluid-section yatra-footer borderTopFooterHide">
+        <div class="our-family servicesFooterHide">
+            <div class="ytContainerFull footer-container boxWidth_family">
+                <ul>
+                    <li class="lable_ourFamily">Our Family22</li>
+                    <li><a href="javascript:void(0);"
+                            class="borderNone"><i title="" class="sprite-footer ico-tgFooter_family"></i></a></li>
+                    <li><a
+                            href="javascript:void(0);"><i title="" class="sprite-footer ico-adventureFooter_family"></i></a>
+                    </li>
+                    <li><a
+                            href="javascript:void(0);"><i title="" class="sprite-footer ico-ytExoticFooter_family"></i></a>
+                    </li>
+                    <li><a href="javascript:void(0);"><i title="" class="sprite-footer ico-tsiYTFooter_family"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="ytContainerFull">
+            <div class="footsec js-footer-new js-footer-slide">
+                <div class="servicesFooterHide">
+                    <div id="js_yt_footer" class="js-footer-active slapAdjust_3">
+                        <div class="footerpages js-footerHead bgclr ">
+                            <ul class="footer-container">
+                                <li class="parentLI"><a id='CorporateInformation' data-href='#CorporateInformation'
+                                        href="javascript:void(0);">
+                                        <span>Corporate Information</span><i class="sprite-footer ico-arrow ml10"></i>
+                                    </a></li>
+                                <li class="parentLI"><a id='YatraServices' data-href='#YatraServices'
+                                        href="javascript:void(0);">
+                                        <span>Yatra Services</span><i class="sprite-footer ico-arrow ml10"></i> </a>
+                                </li>
+                                <li class="parentLI"><a id='CustomerCare' data-href='#CustomerCare'
+                                        href="javascript:void(0);">
+                                        <span>Customer Care</span><i class="sprite-footer ico-arrow ml10"></i> </a></li>
+                            </ul>
+                        </div>
+                        <ul class="clearfix yatra-footsection nav-footer footer-container container">
+                            <li class="ft-li footerpage_223" id='CorporateInformation'>
+                                <ul>
+                                    <li id='AboutUs' class="childLI"><a class="eventTrackable"
+                                            data-trackcategory="Global Footer Links"
+                                            data-trackaction="Global Footer Links" data-trackvalue="About Us"
+                                            href="https://www.yatra.com/corporate/online/about-yatra.html"
+                                            title="About Us">About Us</a></li>
+                                    <li id='TheYatraTeam' class="childLI"><a class="eventTrackable"
+                                            data-trackcategory="Global Footer Links"
+                                            data-trackaction="Global Footer Links" data-trackvalue="The Yatra Team"
+                                            href="https://www.yatra.com/corporate/online/yatra-team.html"
+                                            title="The Yatra Team">The Yatra Team</a></li>
+                                    <li id='OurInvestors' class="childLI"><a class="eventTrackable"
+                                            data-trackcategory="Global Footer Links"
+                                            data-trackaction="Global Footer Links" data-trackvalue="Our Investors"
+                                            href="https://www.yatra.com/corporate/online/our-investors.html"
+                                            title="Our Investors">Our Investors</a></li>
+                                </ul>
+                            </li>
+                            <li class="ft-li footerpage_225" id='YatraServices'>
+                                <ul>
+                                    <li id='Terms&Conditions' class="childLI"><a class="eventTrackable"
+                                            data-trackcategory="Global Footer Links"
+                                            data-trackaction="Global Footer Links" data-trackvalue="Terms & Conditions"
+                                            href="https://www.yatra.com/corporate/online/terms-of-service.html"
+                                            title="Terms & Conditions">Terms & Conditions</a></li>
+                                    <li id='UserAgreement' class="childLI"><a class="eventTrackable"
+                                            data-trackcategory="Global Footer Links"
+                                            data-trackaction="Global Footer Links" data-trackvalue="User Agreement"
+                                            href="https://www.yatra.com/corporate/online/yatra-user-agreement.html"
+                                            title="User Agreement">User Agreement</a></li>
+                                </ul>
+                            </li>
+                            <li class="ft-li footerpage_227" id='CustomerCare'>
+                                <ul>
+                                    <li id='VisaInformation' class="childLI"><a class="eventTrackable"
+                                            data-trackcategory="Global Footer Links"
+                                            data-trackaction="Global Footer Links" data-trackvalue="Visa Information"
+                                            href="https://www.yatra.com/corporate/online/international/visa.html"
+                                            title="Visa Information">Visa Information</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="servicesFooterHide">
+                    <div id="js_yt_footer" class="js-footer-active slapAdjust_3">
+                        <div class="footerpages js-footerHead bgclr ">
+                            <ul class="footer-container">
+                                <li class="parentLI"><a id='WhyBuyWithYatra' data-href='#WhyBuyWithYatra'
+                                        href="javascript:void(0);">
+                                        <span>Why Buy With Yatra</span><i class="sprite-footer ico-arrow ml10"></i> </a>
+                                </li>
+                                <li class="parentLI"><a id='PartnerWithUs' data-href='#PartnerWithUs'
+                                        href="javascript:void(0);">
+                                        <span>Partner With Us</span><i class="sprite-footer ico-arrow ml10"></i> </a>
+                                </li>
+                                <li class="parentLI"><a id='More' data-href='#More' href="javascript:void(0);">
+                                        <span>More</span><i class="sprite-footer ico-arrow ml10"></i> </a></li>
+                            </ul>
+                        </div>
+                        <ul class="clearfix yatra-footsection nav-footer footer-container container">
+                            <li class="ft-li footerpage_229" id='WhyBuyWithYatra'>
+                                <ul>
+                                    <li id='AwardsWon' class="childLI"><a class="eventTrackable"
+                                            data-trackcategory="Global Footer Links"
+                                            data-trackaction="Global Footer Links" data-trackvalue="Awards Won"
+                                            href="https://www.yatra.com/corporate/online/awards-won.html"
+                                            title="Awards Won">Awards Won</a></li>
+                                    <li id='YatraintheNews' class="childLI"><a class="eventTrackable"
+                                            data-trackcategory="Global Footer Links"
+                                            data-trackaction="Global Footer Links" data-trackvalue="Yatra in the News"
+                                            href="https://www.yatra.com/corporate/online/yatra-in-news.html"
+                                            title="Yatra in the News">Yatra in the News</a></li>
+                                </ul>
+                            </li>
+                            <li class="ft-li footerpage_231" id='PartnerWithUs'>
+                                <ul>
+                                    <li id='GetOurService' class="childLI"><a class="eventTrackable"
+                                            data-trackcategory="Global Footer Links"
+                                            data-trackaction="Global Footer Links" data-trackvalue="Get Our Service"
+                                            href="https://www.yatra.com/corporate/online/get-our-service.html"
+                                            title="Get Our Service">Get Our Service</a></li>
+                                </ul>
+                            </li>
+                            <li class="ft-li footerpage_233" id='More'>
+                                <ul>
+                                    <li id='YatraApps' class="childLI"><a class="eventTrackable"
+                                            data-trackcategory="Global Footer Links"
+                                            data-trackaction="Global Footer Links" data-trackvalue="Yatra Apps"
+                                            target='_blank'
+                                            href="https://play.google.com/store/apps/details?id=com.yatra.corporate"
+                                            title="Yatra Apps">Yatra Apps</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="yatraSecure">
+                    <div class="ytContainerFull footer-container">
+                        <ul>
+                            <li> <span><i class="sprite-footer ico-secured-sites"></i></span> </li>
+                            <li> <span class="footer-seperator" style="border-right: 1px solid #bbb;"><i class="sprite-footer ico-verisign-secure"></i></span>
+                            </li>
+                        </ul>
+                        <ul class="Connect-with-us-footer">
+                            <li> <span>Connect with us :</span> </li>
+                            <li> <span><a class="sprite-footer ico-fresh-facebook" title="Facebook" alt="Facebook" href="https://www.facebook.com/Yatra"></a></span>
+                                <span><a class="sprite-footer ico-fresh-twitter" title="Twitter" alt="Twitter" href="https://twitter.com/YatraOfficial"></a></span>
+                                <span><a class="sprite-footer ico-fresh-google" title="Google" alt="Google" href="https://plus.google.com/+yatracom/posts"></a></span>
+                                <span><a class="sprite-footer ico-fresh-youtube" title="Youtube" alt="Youtube" href="https://www.youtube.com/user/yatratravel"></a></span>
+                                <span><a class="sprite-footer ico-fresh-instagram" title="Instagram" alt="Instagram" href="https://www.instagram.com/yatradotcom/"></a></span>
+                            </li>
+                        </ul>
+                        <ul class="weAcceptFooter">
+                            <li> <i title="Visa" class="sprite-footer ico-visa-secure"></i> </li>
+                            <li> <i title="Master Card" class="sprite-footer ico-master-card"></i> </li>
+                            <li> <i title="American Express" class="sprite-footer ico-american-secure"></i> </li>
+                            <li> <i title="Diners Club" class="sprite-footer ico-diner-club"></i> </li>
+                            <li> <i title="Rupay" class="sprite-footer ico-rupay"></i> </li>
+                            <li> <i title="EMI Options" class="sprite-footer ico-emi-secure"></i> </li>
+                            <li> <i title="Net Banking" class="sprite-footer ico-net-secure"></i> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright js_copyright_hide">
+                    <h4>Copyright &copy; 2024 Yatra Online Limited, India. All rights reserved</h4>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+	/*var navigation = queryBuilderFresco.get("navigation");
+	if(navigation=="false") {
+		$(".ytContainerFluid.ytNormFooter, #frescoFooter")
+			
+	};*/
+        if(typeof queryBuilderFresco != "undefined") {
+            var withoutFooter = queryBuilderFresco.get("withoutFooter");
+            if(withoutFooter=="true") {
+                    $(".yatra-footer").hide();
+            }
+        }
+	$("img[width=1], img[width=1px]").css({position:"absolute",display:"none"}); /*hide all pixel*/
+        
+        /* CurrencyKart link  */
+        $('.fr_page_currencykart').on('click' , function (e) {
+            e.preventDefault();
+            var randNum = Math.floor(Math.random() * Math.pow(10, 12));
+            var user = null;
+            if (typeof sso != "undefined" && sso.isUserLoggedIn && sso.isUserLoggedIn()) {
+                user = sso.getUserInfo();
+            }
+
+            var superPnr = "FRESCO_" + randNum;
+            var data = {
+                "superPnr": superPnr
+            };
+
+            if (user && typeof user.emailId != "undefined") {
+                data = {
+                    "name": user.firstName + " " + user.lastName,
+                    "email": user.emailId,
+                    "phone": user.mobile,
+                    "superPnr": superPnr
+                };
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/misc-services/currency/redirectLead/",
+                contentType: "application/json",
+                dataType: "json",
+                timeout: 4000,
+                data: JSON.stringify(data)
+            }).always(function(d) {
+            });
+            window.open("http://www.currencykart.com/" + randNum);
+        });
+
+});
+        </script>
+        <script>
+            function YT_SEO_Toggle_Slide(target) {
+	if(!YT_SEO_Toggle_Slide.oldLinks) {
+		YT_SEO_Toggle_Slide.oldLinks = {tab:null, content:null};
+	};
+	$(".seolinkstabs").removeClass("active");
+	var tab_id = $(target).prop("id");
+	var content_id = tab_id+"_content";
+	var content_id_h = $("#"+content_id);
+	
+	if(content_id_h.css("display")=="none") {
+		$(".seoLinksBg").show();
+		$(target).addClass("active");
+		content_id_h.slideDown("fast");
+		if(content_id!=YT_SEO_Toggle_Slide.oldLinks.content) {
+			$("#"+YT_SEO_Toggle_Slide.oldLinks.content).slideUp();
+		}
+	} else {
+		content_id_h.slideUp("fast");
+		$(".seoLinksBg").slideUp();
+	}
+	YT_SEO_Toggle_Slide.oldLinks = {tab:tab_id, content:content_id};
+}
+/*slide footer seoLinks content*/
+if(jQuery!==undefined) {
+	$('.ytSeoFooter').find('.seoLinksBg .ytContainerFixed > ul , .seoLinksBg').css({
+		'display': 'none'
+	});
+	
+	$(".seolinkstabs").on("click",function(){
+		YT_SEO_Toggle_Slide(this);
+	});
+	
+	$('.ytAboutFooter').find('.aboutYatraContent').css({
+		'display': 'none'
+	});
+	
+	$(".abtTxtFresco").on("click",function(){
+		YT_About_Toggle_Slide(this);
+	 });
+}
+
+function YT_About_Toggle_Slide(target) {
+	$(".aboutYatraContent").slideToggle();
+	$(target).toggleClass("active");
+}
+
+
+
+var RESP = RESP || {};
+RESP.FOOTER = (function() {
+        var config = {
+            footerBlock : $('.ytSeoFooter'),
+            footerNav : 'nav-footer',
+            footerNavHead : 'nav-footer-head',
+            footerActive : 'open-list',
+            activeList : 'active',
+			
+        };
+
+        function bindEvents() {
+            var footerBlock = config.footerBlock;
+            /*footerBlock.find('.' + config.footerNav).on('click', 'h3', function(e) {*/
+            footerBlock.delegate('.' + config.footerNav + ' h3', 'click', function(e) {
+				e.stopPropagation();
+                toggleMobileNav(this);
+            });
+            /*footerBlock.find('.' + config.footerNavHead).on('click', 'li > a', function(e) {		*/	
+            footerBlock.delegate('.' + config.footerNavHead + ' li > a', 'click', function(e) {			
+				e.stopPropagation();
+				e.preventDefault();
+				$('.nav-footer-head').toggleClass('borderBottomFooter');
+                toggleDesktopNav(this, footerBlock);
+            });
+            
+        };
+		var className ={
+			footerDiv: $('.js-footer-slide'),
+			footerHead: 'js-footerHead',
+		};
+		function toggleDesktopAnimate(){
+			var footerDiv = className.footerDiv;
+			footerDiv.delegate('.' + className.footerHead + ' li > a:not(.zerochild)', 'click', function(e) {
+				e.stopPropagation();
+				e.preventDefault();
+				$('.js-footer-active').toggleClass('borderTopFooter');
+				toggleDesktopNav(this, footerDiv);
+			});
+			
+		}
+        function toggleDesktopNav(elem, elemBlock) {
+            /*var attrID = $(elem).attr('href');*/
+            var attrID = $(elem).data('href');
+            if (elemBlock.find('.' + config.footerNav).find(attrID).is(':visible')) {
+                $(elem).removeClass(config.activeList);
+                elemBlock.find('.' + config.footerNav).find('.' + config.footerActive).slideUp().removeClass(config.footerActive);
+                return false;
+            }
+            $(elem).parents('ul').parents('.js-footer-new').find('.' + config.activeList).removeClass(config.activeList);
+            elemBlock.find('.' + config.footerNav).find('.' + config.footerActive).slideUp().removeClass(config.footerActive);
+            elemBlock.find('.' + config.footerNav).find(attrID).slideDown().addClass(config.footerActive);
+            $(elem).addClass(config.activeList);
+        };
+
+        function toggleMobileNav(elem) {
+            if ($(elem).parent().find('ul:first').is(':visible')) {
+                $(elem).parents('ul').find('.' + config.footerActive).removeClass(config.footerActive).find('ul:first').slideUp();
+                return false;
+            } else {
+                $(elem).parents('ul').find('.' + config.footerActive).removeClass(config.footerActive).find('ul:first').slideUp();
+                $(elem).parent().find('ul:first').slideDown().parent().addClass(config.footerActive);
+            };
+
+        };
+
+        function init() {
+            bindEvents();
+			toggleDesktopAnimate();
+        };
+
+        return {
+            init : init
+        }
+
+    }());
+
+$(document).ready(function() {
+    RESP.FOOTER.init();
+});
+        </script>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+	var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+	_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+	var googleAccountId = "UA-25694622-1"; 
+	var googleAccountDomain = "yatra.com";
+	if(typeof frescoTenantScope != "undefined" && (frescoTenantScope == "agent")) {
+		googleAccountId = "UA-74696009-1";		
+	} else if(isSetMobileGA() && typeof offerFresco != "undefined" && offerFresco.isResponsive) {
+		googleAccountId = "UA-25791774-3";
+	}
+	/* Start travelguru ga google set */
+		/* End travelguru ga google set */
+
+	
+	_gaq.push(['_setAccount', googleAccountId]);
+	_gaq.push(['_setDomainName', googleAccountDomain]);
+	_gaq.push(['_setAllowLinker', true]);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var isSecure = (window && window.location && window.location.href) ? window.location.href.indexOf("isSecure=true") : -1;
+		if(typeof behaveAsSecure_footer!="undefined") {
+			isSecure = (behaveAsSecure_footer.toString()=="true") ? 1 : -1;
+		};
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == (document.location.protocol || isSecure>=0) ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	
+	function isSetMobileGA() {	
+		var userAgent = navigator.userAgent.toLowerCase();	
+		if (userAgent.indexOf("ipad") != -1)
+			return false;
+		else if (userAgent.indexOf("mobile") != -1)
+				return true;
+		else if (userAgent.indexOf("tablet") != -1)
+				return false;
+		else if (userAgent.indexOf("nexus") != -1 && userAgent.indexOf("7") != -1)
+				return true;
+		return false;
+	}
+        </script><br class="hide"/>
+        <script type="text/javascript">
+            var YT_ANALYSIS = YT_ANALYSIS || {
+	enabled: true,
+	isBinded:false,
+	trackPage: function(lob,page,params){
+		this.pushData(lob,page,params);
+	},
+	pushData: function(lob,page,ajaxparams){
+		try{
+			if(YT_ANALYSIS.enabled){
+                ajaxparams = (ajaxparams==undefined) ? {} : ajaxparams;
+                ajaxparams.referrerURL = document.referrer;
+				$.ajax({
+					type: "POST",
+					url: "/livedata-analytics/trackLiveData",
+					data: {
+					 'trackingData':JSON.stringify(ajaxparams),
+					 'product':lob,
+					 'page':page	
+					}
+				});
+			}
+		}catch(e){}		
+	},
+	
+	trackEventView: function(lob, page, action,trackValue,multipleDataUpdation){
+		try{
+			if(lob && page && action) {
+				var trackingData={};
+				var pageId = YT_ANALYSIS.uniqueIdentifier(lob,page);
+				if(pageId){
+					trackingData.pageId = pageId;
+				}
+				trackingData.yaaction=action;
+				trackingData.yavalue=trackValue;
+				if(multipleDataUpdation){
+					trackingData.multipleDataUpdation=true;
+				}
+				YT_ANALYSIS.trackEvent(lob, page,trackingData);
+			}
+		}catch(e){}
+			
+	},
+	trackEvent: function(lob, page, trackingData) {
+		try{
+			if(YT_ANALYSIS.enabled){
+				$.ajax({
+					type: "POST",
+					url: "/livedata-analytics/updateLiveData",
+					data: {
+					 'trackingData':JSON.stringify(trackingData),
+					 'product':lob,
+					 'page':page
+					}
+				});
+			}
+		}catch(e){}
+	},
+	bindTrackEvent: function(evt){
+		try{
+			if($(this).length==0){
+				return  false;
+			}
+			var data = $(this).data();
+			var lob = data["yalob"];
+			var page = data["yapage"];
+			var action = data["yaaction"];
+			var trackValue = data["yavalue"];
+			if(lob && page && action) {
+				var trackingData={};
+				var pageId = YT_ANALYSIS.uniqueIdentifier(lob,page);
+				if(pageId){
+					trackingData.pageId = pageId;
+				}
+				trackingData.yaaction=action;
+				trackingData.yavalue=trackValue;
+				YT_ANALYSIS.trackEvent(lob, page,trackingData);
+			};	
+		}catch(e){}
+		
+	},
+	uniqueIdentifier:function generateUUID(lob,page){
+		var uuid = '';
+		if(lob && page){
+			if(lob.toLowerCase()=='flights' && page.toLowerCase()=='search'){
+				var sId=linkedSearchId;
+				if(typeof(sId)=='undefined'){
+					if(typeof(mainData)!='undefined' && typeof(mainData.requestParams)!='undefined' && typeof(mainData.requestParams.searchId)!='undefined'){
+						uuid=mainData.requestParams.searchId;
+					}
+				}else{
+					uuid=sId;
+				}
+			}else if(lob.toLowerCase()=='flights' && page.toLowerCase()=='pricing'){
+					if(jsonData)
+						uuid=jsonData.pricingId;
+			}
+		}
+		return uuid;
+	}
+	
+};
+if(!YT_ANALYSIS.isBinded) {
+	YT_ANALYSIS.isBinded = true;
+try {
+	if($.fn.live) {
+		$(".yatraTrackable").live("click", YT_ANALYSIS.bindTrackEvent);
+	} else if($.fn.on){
+		$("body").on("click", ".yatraTrackable", YT_ANALYSIS.bindTrackEvent);
+	}	
+}	catch(e) {
+	
+}
+}
+        </script>
+        <script type="text/javascript">
+            var ugaAccountId = isHandheldDevice() ? 'UA-156907899-4' :'UA-156907899-1';
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-69050892-1', 'auto', {'allowLinker': true});
+ga('require', 'linker');
+ga('linker:autoLink', ['yatra.com'], false, true);
+ga('send', 'pageview');
+function isHandheldDevice() {	
+		var device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+        return device;
+}
+        </script>
+        <style>
+            <!--
+            .smallNewFooter {
+                font-size: 9px;
+                position: absolute;
+                padding: 2px 4px;
+                top: -5px;
+                right: 0px;
+                color: white;
+                background-color: #f34f4f;
+            }
+
+            .betaBookingEngine {
+                font-size: 9px;
+                position: absolute;
+                background: #f34f4f;
+                padding: 12x 4px;
+                color: white;
+                top: -5px;
+                border-radius: 2px;
+                right: 0px;
+                line-height: 10px;
+            }
+            -->
+        </style>
+        <script type="text/javascript">
+            (function() {
+	
+	var betalinkarr = ["a[id='booking_engine_askmeanything']"];
+	var newlink_arr = ["a[id='booking_engine_journeys']"];
+	var extralink_arr =["a[id='booking_engine_flight_hotels']"];
+	var betalink_arr = ["a[id='booking_engine_activities']"];
+	if(newlink_arr.length>0) {
+		for(var i=0;i<newlink_arr.length;i++) {
+			var current = newlink_arr[i];		
+			if($(current).length>0) {
+				$(current).html($(current).html()+"<span class='betaBookingEngine'>EXPERIENTIAL</span>");
+			}
+		}
+	}
+	if(betalinkarr.length>0) {
+		for(var i=0;i<betalinkarr.length;i++) {
+			var current = betalinkarr[i];		
+			if($(current).length>0) {
+				$(current).html($(current).html()+"<span class='betaBookingEngine'>BETA</span>");
+				$(current).addClass('relative')
+			}
+		}
+	}
+	if(betalink_arr.length>0) {
+		for(var i=0;i<betalink_arr.length;i++) {
+			var currentBeta = betalink_arr[i];		
+			if($(currentBeta).length>0) {
+				$(currentBeta).html($(currentBeta).html()+"<span class='betaBookingEngine'>DO MORE</span>");
+				$('#booking_engine_activities').addClass('relative');
+			}
+		}
+	}
+	if(extralink_arr.length>0) {
+		for(var i=0;i<extralink_arr.length;i++) {
+			var currentExtra = extralink_arr[i];		
+			if($(currentExtra).length>0) {
+				$(currentExtra).html($(currentExtra).html()+"<span class='betaBookingEngine' style='font-size:9px'>EXTRA SAVINGS</span>");
+				$('#booking_engine_flight_hotels').addClass('relative');
+			}
+		}
+	}	
+})();
+        </script>
+        <script>
+            var enableWebEngage = typeof collectFeedback !== "undefined" && !collectFeedback ? false : true;
+      var enableWebEngageDesktop = true;
+       if(typeof window.innerWidth == "number" && typeof categoryName!="undefined" && window.innerWidth < 700 && categoryName == 'Home' ){
+        enableWebEngageDesktop =false;
+         }
+        </script> <br class="hide"/>
+        <script id="_webengage_script_tag" type="text/javascript">
+            if(enableWebEngageDesktop) {
+var webengage; !function(w,e,b,n,g){function o(e,t){e[t[t.length-1]]=function(){r.__queue.push([t.join("."),arguments])}}var i,s,r=w[b],z=" ",l="init options track screen onReady".split(z),a="feedback survey notification".split(z),c="options render clear abort".split(z),p="Open Close Submit Complete View Click".split(z),u="identify login logout setAttribute".split(z);if(!r||!r.__v){for(w[b]=r={__queue:[],__v:"6.0",user:{}},i=0;i<l.length;i++)o(r,[l[i]]);for(i=0;i<a.length;i++){for(r[a[i]]={},s=0;s<c.length;s++)o(r[a[i]],[a[i],c[s]]);for(s=0;s<p.length;s++)o(r[a[i]],[a[i],"on"+p[s]])}for(i=0;i<u.length;i++)o(r.user,["user",u[i]]);setTimeout(function(){var f=e.createElement("script"),d=e.getElementById("_webengage_script_tag");f.type="text/javascript",f.async=!0,f.defer="defer",f.src=("https:"==e.location.protocol?"https://ssl.widgets.webengage.com":"http://cdn.widgets.webengage.com")+"/js/webengage-min-v-6.0.js",d.parentNode.insertBefore(f,d)})}}(window,document,"webengage");   
+	var licenseCode = "~716800b0";
+	setTimeout(function(){
+		if(typeof userLogin!="undefined" && typeof userLogin.isUserLogIn!="undefined" && typeof userLogin.getCookie!="undefined" && userLogin.isUserLogIn() && (userLogin.getCookie('userType') =='SME')){
+				licenseCode = "11b565199"
+				}
+			else{
+                if(typeof frescoTenantScope != "undefined" && frescoTenantScope == "agent"){
+                    licenseCode = "~47b65a1c";
+                }
+                else if(typeof frescoTenantScope != "undefined" && frescoTenantScope == "corporate"){
+                    licenseCode = "11b565199"
+                }
+                else{
+                    licenseCode = "~716800b0";
+                }
+			}
+			if(enableWebEngage){
+					webengage.init(licenseCode);
+			}
+	},500);
+}
+
+webengage.options('webpush.disablePrompt', false);
+        </script>
